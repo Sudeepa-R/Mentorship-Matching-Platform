@@ -1,20 +1,23 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
+import Home from './constants/home/Home'
 import LoginPage from './constants/LoginPage/loginPage'
-import Login from './constants/LoginPage/Example'
-import ForgotPass from './constants/LoginPage/ForgotPass'
+import NotFound from './constants/not-found/not-found' // Importing NotFound component
+import { BrowserRouter, Route, Routes } from 'react-router-dom'
 
 function App() {
-  const [count, setCount] = useState(0)
 
   return (
-    <>
-      <LoginPage/>
+    <BrowserRouter>
+    <Routes>
+      <Route index element={<Home />}/>
+      <Route path='/login' element={<LoginPage />}/>
+      <Route path='*' element={<NotFound />}/>
+    </Routes>
+
       {/* <ForgotPass/> */}
       {/* <Login/> */}
-    </>
+    </BrowserRouter>
+
   )
 }
 
