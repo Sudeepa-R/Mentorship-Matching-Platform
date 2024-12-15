@@ -83,7 +83,7 @@ export class LoginPage extends React.Component {
                   // onFinish={onFinish}
                 >
                   <p>
-                    Enter your email address and password to access you portal!
+                    Enter your email address and password to access your portal!
                   </p>
                   <Form.Item
                     label="Username"
