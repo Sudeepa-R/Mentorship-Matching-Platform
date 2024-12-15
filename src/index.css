@@ -1,0 +1,18 @@
+/* *{
+  font-family: roboto;
+  font-size: 14px;
+} */
+.gutter-box {
+  padding: 8px 0;
+  background: #00a0e9;
+}
+.ant-btn-primary{
+  background-color:#537786;
+}
+.ant-btn-primary:hover{
+  background-color:#537786 !important;
+}
+.ant-btn-default:hover{
+  border-color: #537786 !important;
+  color: #537786 !important;
+}
