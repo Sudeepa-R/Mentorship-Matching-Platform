@@ -136,6 +136,7 @@ export class LoginPage extends React.Component {
                       Don't have an account?{" "}
                       <a href="" className="forgotPassword">
                         Register now!
+                        test
                       </a>
                     </div>
                   </Form.Item>
