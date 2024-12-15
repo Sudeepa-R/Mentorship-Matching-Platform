@@ -141,7 +141,7 @@ export class LoginPage extends React.Component {
                     </div>
                   </Form.Item>
                 </Form>
-+                <div>
+                <div>
                   <Divider>Or</Divider>
                 </div>
               </div>
