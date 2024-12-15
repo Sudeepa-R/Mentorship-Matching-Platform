@@ -10,6 +10,7 @@ import {
 } from "@ant-design/icons";
 import "./Logingpage.scss";
 import ForgotPass from "./ForgotPass";
+import { Link } from "react-router-dom";
 
 
 export class LoginPage extends React.Component {
@@ -134,10 +135,10 @@ export class LoginPage extends React.Component {
                     </Button>
                     <div className="mt-2">
                       Don't have an account?{" "}
-                      <a href="" className="forgotPassword">
+                      <Link to="/register" className="registerLink">
                         Register now!
                         
-                      </a>
+                      </Link>
                     </div>
                   </Form.Item>
                 </Form>
