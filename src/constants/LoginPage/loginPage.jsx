@@ -158,6 +158,7 @@ export class LoginPage extends React.Component {
         open={this.state.forgotPass}
         // onOk={this.handleOnOk()}
         onCancel={()=>this.handleClose()}
+        footer={null}
       >
        <ForgotPass/>
       </Modal>}

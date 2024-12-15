@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Button, Form, Input, Flex } from "antd";
+import { Button, Form, Input, Flex, Space } from "antd";
 import {
   LockOutlined,
   UserOutlined,
@@ -35,36 +35,64 @@ export class ForgotPass extends Component {
             // onFinish={onFinish}
           >
             <Form.Item
-              label="Username"
-              name="username"
+              label="Username or Phone Number"
+              name="username or phone number"
               rules={[
-                {
-                  type: "email",
-                  message: "The input is not valid E-mail!",
-                },
                 {
                   required: true,
                   message: "Please input your Username!",
                 },
               ]}
             >
-              <Input prefix={<UserOutlined />} placeholder="Username" />
+              <Input prefix={<UserOutlined />} placeholder="Username or phone number" />
             </Form.Item>
             <Form.Item
-              label="Phone number"
-              name="Phone number"
-              rules={[
-                {
-                  required: true,
-                  message: "Please input your Password!",
-                },
-              ]}
-            >
-              <Input.Password
-                prefix={<LockOutlined />}
-                placeholder="Phone number"
-              />
-            </Form.Item>
+        name="password"
+        label="Password"
+        rules={[
+          {
+            required: true,
+            message: 'Please input your password!',
+          },
+        ]}
+        hasFeedback
+      >
+        <Input.Password />
+      </Form.Item>
+
+      <Form.Item
+        name="confirm"
+        label="Confirm Password"
+        dependencies={['password']}
+        hasFeedback
+        rules={[
+          {
+            required: true,
+            message: 'Please confirm your password!',
+          },
+          ({ getFieldValue }) => ({
+            validator(_, value) {
+              if (!value || getFieldValue('password') === value) {
+                return Promise.resolve();
+              }
+              return Promise.reject(new Error('The new password that you entered do not match!'));
+            },
+          }),
+        ]}
+      >
+        <Input.Password />
+      </Form.Item>
+      <Form.Item >
+        <Space>
+          <Button type="primary" htmlType="submit">
+            Generate OTP
+          </Button>
+          <Button htmlType="button" >
+            Reset
+          </Button>
+          
+        </Space>
+      </Form.Item>
             
             {/* <Form.Item>
               <Button
