@@ -1,4 +1,4 @@
-.forgotPassword , .registerLink{
+.forgotPassword{
     text-decoration: none;
     color: #757474;
 }
@@ -13,4 +13,8 @@
 }
 .linkedIn:hover{
     color:#0170AD;
+}
+
+.ant-modal-content{
+    max-width: 83%;
 }
