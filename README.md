@@ -2,4 +2,4 @@
 
 # Languages
 - React
--Javascript
+- Javascript
