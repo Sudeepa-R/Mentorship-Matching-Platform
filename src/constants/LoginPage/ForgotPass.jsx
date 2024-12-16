@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Button, Form, Input, Space } from "antd";
 import { UserOutlined, LockOutlined } from "@ant-design/icons";
+import { showMessage } from "../../constants/Toaster/toaster";
 import "./Logingpage.scss";
 
 export class ForgotPass extends Component {
@@ -9,10 +10,11 @@ export class ForgotPass extends Component {
     this.state = {
       modal2Open: this.props.modal2Open,
       isUserExist: false,
-      countdown: 180, // 3 minutes countdown in seconds
+      countdown: 180,
       username: '',
       password: '',
       confirmPassword: '',
+      regexError: '',
     };
     this.timer = null;
   }
@@ -51,12 +53,27 @@ export class ForgotPass extends Component {
   };
 
   handleInputChange = (e) => {
-    this.setState({ [e.target.name]: e.target.value });
+    this.setState({ [e.target.name]: e.target.value, regexError: '' });
+  };
+
+  handleGenerateOtp = () => {
+    const { username, password, confirmPassword } = this.state;
+    if (!username || !password || !confirmPassword) {
+      showMessage('error', 'Please fill in all fields before generating OTP!');
+    } else if (password !== confirmPassword) {
+      showMessage('error', 'Passwords do not match!');
+    } else {
+      const passwordPattern = /^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+      if (!passwordPattern.test(password)) {
+        this.setState({ regexError: 'Password must be at least 8 characters long, contain one uppercase letter, one number, and one special character!' });
+      } else {
+        this.handleClose();
+      }
+    }
   };
 
   render() {
-    const { isUserExist, countdown, username, password, confirmPassword } = this.state;
-    const isGenerateOtpDisabled = !username || !password || !confirmPassword;
+    const { isUserExist, countdown, username, password, confirmPassword, regexError } = this.state;
 
     return (
       <>
@@ -142,10 +159,11 @@ export class ForgotPass extends Component {
                   placeholder="Enter Confirm password"
                 />
               </Form.Item>
+              {regexError && <p style={{ color: 'red' }}>{regexError}</p>}
             </Form>
             <Space style={{ display: "flex", justifyContent: "end" }}>
               <Button key="back">Reset</Button>,
-              <Button key="submit" type="primary" onClick={this.handleClose} disabled={isGenerateOtpDisabled}>
+              <Button key="submit" type="primary" onClick={this.handleGenerateOtp}>
                 Generate OTP
               </Button>
             </Space>
