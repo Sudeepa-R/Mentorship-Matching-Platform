@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import loginImg from "../../assets/loginImg.webp";
-import { Col, Row, Button, Divider, Form, Input, Flex, Modal } from "antd";
+import { Col, Row, Button, Divider, Form, Input, Modal } from "antd";
 import {
   LockOutlined,
   UserOutlined,
@@ -10,6 +10,7 @@ import {
 } from "@ant-design/icons";
 import "./Logingpage.scss";
 import ForgotPass from "./ForgotPass";
+import { showMessage, showNotification } from "../Toaster/toaster";
 
 export class LoginPage extends React.Component {
   constructor(props) {
@@ -18,6 +19,7 @@ export class LoginPage extends React.Component {
       forgotPass: false,
     };
   }
+
   handleOnClick = () => {
     event.preventDefault();
     this.setState({ forgotPass: true });
@@ -25,6 +27,29 @@ export class LoginPage extends React.Component {
 
   handleClose = () => {
     this.setState({ forgotPass: false });
+  };
+
+ 
+  handleLogin = (values) => {
+    const { username, password } = values;
+
+    
+    if (username === "test@example.com" && password === "password123") {
+      
+      showMessage("success", "Login successful!");
+    } else {
+      
+      showMessage("error", "Invalid username or password!");
+    }
+  };
+
+  
+  handleLoginFailed = (errorInfo) => {
+    showNotification({
+      type: "warning",
+      title: "Form Submission Failed",
+      description: "Please check the form fields and try again.",
+    });
   };
 
   render() {
@@ -45,7 +70,7 @@ export class LoginPage extends React.Component {
           >
             <img
               src={loginImg}
-              alt="loging page image"
+              alt="login page image"
               style={{ width: "100%", height: "100%" }}
             />
           </Col>
@@ -75,13 +100,14 @@ export class LoginPage extends React.Component {
                   initialValues={{
                     remember: true,
                   }}
+                  onFinish={this.handleLogin} 
+                  onFinishFailed={this.handleLoginFailed} 
                   style={{
                     minWidth: 350,
                   }}
-                  // onFinish={onFinish}
                 >
                   <p>
-                    Enter your email address and password to access you portal!
+                    Enter your email address and password to access your portal!
                   </p>
                   <Form.Item
                     label="Username"
@@ -115,15 +141,13 @@ export class LoginPage extends React.Component {
                     />
                   </Form.Item>
                   <Form.Item style={{ margin: "10px" }}>
-                    <Flex justify="end" align="center">
-                      <a
-                        href=""
-                        className="forgotPassword"
-                        onClick={this.handleOnClick}
-                      >
-                        Forgot password ?
-                      </a>
-                    </Flex>
+                    <a
+                      href=""
+                      className="forgotPassword"
+                      onClick={this.handleOnClick}
+                    >
+                      Forgot password?
+                    </a>
                   </Form.Item>
                   <Form.Item>
                     <Button
@@ -133,11 +157,7 @@ export class LoginPage extends React.Component {
                       style={{ backgroundColor: "#537786" }}
                     >
                       <strong>
-                        {" "}
-                        <span>
-                          <LoginOutlined />
-                        </span>{" "}
-                        Login
+                        <LoginOutlined /> Login
                       </strong>
                     </Button>
                     <div className="mt-2">
@@ -164,7 +184,6 @@ export class LoginPage extends React.Component {
             title="Reset Your Account Password"
             centered
             open={this.state.forgotPass}
-            // onOk={this.handleOnOk()}
             onCancel={() => this.handleClose()}
             footer={false}
           >

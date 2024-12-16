@@ -1,6 +1,5 @@
 import React, { Component } from "react";
-import { Button, Form, Input, Space } from "antd";
-import { UserOutlined, LockOutlined } from "@ant-design/icons";
+import { Button, Form, Input, Space, message, notification } from "antd";
 import "./Logingpage.scss";
 
 export class ForgotPass extends Component {
@@ -9,7 +8,8 @@ export class ForgotPass extends Component {
     this.state = {
       modal2Open: this.props.modal2Open,
       isUserExist: false,
-      countdown: 180, // 3 minutes countdown in seconds
+      countdown: 180, 
+      otp: Array(6).fill(""), 
     };
     this.timer = null;
   }
@@ -23,7 +23,10 @@ export class ForgotPass extends Component {
   }
 
   handleClose = () => {
-    this.setState({ isUserExist: true }, this.startCountdown);
+    this.setState({ isUserExist: true }, () => {
+      this.startCountdown();
+      this.showNotification("OTP Generated", "An OTP has been sent to your registered mobile number/email.");
+    });
   };
 
   startCountdown = () => {
@@ -31,6 +34,7 @@ export class ForgotPass extends Component {
       this.setState((prevState) => {
         if (prevState.countdown <= 0) {
           clearInterval(this.timer);
+          this.showNotification("Error", "The OTP has expired. Please generate a new one.", "error");
           return { countdown: 0 };
         }
         return { countdown: prevState.countdown - 1 };
@@ -41,10 +45,68 @@ export class ForgotPass extends Component {
   formatTime = (seconds) => {
     const minutes = Math.floor(seconds / 60);
     const secs = seconds % 60;
-    return `${String(minutes).padStart(2, "0")}:${String(secs).padStart(
-      2,
-      "0"
-    )}`;
+    return `${String(minutes).padStart(2, "0")}:${String(secs).padStart(2, "0")}`;
+  };
+
+  handleOtpChange = (value, index) => {
+    const { otp } = this.state;
+    const updatedOtp = [...otp];
+    updatedOtp[index] = value.slice(-1); // Ensure only the last character is taken (1 digit)
+    this.setState({ otp: updatedOtp });
+
+    // Focus the next input box if available
+    if (value && index < otp.length - 1) {
+      const nextInput = document.getElementById(`otp-${index + 1}`);
+      if (nextInput) nextInput.focus();
+    }
+  };
+
+  handleBackspace = (index) => {
+    const { otp } = this.state;
+    if (index > 0 && !otp[index]) {
+      const prevInput = document.getElementById(`otp-${index - 1}`);
+      if (prevInput) prevInput.focus();
+    }
+  };
+
+  handleConfirm = () => {
+    const { otp } = this.state;
+    if (otp.some((digit) => digit === "")) {
+      this.showNotification("Error", "Please fill all OTP boxes.", "error");
+    } else {
+      this.showNotification("Success", "Password reset successfully. You can now log in with your new password.");
+    }
+  };
+
+  showNotification = (title, description, type = "success") => {
+    notification[type]({
+      message: title,
+      description,
+      placement: "topRight",
+    });
+  };
+
+  renderOtpInputs = () => {
+    const { otp } = this.state;
+    return otp.map((digit, index) => (
+      <Input
+        key={index}
+        id={`otp-${index}`}
+        value={digit}
+        maxLength={1}
+        onChange={(e) => this.handleOtpChange(e.target.value, index)}
+        onKeyDown={(e) => {
+          if (e.key === "Backspace") this.handleBackspace(index);
+        }}
+        style={{
+          width: "50px",
+          height: "50px",
+          textAlign: "center",
+          margin: "0 5px",
+          fontSize: "18px",
+        }}
+      />
+    ));
   };
 
   render() {
@@ -75,7 +137,6 @@ export class ForgotPass extends Component {
                 ]}
               >
                 <Input
-                  prefix={<UserOutlined />}
                   placeholder="Username or phone number"
                 />
               </Form.Item>
@@ -90,10 +151,7 @@ export class ForgotPass extends Component {
                 ]}
                 hasFeedback
               >
-                <Input.Password
-                  prefix={<LockOutlined />}
-                  placeholder="Enter password"
-                />
+                <Input.Password placeholder="Enter password" />
               </Form.Item>
 
               <Form.Item
@@ -120,10 +178,7 @@ export class ForgotPass extends Component {
                   }),
                 ]}
               >
-                <Input.Password
-                  prefix={<LockOutlined />}
-                  placeholder="Enter Confirm password"
-                />
+                <Input.Password placeholder="Enter Confirm password" />
               </Form.Item>
             </Form>
             <Space style={{ display: "flex", justifyContent: "end" }}>
@@ -147,21 +202,11 @@ export class ForgotPass extends Component {
             >
               <Form.Item
                 label="Enter OTP"
-                hasFeedback
-                validateStatus="success"
-                name="otp"
-                rules={[
-                  {
-                    required: true,
-                    message: "Please enter a value!",
-                  },
-                  {
-                    pattern: /^\d+$/,
-                    message: "Only numbers are allowed!",
-                  },
-                ]}
+                required
               >
-                <Input.OTP />
+                <div style={{ display: "flex", justifyContent: "center" }}>
+                  {this.renderOtpInputs()}
+                </div>
               </Form.Item>
               <span style={{ display: "flex", justifyContent: "end" }}>
                 <p style={{ fontSize: "14px", color: "red" }}>
@@ -179,7 +224,7 @@ export class ForgotPass extends Component {
                 className="mt-5"
                 style={{ display: "flex", justifyContent: "end" }}
               >
-                <Button key="submit" type="primary">
+                <Button key="submit" type="primary" onClick={this.handleConfirm}>
                   Confirm
                 </Button>
               </Space>
