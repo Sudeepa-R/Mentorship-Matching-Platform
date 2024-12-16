@@ -1,27 +1,46 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Box, Typography, Button } from '@mui/material';
+import { Link } from 'react-router-dom';
+import Navbar from '../../components/Navbar';
 
-const Home = () => {
-  const navigate = useNavigate();
-
-  const handleLogin = () => {
-    navigate('/login');
-  };
-
-  const handleRegister = () => {
-    navigate('/register');
-  };
-
+function Home() {
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', height: '100vh', textAlign: 'center', padding: '20px' }}>
-      <h1 style={{ fontSize: '2.5em', marginBottom: '20px' }}>Welcome to the Mentorship Matching Platform</h1>
-      <p style={{ fontSize: '1.2em', marginBottom: '30px' }}>Join us to connect with mentors and mentees!</p>
-      <div style={{ display: 'flex', justifyContent: 'center', gap: '20px' }}>
-        <button style={{ padding: '15px 30px', fontSize: '1em', cursor: 'pointer', borderRadius: '5px', backgroundColor: '#4CAF50', color: 'white', border: 'none' }} onClick={handleLogin}>Login</button>
-        <button style={{ padding: '15px 30px', fontSize: '1em', cursor: 'pointer', borderRadius: '5px', backgroundColor: '#008CBA', color: 'white', border: 'none' }} onClick={handleRegister}>Register</button>
-      </div>
-    </div>
+    <>
+      <Navbar />
+      <Box
+        sx={{
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          justifyContent: 'center',
+          height: '100vh',
+          textAlign: 'center',
+          padding: '40px',
+          borderRadius: '8px',
+          boxShadow: '0 4px 20px rgba(0, 0, 0, 0.2)',
+          width: '100%',
+        }}
+      >
+        <Typography variant="h2" gutterBottom sx={{ fontWeight: 'bold', color: '#537786' }}>
+          Welcome to the Mentorship Matching Platform
+        </Typography>
+        <Typography variant="h5" gutterBottom sx={{ color: '#537786' }}>
+          Connect with mentors to unlock your potential.
+        </Typography>
+        <Typography variant="body1" sx={{ marginTop: 2, color: '#333' }}>
+          Our platform offers a variety of resources to help you grow, including one-on-one mentoring sessions, group workshops, and access to exclusive content.
+        </Typography>
+        <Typography variant="body1" sx={{ marginTop: 1, color: '#333' }}>
+          Whether you're looking to enhance your skills, explore new career paths, or gain insights from experienced professionals, we are here to support you every step of the way.
+        </Typography>
+        <Button variant="contained" sx={{ backgroundColor: 'green', color: 'white', marginTop: 3 }} size="large">
+          <Link to="/register" style={{ textDecoration: 'none', color: 'white' }}>
+            Get Started
+          </Link>
+        </Button>
+      </Box>
+    </>
   );
-};
+}
 
 export default Home;
