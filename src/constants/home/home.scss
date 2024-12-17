@@ -1,0 +1,169 @@
+.homeContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    text-align: center;
+    padding: 40px;
+    border-radius: 8px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+  
+    
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url('../../assets/loginImg.webp') no-repeat center center fixed;
+      background-size: cover;
+      opacity: 0.37; 
+      z-index: 1;
+    }
+  
+  
+    .title,
+    .description,
+    .startButton {
+      position: relative;
+      z-index: 2; 
+    }
+  
+    .title {
+      font-weight: bold;
+      color: #537786;
+    }
+  
+    .description {
+      margin-top: 2rem;
+      color: #333;
+    }
+  
+    .startButton {
+      background-color: green;
+      color: white;
+      margin-top: 3rem;
+  
+      a {
+        text-decoration: none;
+        color: white;
+      }
+    }
+  }
+
+  .section {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #f9f9f9;
+  
+    .sectionTitle {
+      font-size: 2.5rem;
+      color: #537786;
+      margin-bottom: 1rem;
+    }
+  
+    .sectionContent {
+      font-size: 1.2rem;
+      color: #333;
+      max-width: 600px;
+      text-align: center;
+    }
+  }
+
+  .nav-link {
+  cursor: pointer;
+  font-weight: 600;
+  color: #000;
+  font-size: 1rem;
+  position: relative;
+  display: inline-block;
+  padding-bottom: 5px;
+  transition: color 0.3s ease; /* Smooth color transition */
+
+  &.active {
+    color: #537786;
+  }
+
+  &.active::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: #537786;
+    transform: scaleX(0);
+    transition: transform 0.3s ease;
+    transform-origin: bottom right;
+  }
+
+  &:hover::before {
+    transform: scaleX(1);
+    transform-origin: bottom left;
+  }
+
+  &.active:hover::before {
+    transform: scaleX(1);
+    transform-origin: bottom left;
+  }
+}
+.nav-link {
+    cursor: pointer;
+    font-weight: 600;
+    color: #000;
+    font-size: 1rem;
+    position: relative;
+    display: inline-block;
+    padding-bottom: 5px;
+    transition: color 0.3s ease; /* Smooth color transition */
+  
+    &.active {
+      color: #537786;
+    }
+  
+    &.active::before {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background-color: #537786;
+      transform: scaleX(0);
+      transition: transform 0.3s ease-in-out;
+      transform-origin: bottom left;
+    }
+  
+    &:hover::before {
+      transform: scaleX(1);
+      transform-origin: bottom left;
+    }
+  
+    &.active::before {
+      transform: scaleX(1); /* This ensures the underline is fully expanded when active */
+      transform-origin: bottom left;
+      animation: slideUnderline 0.3s forwards; /* Apply animation when active */
+    }
+  }
+  
+  /* Animation to slide the underline from left to right */
+  @keyframes slideUnderline {
+    0% {
+      transform: scaleX(0);
+      transform-origin: bottom left;
+    }
+    100% {
+      transform: scaleX(1);
+      transform-origin: bottom right;
+    }
+  }
+  
+  

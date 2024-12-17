@@ -1,15 +1,41 @@
 import { Link, useNavigate } from 'react-router-dom';
 import { Button } from '@mui/material';
+import React, { useState, useEffect } from 'react';
+
 
 const navigation = [
-  { name: 'Home', href: '/' },
-  { name: 'Find a Mentor', href: '/find-mentor' },
-  { name: 'Mentorship Stories', href: '/mentorship-stories' },
-  { name: 'Membership Plans', href: '/membership-plans' },
+  { name: 'Home', section: 'home' },
+  { name: 'Find a Mentor', section: 'findMentor' },
+  { name: 'Mentorship Stories', section: 'mentorshipStories' },
+  { name: 'Membership Plans', section: 'membershipPlans' },
 ];
 
-const Navbar = () => {
+const Navbar = ({onScrollToSection}) => {
   const navigate = useNavigate();
+  const [activeSection, setActiveSection] = useState('home');
+
+  const handleScroll = () => {
+    const sections = ['home', 'findMentor', 'mentorshipStories', 'membershipPlans'];
+    const sectionPositions = sections.map(section => {
+      const element = document.getElementById(section);
+      return element ? element.offsetTop : 0;
+    });
+
+    const scrollPosition = window.scrollY;
+
+    for (let i = 0; i < sectionPositions.length; i++) {
+      if (scrollPosition >= sectionPositions[i] - 50) {
+        setActiveSection(sections[i]);
+      }
+    }
+  };
+
+   // Listen to scroll events to update active section
+   useEffect(() => {
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
 
   return (
     <header style={{ position: 'fixed', top: 0, left: 0, right: 0, zIndex: 50, backgroundColor: 'rgba(255, 255, 255, 0.8)', backdropFilter: 'blur(10px)', boxShadow: '0 2px 10px rgba(0, 0, 0, 0.1)' }}>
@@ -25,7 +51,15 @@ const Navbar = () => {
 
         {/* Navigation Links */}
         <div style={{ display: 'flex', gap: '3rem' }}>
-          {navigation.map((item) => (
+          {navigation.map((item) => item.section ? (
+              <span
+                key={item.name}
+                onClick={() => onScrollToSection(item.section)}
+                className={`nav-link ${item.section === activeSection ? 'active' : ''}`}
+              >
+                {item.name}
+              </span>
+            ) : (
             <Link
               key={item.name}
               to={item.href}
