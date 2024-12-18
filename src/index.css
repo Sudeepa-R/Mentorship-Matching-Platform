@@ -1,7 +1,3 @@
-/* *{
-  font-family: roboto;
-  font-size: 14px;
-} */
 .gutter-box {
   padding: 8px 0;
   background: #00a0e9;
@@ -15,4 +11,21 @@
 .ant-btn-default:hover{
   border-color: #537786 !important;
   color: #537786 !important;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #537786;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #00a0e9;
 }
