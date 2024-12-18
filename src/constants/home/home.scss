@@ -1,84 +1,107 @@
 .homeContainer {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
-    text-align: center;
-    padding: 40px;
-    border-radius: 8px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  text-align: center;
+  padding: 40px;
+  border-radius: 8px;
+  // box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 30;
+    left: 0;
     width: 100%;
+    height: 70%;
+    background: url("../../assets/banner.webp") no-repeat center center fixed,
+      url("../../assets/extrImg.svg") no-repeat center center fixed;
+    background-size: cover, cover;
+    background-position: center, center;
+    background-repeat: no-repeat, no-repeat;
+    background-blend-mode: overlay;
+    opacity: 1;
+    z-index: 1;
+  }
+
+  .title,
+  .description,
+  .startButton {
     position: relative;
-    overflow: hidden;
-  
-    
-    &::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: url('../../assets/loginImg.webp') no-repeat center center fixed;
-      background-size: cover;
-      opacity: 0.7; 
-      z-index: 1;
-    }
-  
-  
-    .title,
-    .description,
-    .startButton {
-      position: relative;
-      z-index: 2; 
-    }
-  
-    .title {
-      font-weight: bold;
-      color: #537786;
-    }
-  
-    .description {
-      margin-top: 2rem;
-      color: #333;
-    }
-  
-    .startButton {
-      background-color: green;
-      color: white;
-      margin-top: 3rem;
-  
-      a {
-        text-decoration: none;
-        color: white;
-      }
-    }
+    z-index: 2;
   }
 
-  .section {
-    height: 100vh;
+  .title {
+    font-weight: bold;
+    color: whitesmoke;
+  }
+  .subTitle {
+    position: absolute;
+    left: 100px;
+    top: 450px;
+    height: 200px;
+    width: 350px;
     display: flex;
-    flex-direction: column;
-    justify-content: center;
     align-items: center;
-    background-color: #f9f9f9;
-  
-    .sectionTitle {
-      font-size: 2.5rem;
-      color: #537786;
-      margin-bottom: 1rem;
-    }
-  
-    .sectionContent {
-      font-size: 1.2rem;
-      color: #333;
-      max-width: 600px;
-      text-align: center;
-    }
+    justify-content: center;
+    font-size: 2rem;
+    background-color: #537786;
+    font-family: roboto;
   }
 
-  .nav-link {
+  .description {
+    margin-top: 2rem;
+    color: whitesmoke;
+  }
+
+  .startButton {
+    background-color: green;
+    color: white;
+    margin-top: 3rem;
+
+    a {
+      text-decoration: none;
+      color: white;
+    }
+  }
+}
+
+.section {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #f9f9f9;
+  background-image: url("../../assets/banner.webp") no-repeat center center
+    fixed;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-blend-mode: overlay;
+  opacity: 1;
+  z-index: 1;
+
+  .sectionTitle {
+    font-size: 2.5rem;
+    color: #537786;
+    margin-bottom: 1rem;
+  }
+
+  .sectionContent {
+    font-size: 1.2rem;
+    color: #333;
+    max-width: 600px;
+    text-align: center;
+  }
+}
+
+.nav-link {
   cursor: pointer;
   font-weight: 600;
   color: #000;
@@ -93,7 +116,7 @@
   }
 
   &.active::before {
-    content: '';
+    content: "";
     position: absolute;
     bottom: 0;
     left: 0;
@@ -116,54 +139,54 @@
   }
 }
 .nav-link {
-    cursor: pointer;
-    font-weight: 600;
-    color: #000;
-    font-size: 1rem;
-    position: relative;
-    display: inline-block;
-    padding-bottom: 5px;
-    transition: color 0.3s ease; /* Smooth color transition */
-  
-    &.active {
-      color: #537786;
-    }
-  
-    &.active::before {
-      content: '';
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      width: 100%;
-      height: 2px;
-      background-color: #537786;
-      transform: scaleX(0);
-      transition: transform 0.3s ease-in-out;
-      transform-origin: bottom left;
-    }
-  
-    &:hover::before {
-      transform: scaleX(1);
-      transform-origin: bottom left;
-    }
-  
-    &.active::before {
-      transform: scaleX(1); /* This ensures the underline is fully expanded when active */
-      transform-origin: bottom left;
-      animation: slideUnderline 0.3s forwards; /* Apply animation when active */
-    }
+  cursor: pointer;
+  font-weight: 600;
+  color: #000;
+  font-size: 1rem;
+  position: relative;
+  display: inline-block;
+  padding-bottom: 5px;
+  transition: color 0.3s ease; /* Smooth color transition */
+
+  &.active {
+    color: #537786;
   }
-  
-  /* Animation to slide the underline from left to right */
-  @keyframes slideUnderline {
-    0% {
-      transform: scaleX(0);
-      transform-origin: bottom left;
-    }
-    100% {
-      transform: scaleX(1);
-      transform-origin: bottom right;
-    }
+
+  &.active::before {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: #537786;
+    transform: scaleX(0);
+    transition: transform 0.3s ease-in-out;
+    transform-origin: bottom left;
   }
-  
-  
+
+  &:hover::before {
+    transform: scaleX(1);
+    transform-origin: bottom left;
+  }
+
+  &.active::before {
+    transform: scaleX(
+      1
+    ); /* This ensures the underline is fully expanded when active */
+    transform-origin: bottom left;
+    animation: slideUnderline 0.3s forwards; /* Apply animation when active */
+  }
+}
+
+/* Animation to slide the underline from left to right */
+@keyframes slideUnderline {
+  0% {
+    transform: scaleX(0);
+    transform-origin: bottom left;
+  }
+  100% {
+    transform: scaleX(1);
+    transform-origin: bottom right;
+  }
+}
