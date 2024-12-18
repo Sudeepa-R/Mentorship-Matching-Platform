@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import loginImg from "../../assets/loginImg.webp";
-import { Col, Row, Button, Divider, Form, Input, Flex, Modal } from "antd";
+import { Col, Row, Button, Divider, Form, Input, Flex,Modal } from "antd";
 import {
   LockOutlined,
   UserOutlined,
@@ -11,21 +11,23 @@ import {
 import "./Logingpage.scss";
 import ForgotPass from "./ForgotPass";
 
-export class LoginPage extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      forgotPass: false,
-    };
-  }
-  handleOnClick = () => {
-    event.preventDefault();
-    this.setState({ forgotPass: true });
-  };
 
-  handleClose = () => {
-    this.setState({ forgotPass: false });
-  };
+export class LoginPage extends React.Component {
+  constructor(props){
+    super(props)
+    this.state={
+      forgotPass:false,
+    }
+
+  }
+  handleOnClick=()=>{
+    event.preventDefault();
+    this.setState({forgotPass:true})
+  }   
+  
+  handleClose=()=>{
+    this.setState({forgotPass:false})
+  }
 
   render() {
     return (
@@ -88,8 +90,8 @@ export class LoginPage extends React.Component {
                     name="username"
                     rules={[
                       {
-                        type: "email",
-                        message: "The input is not valid E-mail!",
+                        type: 'email',
+                        message: 'The input is not valid E-mail!',
                       },
                       {
                         required: true,
@@ -116,11 +118,7 @@ export class LoginPage extends React.Component {
                   </Form.Item>
                   <Form.Item style={{ margin: "10px" }}>
                     <Flex justify="end" align="center">
-                      <a
-                        href=""
-                        className="forgotPassword"
-                        onClick={this.handleOnClick}
-                      >
+                      <a href="" className="forgotPassword" onClick={this.handleOnClick}>
                         Forgot password ?
                       </a>
                     </Flex>
@@ -132,13 +130,7 @@ export class LoginPage extends React.Component {
                       htmlType="submit"
                       style={{ backgroundColor: "#537786" }}
                     >
-                      <strong>
-                        {" "}
-                        <span>
-                          <LoginOutlined />
-                        </span>{" "}
-                        Login
-                      </strong>
+                      <strong> <span><LoginOutlined /></span> Login</strong>
                     </Button>
                     <div className="mt-2">
                       Don't have an account?{" "}
@@ -159,18 +151,15 @@ export class LoginPage extends React.Component {
             </div>
           </Col>
         </Row>
-        {this.state.forgotPass && (
-          <Modal
-            title="Reset Your Account Password"
-            centered
-            open={this.state.forgotPass}
-            // onOk={this.handleOnOk()}
-            onCancel={() => this.handleClose()}
-            footer={false}
-          >
-            <ForgotPass />
-          </Modal>
-        )}
+        {this.state.forgotPass &&  <Modal
+        title="Reset Your Account Password"
+        centered
+        open={this.state.forgotPass}
+        // onOk={this.handleOnOk()}
+        onCancel={()=>this.handleClose()}
+      >
+       <ForgotPass/>
+      </Modal>}
       </>
     );
   }
