@@ -1,5 +1,9 @@
 .navbar {
   background-color: transparent !important;
+  color: white !important;
+}
+.navbar:hover {
+  color: #537786 !important;
 }
 
 .navbar.scrolled {
