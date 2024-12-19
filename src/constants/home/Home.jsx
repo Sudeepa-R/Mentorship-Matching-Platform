@@ -1,8 +1,7 @@
-import React, { useRef } from "react";
-import { Box, Typography, Button } from "@mui/material";
-import { Link,useNavigate } from "react-router-dom";
-import Navbar from "../../components/Navbar";
-import "./home.scss";
+import React from 'react';
+import { Box, Typography, Button } from '@mui/material';
+import { Link } from 'react-router-dom';
+import Navbar from '../../components/Navbar';
 
 function Home() {
   const navigate = useNavigate();
@@ -120,19 +119,8 @@ function Home() {
         </Button>
       </Box>
     ))}
-        </Box>
       </Box>
-
-      {/*---- Membership Plans Section---------- */}
-      <Box ref={membershipPlansRef} id="membershipPlans" className="section">
-        <Typography variant="h3" className="sectionTitle">
-          Membership Plans
-        </Typography>
-        <Typography variant="body1" className="sectionContent">
-          Learn more about how our platform can help you connect with mentors
-          and unlock new opportunities.
-        </Typography>
-      </Box>
+    </Box>
     </>
   );
 }
