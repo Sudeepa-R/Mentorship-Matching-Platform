@@ -1,6 +1,7 @@
 import { Link, useNavigate } from "react-router-dom";
 import { Button } from "@mui/material";
 import React, { useState, useEffect } from "react";
+import { SignedIn, SignedOut, SignInButton, UserButton, SignUpButton } from "@clerk/clerk-react";
 import "./navbar.scss";
 
 const navigation = [
@@ -95,9 +96,8 @@ const Navbar = ({ onScrollToSection }) => {
               <span
                 key={item.name}
                 onClick={() => onScrollToSection(item.section)}
-                className={`nav-link ${
-                  item.section === activeSection ? "active" : ""
-                }`}
+                className={`nav-link ${item.section === activeSection ? "active" : ""
+                  }`}
               >
                 {item.name}
               </span>
@@ -119,26 +119,39 @@ const Navbar = ({ onScrollToSection }) => {
         </div>
 
         {/* Buttons */}
-        <div style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
-          <Button
-            variant="text"
-            style={{ color: "#000", textTransform: "capitalize" }}
-            onClick={() => navigate("/login")}
-          >
-            Log In
-          </Button>
-          <Button
-            variant="contained"
-            style={{
+        <div className="">
+          <SignedOut style={{ display: "flex", gap: "20px" }}>
+            <SignInButton >
+            <button style={{
+              backgroundColor: "#fff", 
+              color: "#000", 
+              textTransform: "capitalize", 
+              padding: "10px 20px",
+              borderRadius: "5px",
+              border: "1px solid #000",
+              cursor: "pointer",
+              marginRight: "10px",
+              transition: "background-color 0.3s",
+            }} 
+            onClick={()=>navigate('/login')}>Login</button>
+            </SignInButton>
+            <SignUpButton>
+            <button style={{
               backgroundColor: "#537786",
               color: "#fff",
               textTransform: "capitalize",
-            }}
-            onClick={() => navigate("/register")}
-          >
-            Register
-          </Button>
+              padding: "10px 20px",
+              borderRadius: "5px",
+              border: "none",
+              cursor: "pointer",
+              transition: "background-color 0.3s",
+            }} onClick={()=>navigate('/register')}>Register</button>
+            </SignUpButton>
+          </SignedOut>
         </div>
+        <SignedIn>
+          <UserButton afterSignOut={() => window.location.href = "/"} />
+        </SignedIn>
       </nav>
     </header>
   );
