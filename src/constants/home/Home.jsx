@@ -2,6 +2,7 @@ import React from 'react';
 import { Box, Typography, Button } from '@mui/material';
 import { Link } from 'react-router-dom';
 import Navbar from '../../components/Navbar';
+import Footer from '../../components/Footer';
 
 function Home() {
   return (
@@ -39,6 +40,7 @@ function Home() {
           </Link>
         </Button>
       </Box>
+      <Footer/>
     </>
   );
 }
