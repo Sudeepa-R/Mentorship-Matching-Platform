@@ -10,6 +10,7 @@ import {
 } from "@ant-design/icons";
 import "./Logingpage.scss";
 import ForgotPass from "./ForgotPass";
+import { showMessage, showNotification } from "../Toaster/toaster";
 
 export class LoginPage extends React.Component {
   constructor(props) {
@@ -25,6 +26,27 @@ export class LoginPage extends React.Component {
 
   handleClose = () => {
     this.setState({ forgotPass: false });
+  };
+
+  handleLogin = (values) => {
+    const { username, password } = values;
+
+
+    if (username === "test@example.com" && password === "password123") {
+
+      showMessage("success", "Login successful!");
+    } else {
+
+      showMessage("error", "Invalid username or password!");
+    }
+  };
+
+  handleLoginFailed = (errorInfo) => {
+    showNotification({
+      type: "warning",
+      title: "Form Submission Failed",
+      description: "Please check the form fields and try again.",
+    });
   };
 
   render() {
@@ -45,7 +67,7 @@ export class LoginPage extends React.Component {
           >
             <img
               src={loginImg}
-              alt="loging page image"
+              alt="login page image"
               style={{ width: "100%", height: "100%" }}
             />
           </Col>
@@ -78,10 +100,12 @@ export class LoginPage extends React.Component {
                   style={{
                     minWidth: 350,
                   }}
+                  onFinish={this.handleLogin} 
+                  onFinishFailed={this.handleLoginFailed} 
                   // onFinish={onFinish}
                 >
                   <p>
-                    Enter your email address and password to access you portal!
+                  Enter your email address and password to access your portal!
                   </p>
                   <Form.Item
                     label="Username"
@@ -167,6 +191,7 @@ export class LoginPage extends React.Component {
             // onOk={this.handleOnOk()}
             onCancel={() => this.handleClose()}
             footer={false}
+            className=".forget-model"
           >
             <ForgotPass />
           </Modal>
