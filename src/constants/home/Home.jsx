@@ -33,23 +33,23 @@ function Home() {
         <Typography variant="h2" gutterBottom className="title">
           Welcome to the Mentorship Matching Platform
         </Typography>
-        <Typography variant="h5" gutterBottom className="title">
+        <Typography variant="h5" gutterBottom className="title subTitle">
           <strong>Connect with mentors to unlock your potential.</strong>
         </Typography>
-        <Typography variant="body1" className="description">
+        {/* <Typography variant="body1" className="description">
           <strong>
             Our platform offers a variety of resources to help you grow,
             including one-on-one mentoring sessions, group workshops, and access
             to exclusive content.
           </strong>
-        </Typography>
-        <Typography variant="body1" className="description">
+        </Typography> */}
+        {/* <Typography variant="body1" className="description">
           <strong>
             Whether you're looking to enhance your skills, explore new career
             paths, or gain insights from experienced professionals, we are here
             to support you every step of the way.
           </strong>
-        </Typography>
+        </Typography> */}
         <Button variant="contained" className="startButton" size="large">
           <Link to="/register">Get Started</Link>
         </Button>
