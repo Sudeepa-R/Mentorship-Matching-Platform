@@ -118,6 +118,9 @@ function Home() {
           Learn More
         </Button>
       </Box>
+    ))}
+      </Box>
+    </Box>
     </>
   );
 }
