@@ -191,7 +191,6 @@
   }
 }
 
-
 //-----Find a Mentor section edited---------//
 
 .section-1 {
@@ -236,8 +235,7 @@
   border-radius: 8px; /* Optional: Adds rounded corners */
 }
 
-
-//------Mentornship  stories section 
+//------Mentornship  stories section
 .section-2 {
   text-align: center;
   padding: 2rem;
@@ -307,7 +305,6 @@
   margin-bottom: 1rem; /* Adds space below the content if needed */
 }
 
-
 .cardButton:hover {
   background-color: #537786; /* Darker shade for hover */
   transform: scale(1.05); /* Slightly enlarges button on hover */
@@ -317,7 +314,6 @@
   background-color: #537786; /* Even darker shade for active state */
   transform: scale(0.98); /* Slightly shrinks button on click */
 }
-
 
 @keyframes slideInFromRight {
   from {
@@ -334,8 +330,3 @@
   animation: slideInFromRight 1.5s ease-out; /* Duration and easing */
   display: inline-block; /* Ensures animation affects the text properly */
 }
-
-
-
-
-
