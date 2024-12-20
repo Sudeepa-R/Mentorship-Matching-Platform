@@ -4,7 +4,7 @@ import "./Footer.scss";
 
 const Footer = () => {
   return (
-    <div className="footer">
+    <div className="footer" id="contactUs">
       <div className="app_name">
         <h1>MentorMatch</h1>
         <p>
@@ -18,8 +18,7 @@ const Footer = () => {
         <ul>
           <li>Story</li>
           <li>Clients</li>
-          <li>Testimonals</li>
-          <li>Testimonals</li>
+          <li>Testimonials</li>
         </ul>
       </div>
       <div className="Services">
@@ -27,20 +26,18 @@ const Footer = () => {
         <ul>
           <li>Development</li>
           <li>Design</li>
-          <li>Customer serv</li>
-          <li>Customer serv</li>
+          <li>Customer Service</li>
         </ul>
       </div>
       <div className="Contact_us">
         <h3>Contact us</h3>
-        <p>Email:Info@example.com</p>
-        <p>phone:+91 7386789947</p>
-        <p>Address:Your address 123</p>
+        <p>Email: Info@example.com</p>
+        <p>Phone: +91 7386789947</p>
+        <p>Address: Your address 123</p>
       </div>
       <hr />
       <div className="footer_bottom">
         <p>
-          {" "}
           <span>&copy; 2024</span> Your Company Name. All rights reserved.
         </p>
       </div>

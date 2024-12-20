@@ -12,8 +12,7 @@
   border-color: #537786 !important;
   color: #537786 !important;
 }
-
-::-webkit-scrollbar {
+/* ::-webkit-scrollbar {
   width: 8px;
 }
 
@@ -28,4 +27,4 @@
 
 ::-webkit-scrollbar-thumb:hover {
   background: #00a0e9;
-}
+}  */

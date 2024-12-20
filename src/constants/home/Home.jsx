@@ -1,7 +1,8 @@
-import React, { useRef, useState } from "react";
+import React, { useRef } from "react";
 import { Box, Typography, Button } from "@mui/material";
 import { Link, useNavigate } from "react-router-dom";
 import Navbar from "../../components/Navbar";
+import Footer from "../../components/Footer";
 import "./home.scss";
 
 function Home() {
@@ -10,6 +11,7 @@ function Home() {
   const findMentorRef = useRef(null);
   const mentorshipStoriesRef = useRef(null);
   const membershipPlansRef = useRef(null);
+  const contactUsRef = useRef(null);
 
   // Scroll to specific section
   const scrollToSection = (ref) => {
@@ -21,6 +23,7 @@ function Home() {
     findMentor: findMentorRef,
     mentorshipStories: mentorshipStoriesRef,
     membershipPlans: membershipPlansRef,
+    contactUs: contactUsRef,
   };
   return (
     <>
@@ -90,6 +93,15 @@ function Home() {
           Learn more about how our platform can help you connect with mentors
           and unlock new opportunities.
         </Typography>
+
+        {/*----------- ContactUs-------------- */}
+        <Box
+        ref={contactUsRef}
+        id="contactUs"
+        className="section-3"
+        to='/contactUs'
+       
+      ></Box>
         <Box className="cardContainer">
           {[
             {
@@ -151,6 +163,9 @@ function Home() {
           and unlock new opportunities.
         </Typography>
       </Box>
+</Box>
+<Footer />
+
     </>
   );
 }
