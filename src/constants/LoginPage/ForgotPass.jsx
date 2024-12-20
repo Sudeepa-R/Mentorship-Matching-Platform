@@ -12,11 +12,11 @@ export class ForgotPass extends Component {
       isUserExist: false,
       countdown: 120,
       otp: Array(6).fill(""),
-      username: '',
-      password: '',
-      confirmPassword: '',
-      regexError: '',
-      otpError: '',
+      username: "",
+      password: "",
+      confirmPassword: "",
+      regexError: "",
+      otpError: "",
     };
     this.timer = null;
   }
@@ -32,7 +32,10 @@ export class ForgotPass extends Component {
   handleClose = () => {
     this.setState({ isUserExist: true }, () => {
       this.startCountdown();
-      this.showNotification("OTP Generated", "An OTP has been sent to your registered mobile number/email.");
+      this.showNotification(
+        "OTP Generated",
+        "An OTP has been sent to your registered mobile number/email."
+      );
     });
   };
 
@@ -41,7 +44,11 @@ export class ForgotPass extends Component {
       this.setState((prevState) => {
         if (prevState.countdown <= 0) {
           clearInterval(this.timer);
-          this.showNotification("Error", "The OTP has expired. Please generate a new one.", "error");
+          this.showNotification(
+            "Error",
+            "The OTP has expired. Please generate a new one.",
+            "error"
+          );
           return { countdown: 0 };
         }
         return { countdown: prevState.countdown - 1 };
@@ -52,23 +59,30 @@ export class ForgotPass extends Component {
   formatTime = (seconds) => {
     const minutes = Math.floor(seconds / 60);
     const secs = seconds % 60;
-    return `${String(minutes).padStart(2, "0")}:${String(secs).padStart(2, "0")}`;
+    return `${String(minutes).padStart(2, "0")}:${String(secs).padStart(
+      2,
+      "0"
+    )}`;
   };
 
   handleInputChange = (e) => {
-    this.setState({ [e.target.name]: e.target.value, regexError: '' });
+    this.setState({ [e.target.name]: e.target.value, regexError: "" });
   };
 
   handleGenerateOtp = () => {
     const { username, password, confirmPassword } = this.state;
     if (!username || !password || !confirmPassword) {
-      showMessage('error', 'Please fill in all fields before generating OTP!');
+      showMessage("error", "Please fill in all fields before generating OTP!");
     } else if (password !== confirmPassword) {
-      showMessage('error', 'Passwords do not match!');
+      showMessage("error", "Passwords do not match!");
     } else {
-      const passwordPattern = /^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+      const passwordPattern =
+        /^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
       if (!passwordPattern.test(password)) {
-        this.setState({ regexError: 'Password must be at least 8 characters long, contain one uppercase letter, one number, and one special character!' });
+        this.setState({
+          regexError:
+            "Password must be at least 8 characters long, contain one uppercase letter, one number, and one special character!",
+        });
       } else {
         this.handleClose();
       }
@@ -82,14 +96,14 @@ export class ForgotPass extends Component {
 
     if (/^\d$/.test(digit)) {
       updatedOtp[index] = digit;
-      this.setState({ otp: updatedOtp, otpError: '' });
+      this.setState({ otp: updatedOtp, otpError: "" });
 
       if (digit && index < otp.length - 1) {
         const nextInput = document.getElementById(`otp-${index + 1}`);
         if (nextInput) nextInput.focus();
       }
     } else {
-      this.setState({ otpError: 'Only numbers are allowed!' });
+      this.setState({ otpError: "Only numbers are allowed!" });
     }
   };
 
@@ -106,7 +120,10 @@ export class ForgotPass extends Component {
     if (otp.some((digit) => digit === "")) {
       this.showNotification("Error", "Please fill all OTP boxes.", "error");
     } else {
-      this.showNotification("Success", "Password reset successfully. You can now log in with your new password.");
+      this.showNotification(
+        "Success",
+        "Password reset successfully. You can now log in with your new password."
+      );
     }
   };
 
@@ -121,8 +138,20 @@ export class ForgotPass extends Component {
   renderOtpInputs = () => {
     const { otp, otpError } = this.state;
     return (
-      <div style={{ display: "flex", flexDirection: "column"  , alignItems:"center"}}>
-        <div style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+        }}
+      >
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
           {otp.map((digit, index) => (
             <Input
               key={index}
@@ -143,13 +172,24 @@ export class ForgotPass extends Component {
             />
           ))}
         </div>
-        {otpError && <p style={{ color: 'red', marginTop: '5px', textAlign: 'center' }}>{otpError}</p>}
+        {otpError && (
+          <p style={{ color: "red", marginTop: "5px", textAlign: "center" }}>
+            {otpError}
+          </p>
+        )}
       </div>
     );
   };
 
   render() {
-    const { isUserExist, countdown, username, password, confirmPassword, regexError } = this.state;
+    const {
+      isUserExist,
+      countdown,
+      username,
+      password,
+      confirmPassword,
+      regexError,
+    } = this.state;
 
     return (
       <>
@@ -235,11 +275,15 @@ export class ForgotPass extends Component {
                   placeholder="Enter Confirm password"
                 />
               </Form.Item>
-              {regexError && <p style={{ color: 'red' }}>{regexError}</p>}
+              {regexError && <p style={{ color: "red" }}>{regexError}</p>}
             </Form>
             <Space style={{ display: "flex", justifyContent: "end" }}>
               <Button key="back">Reset</Button>,
-              <Button key="submit" type="primary" onClick={this.handleGenerateOtp}>
+              <Button
+                key="submit"
+                type="primary"
+                onClick={this.handleGenerateOtp}
+              >
                 Generate OTP
               </Button>
             </Space>
@@ -256,9 +300,7 @@ export class ForgotPass extends Component {
                 maxWidth: 350,
               }}
             >
-              <Form.Item
-                label="Enter OTP"
-              >
+              <Form.Item label="Enter OTP">
                 <div style={{ display: "flex", justifyContent: "center" }}>
                   {this.renderOtpInputs()}
                 </div>
@@ -279,7 +321,11 @@ export class ForgotPass extends Component {
                 className="mt-5"
                 style={{ display: "flex", justifyContent: "end" }}
               >
-                <Button key="submit" type="primary" onClick={this.handleConfirm}>
+                <Button
+                  key="submit"
+                  type="primary"
+                  onClick={this.handleConfirm}
+                >
                   Confirm
                 </Button>
               </Space>
