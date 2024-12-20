@@ -1,6 +1,6 @@
-import React from 'react';
-import { Box, Typography, Button } from '@mui/material';
-import { useNavigate } from 'react-router-dom';
+import React from "react";
+import { Box, Typography, Button } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 
 function ServerError() {
   const navigate = useNavigate();
@@ -13,14 +13,14 @@ function ServerError() {
   return (
     <Box
       sx={{
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        justifyContent: 'center',
-        height: '100vh',
-        textAlign: 'center',
-        backgroundColor: '#f8f9fa',
-        padding: '20px',
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        justifyContent: "center",
+        height: "100vh",
+        textAlign: "center",
+        backgroundColor: "#f8f9fa",
+        padding: "20px",
       }}
     >
       <Typography variant="h4" gutterBottom>
@@ -33,7 +33,7 @@ function ServerError() {
         <Button
           variant="contained"
           color="primary"
-          onClick={() => navigate('/')}
+          onClick={() => navigate("/")}
           sx={{ marginRight: 2 }}
         >
           Go to Home

@@ -1,7 +1,8 @@
-import React from 'react';
-import { Box, Typography, Button } from '@mui/material';
-import { Link } from 'react-router-dom';
-import Navbar from '../../components/Navbar';
+import React, { useRef, useState } from "react";
+import { Box, Typography, Button } from "@mui/material";
+import { Link, useNavigate } from "react-router-dom";
+import Navbar from "../../components/Navbar";
+import "./home.scss";
 
 function Home() {
   const navigate = useNavigate();
@@ -56,25 +57,25 @@ function Home() {
 
       {/*------------ find-mentor section------------- */}
       <Box ref={findMentorRef} id="findMentor" className="section-1 ">
-      <Box className="sectionContentWrapper-1">
-      <Box className="content-1">
-        <Typography variant="h3" className="sectionTitle-1">
-          Find a Mentor
-        </Typography>
-        <Typography variant="body1" className="sectionContent">
-          Learn more about how our platform can help you connect with mentors
-          and unlock new opportunities.
-        </Typography>
+        <Box className="sectionContentWrapper-1">
+          <Box className="content-1">
+            <Typography variant="h3" className="sectionTitle-1">
+              Find a Mentor
+            </Typography>
+            <Typography variant="body1" className="sectionContent">
+              Learn more about how our platform can help you connect with
+              mentors and unlock new opportunities.
+            </Typography>
+          </Box>
+          <Box className="imageWrapper">
+            <img
+              src="https://img.freepik.com/free-vector/3d-cartoon-people-concept-online-meeting-virtual-conference-video-call_40876-3763.jpg?t=st=1734586121~exp=1734589721~hmac=4ba87f4f92998bcd4b2e739c142939f95eef8dbe4b98f5e022e8b1b04dd69cd5&w=900"
+              alt="Find a Mentor"
+              className="mentorImage"
+            />
+          </Box>
+        </Box>
       </Box>
-      <Box className="imageWrapper">
-      <img
-        src="https://img.freepik.com/free-vector/3d-cartoon-people-concept-online-meeting-virtual-conference-video-call_40876-3763.jpg?t=st=1734586121~exp=1734589721~hmac=4ba87f4f92998bcd4b2e739c142939f95eef8dbe4b98f5e022e8b1b04dd69cd5&w=900"
-        alt="Find a Mentor"
-        className="mentorImage"
-      />
-       </Box>
-  </Box>
-</Box>
 
       {/*------ mentorship-storiess ----------*/}
       <Box
@@ -90,37 +91,56 @@ function Home() {
           and unlock new opportunities.
         </Typography>
         <Box className="cardContainer">
-        {[
-      { image: 'https://img.freepik.com/free-vector/3d-cartoon-people-concept-online-meeting-virtual-conference-video-call_40876-3763.jpg?t=st=1734586121~exp=1734589721~hmac=4ba87f4f92998bcd4b2e739c142939f95eef8dbe4b98f5e022e8b1b04dd69cd5&w=900', title: 'Story 1',
-       content: 'Learn more about how our platform can help you connect with mentors and unlock new opportunities.' },
-      { image: 'https://img.freepik.com/free-vector/3d-cartoon-people-concept-online-meeting-virtual-conference-video-call_40876-3763.jpg?t=st=1734586121~exp=1734589721~hmac=4ba87f4f92998bcd4b2e739c142939f95eef8dbe4b98f5e022e8b1b04dd69cd5&w=900', title: 'Story 2', 
-        content: 'Learn more about how our platform can help you connect with mentors and unlock new opportunities.'  },
-      { image: 'https://img.freepik.com/free-vector/3d-cartoon-people-concept-online-meeting-virtual-conference-video-call_40876-3763.jpg?t=st=1734586121~exp=1734589721~hmac=4ba87f4f92998bcd4b2e739c142939f95eef8dbe4b98f5e022e8b1b04dd69cd5&w=900', title: 'Story 3',
-        content: 'Learn more about how our platform can help you connect with mentors and unlock new opportunities.' },
-    ].map((card, index) => (
-      <Box key={index} className="card">
-        <img src={card.image} alt={card.title} className="cardImage" />
-        <Typography variant="h6" className="cardTitle">
-          {card.title}
-        </Typography>
-        <Typography variant="body2" className="cardContent">
-          {card.content}
-        </Typography>
-        <Button
-          variant="contained"
-          color="primary"
-          className="cardButton"
-          style={{ margin: '1rem auto', display: 'block' ,backgroundColor: "#537786",
-            color: "#fff",
-            textTransform: "capitalize",}}
-            onClick={() => navigate("/login")}
-        >
-          Learn More
-        </Button>
+          {[
+            {
+              image:
+                "https://img.freepik.com/free-vector/3d-cartoon-people-concept-online-meeting-virtual-conference-video-call_40876-3763.jpg?t=st=1734586121~exp=1734589721~hmac=4ba87f4f92998bcd4b2e739c142939f95eef8dbe4b98f5e022e8b1b04dd69cd5&w=900",
+              title: "Story 1",
+              content:
+                "Learn more about how our platform can help you connect with mentors and unlock new opportunities.",
+            },
+            {
+              image:
+                "https://img.freepik.com/free-vector/3d-cartoon-people-concept-online-meeting-virtual-conference-video-call_40876-3763.jpg?t=st=1734586121~exp=1734589721~hmac=4ba87f4f92998bcd4b2e739c142939f95eef8dbe4b98f5e022e8b1b04dd69cd5&w=900",
+              title: "Story 2",
+              content:
+                "Learn more about how our platform can help you connect with mentors and unlock new opportunities.",
+            },
+            {
+              image:
+                "https://img.freepik.com/free-vector/3d-cartoon-people-concept-online-meeting-virtual-conference-video-call_40876-3763.jpg?t=st=1734586121~exp=1734589721~hmac=4ba87f4f92998bcd4b2e739c142939f95eef8dbe4b98f5e022e8b1b04dd69cd5&w=900",
+              title: "Story 3",
+              content:
+                "Learn more about how our platform can help you connect with mentors and unlock new opportunities.",
+            },
+          ].map((card, index) => (
+            <Box key={index} className="card">
+              <img src={card.image} alt={card.title} className="cardImage" />
+              <Typography variant="h6" className="cardTitle">
+                {card.title}
+              </Typography>
+              <Typography variant="body2" className="cardContent">
+                {card.content}
+              </Typography>
+              <Button
+                variant="contained"
+                color="primary"
+                className="cardButton"
+                style={{
+                  margin: "1rem auto",
+                  display: "block",
+                  backgroundColor: "#537786",
+                  color: "#fff",
+                  textTransform: "capitalize",
+                }}
+                onClick={() => navigate("/login")}
+              >
+                Learn More
+              </Button>
+            </Box>
+          ))}
+        </Box>
       </Box>
-    ))}
-      </Box>
-    </Box>
     </>
   );
 }

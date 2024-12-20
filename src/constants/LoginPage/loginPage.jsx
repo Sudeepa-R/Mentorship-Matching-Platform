@@ -31,12 +31,9 @@ export class LoginPage extends React.Component {
   handleLogin = (values) => {
     const { username, password } = values;
 
-
     if (username === "test@example.com" && password === "password123") {
-
       showMessage("success", "Login successful!");
     } else {
-
       showMessage("error", "Invalid username or password!");
     }
   };
@@ -100,12 +97,12 @@ export class LoginPage extends React.Component {
                   style={{
                     minWidth: 350,
                   }}
-                  onFinish={this.handleLogin} 
-                  onFinishFailed={this.handleLoginFailed} 
+                  onFinish={this.handleLogin}
+                  onFinishFailed={this.handleLoginFailed}
                   // onFinish={onFinish}
                 >
                   <p>
-                  Enter your email address and password to access your portal!
+                    Enter your email address and password to access your portal!
                   </p>
                   <Form.Item
                     label="Username"
