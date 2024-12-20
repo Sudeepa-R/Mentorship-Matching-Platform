@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import React from 'react'
 import {  Route, Routes } from 'react-router-dom'
 import Home from './home/Home';
@@ -19,5 +20,28 @@ const RouterProvider = () => {
         </Routes>
     )
   }
+=======
+import React from "react";
+import { Route, Routes } from "react-router-dom";
+import Home from "./home/Home";
+import LoginPage from "./LoginPage/loginPage";
+import NotFound from "./not-found/not-found";
+import Profile from "../pages/Profile/Profile";
+import { sampleUsers } from "../data";
 
-export default RouterProvider
+const RouterProvider = () => {
+  return (
+    <Routes>
+      <Route index element={<Home />} />
+      <Route path="/login" element={<LoginPage />} />
+      <Route
+        path="/profile/:userId"
+        element={<Profile users={sampleUsers} />}
+      />
+      <Route path="*" element={<NotFound />} />
+    </Routes>
+  );
+};
+>>>>>>> 88da41470e182011382822378a29a7df5a1ea707
+
+export default RouterProvider;

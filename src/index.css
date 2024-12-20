@@ -2,18 +2,17 @@
   padding: 8px 0;
   background: #00a0e9;
 }
-.ant-btn-primary{
-  background-color:#537786;
+.ant-btn-primary {
+  background-color: #537786;
 }
-.ant-btn-primary:hover{
-  background-color:#537786 !important;
+.ant-btn-primary:hover {
+  background-color: #537786 !important;
 }
-.ant-btn-default:hover{
+.ant-btn-default:hover {
   border-color: #537786 !important;
   color: #537786 !important;
 }
-
-::-webkit-scrollbar {
+/* ::-webkit-scrollbar {
   width: 8px;
 }
 
@@ -28,4 +27,4 @@
 
 ::-webkit-scrollbar-thumb:hover {
   background: #00a0e9;
-}
+}  */

@@ -1,0 +1,37 @@
+.footer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  padding: 20px 0 0;
+  margin: 50px 70px;
+}
+.footer_bottom {
+  margin-bottom: 50px;
+}
+
+.app_name h1 {
+  color: #537786;
+  font-weight: 700;
+}
+.footer h3 {
+  color: #537786;
+  cursor: pointer;
+}
+.footer ul li {
+  list-style: none;
+  color: #080808;
+  font-weight: 400;
+}
+.footer ul {
+  margin: 0;
+  padding: 0;
+  cursor: pointer;
+}
+.footer hr {
+  border: none;
+  border: 1px solid #080808;
+  width: 100%;
+}
+.footer_bottom span {
+  color: rgb(102, 113, 118);
+}
