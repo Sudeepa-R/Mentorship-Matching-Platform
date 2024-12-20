@@ -4,7 +4,7 @@ import './Footer.scss'
 
 const Footer = () => {
   return (
-    <div className='footer'>
+    <div className='footer' id='contactUs'>
          <div className="app_name">
             <h1>MentorMatch</h1>
             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.<br/>

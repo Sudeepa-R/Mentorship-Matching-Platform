@@ -1,14 +1,17 @@
-import React from 'react';
-import { Box, Typography, Button } from '@mui/material';
+import {React,useRef} from 'react';
+import { Box, Typography, Button, getOffsetTop } from '@mui/material';
+import { useNavigate} from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import Navbar from '../../components/Navbar';
-
+import './home.scss'
+import Footer from'../../components/Footer';
 function Home() {
   const navigate = useNavigate();
   const homeRef = useRef(null);
   const findMentorRef = useRef(null);
   const mentorshipStoriesRef = useRef(null);
   const membershipPlansRef = useRef(null);
+  const contactUsRef = useRef(null);
 
   // Scroll to specific section
   const scrollToSection = (ref) => {
@@ -20,6 +23,7 @@ function Home() {
     findMentor: findMentorRef,
     mentorshipStories: mentorshipStoriesRef,
     membershipPlans: membershipPlansRef,
+    contactUs: contactUsRef,
   };
   return (
     <>
@@ -89,6 +93,15 @@ function Home() {
           Learn more about how our platform can help you connect with mentors
           and unlock new opportunities.
         </Typography>
+
+        {/*----------- ContactUs-------------- */}
+        <Box
+        ref={contactUsRef}
+        id="contactUs"
+        className="section-3"
+        to='/contactUs'
+       
+      ></Box>
         <Box className="cardContainer">
         {[
       { image: 'https://img.freepik.com/free-vector/3d-cartoon-people-concept-online-meeting-virtual-conference-video-call_40876-3763.jpg?t=st=1734586121~exp=1734589721~hmac=4ba87f4f92998bcd4b2e739c142939f95eef8dbe4b98f5e022e8b1b04dd69cd5&w=900', title: 'Story 1',
@@ -121,6 +134,7 @@ function Home() {
     ))}
       </Box>
     </Box>
+    <Footer/>
     </>
   );
 }

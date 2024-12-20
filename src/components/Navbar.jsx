@@ -8,6 +8,7 @@ const navigation = [
   { name: "Find a Mentor", section: "findMentor" },
   { name: "Mentorship Stories", section: "mentorshipStories" },
   { name: "Membership Plans", section: "membershipPlans" },
+  { name: "Contact Us", section: "contactUs" },
 ];
 
 const Navbar = ({ onScrollToSection }) => {
@@ -38,6 +39,7 @@ const Navbar = ({ onScrollToSection }) => {
       "findMentor",
       "mentorshipStories",
       "membershipPlans",
+      "contactUs",
     ];
     const sectionPositions = sections.map((section) => {
       const element = document.getElementById(section);
