@@ -153,17 +153,55 @@ function Home() {
           ))}
         </Box>
       </Box>
+
        {/*---- Membership Plans Section---------- */}
-     <Box ref={membershipPlansRef} id="membershipPlans" className="section">
-        <Typography variant="h3" className="sectionTitle">
+     
+
+      
+      <Box ref={membershipPlansRef} id="membershipPlans" className="section-3">
+        <Typography variant="h3" className="sectionTitle-3">
           Membership Plans
         </Typography>
-        <Typography variant="body1" className="sectionContent">
-          Learn more about how our platform can help you connect with mentors
-          and unlock new opportunities.
+       
+        <Box className="cardContainer-3">
+    {[
+      { title: 'Unlimited', content: 'Learn more about how our platform can help you connect with mentors and unlock new opportunities.Learn more about how our platform can help you connect with mentors and unlock new opportunities.Learn more about how our platform can help you connect with mentors and unlock new opportunities.', subHeading: 'Credits $12/months' },
+      { title: 'Pro', content: 'Learn more about how our platform can help you connect with mentors and unlock new opportunities.Learn more about how our platform can help you connect with mentors and unlock new opportunities.Learn more about how our platform can help you connect with mentors and unlock new opportunities.', subHeading: 'Credits $12/months' },
+      { title: 'Free', content: 'Learn more about how our platform can help you connect with mentors and unlock new opportunities.Learn more about how our platform can help you connect with mentors and unlock new opportunities.Learn more about how our platform can help you connect with mentors and unlock new opportunities.', subHeading: 'Free' },
+    ].map((card2, index) => (
+      <Box key={index} className="card2" sx={{ textAlign: 'left', padding: '16px', margin: '16px', border: '1px solid #ddd', boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)' }}>
+        <Typography variant="h5" className="cardTitle2" sx={{ fontWeight: 'bold', marginBottom: '8px' }}>
+          {card2.title}
         </Typography>
+        <Typography variant="body1" className="cardContent2" sx={{ marginBottom: '8px' }}>
+          {card2.content}
+        </Typography>
+        <Typography variant="subtitle1" sx={{ marginBottom: '16px' }}>
+          {card2.subHeading}
+        </Typography>
+        <Button
+          variant="contained"
+          color="primary"
+          className="cardButton2"
+          sx={{
+            margin: '1rem auto',
+            display: 'block',
+            backgroundColor: '#fff',
+            color: '#537786',
+            textTransform: 'capitalize',
+            border: '',
+            borderRadius: '0',  // Removes the border radius
+          }}
+          
+          onClick={() => navigate("/login")}
+        >
+          Purchase
+        </Button>
       </Box>
-</Box>
+    ))}
+  </Box>
+      </Box>
+
 <Footer />
 
     </>
