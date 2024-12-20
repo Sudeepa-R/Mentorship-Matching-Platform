@@ -123,7 +123,7 @@ function Home() {
         </Box>
       </Box>
 
-      {/*---- Membership Plans Section---------- */}  
+      {/*---- Membership Plans Section-------------- */}  
 
       
       <Box ref={membershipPlansRef} id="membershipPlans" className="section-3">
