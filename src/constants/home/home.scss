@@ -1,5 +1,5 @@
 
-@import './variable.scss';
+@use './variable.scss' as *;
 
 
 
@@ -48,7 +48,7 @@
   .subTitle {
     position: absolute;
     left: 100px;
-    top: 450px;
+    top: 500px;
     height: 200px;
     width: 350px;
     display: flex;

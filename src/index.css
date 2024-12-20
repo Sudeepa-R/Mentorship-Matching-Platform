@@ -12,19 +12,6 @@
   border-color: #537786 !important;
   color: #537786 !important;
 }
-/* ::-webkit-scrollbar {
-  width: 8px;
+ ::-webkit-scrollbar {
+  display: none;
 }
-
-::-webkit-scrollbar-track {
-  background: #f1f1f1;
-}
-
-::-webkit-scrollbar-thumb {
-  background: #537786;
-  border-radius: 10px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: #00a0e9;
-}  */

@@ -1,7 +1,7 @@
 import { Link, useNavigate } from "react-router-dom";
 import { Button } from "@mui/material";
 import React, { useState, useEffect } from "react";
-import { SignedIn, SignedOut, SignInButton, UserButton, SignUpButton } from "@clerk/clerk-react";
+import { SignedIn, SignedOut, SignInButton, UserButton, SignUpButton, useUser } from "@clerk/clerk-react";
 import "./navbar.scss";
 
 const navigation = [
@@ -152,7 +152,17 @@ const Navbar = ({ onScrollToSection }) => {
           </SignedOut>
         </div>
         <SignedIn>
-          <UserButton afterSignOut={() => window.location.href = "/"} />
+        {/* <button style={{
+              backgroundColor: "#537786",
+              color: "#fff",
+              textTransform: "capitalize",
+              padding: "10px 20px",
+              borderRadius: "5px",
+              border: "none",
+              cursor: "pointer",
+              transition: "background-color 0.3s",
+            }} onClick={()=>navigate('/dashboard')}>Dashboard</button> */}
+                      <UserButton afterSignOut={() => window.location.href = "/"} />
         </SignedIn>
       </nav>
     </header>
