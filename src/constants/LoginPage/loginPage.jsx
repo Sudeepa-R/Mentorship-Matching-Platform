@@ -29,23 +29,7 @@ export class LoginPage extends React.Component {
     this.setState({forgotPass:false})
   }
 
-  handleLogin = (values) => {
-    const { username, password } = values;
-
-    if (username === "test@example.com" && password === "password123") {
-      showMessage("success", "Login successful!");
-    } else {
-      showMessage("error", "Invalid username or password!");
-    }
-  };
-
-  handleLoginFailed = (errorInfo) => {
-    showNotification({
-      type: "warning",
-      title: "Form Submission Failed",
-      description: "Please check the form fields and try again.",
-    });
-  };
+ 
 
   handleLogin = (values) => {
     const { username, password } = values;
@@ -56,69 +40,7 @@ export class LoginPage extends React.Component {
       showMessage("error", "Invalid username or password!");
     }
   };
-
-  handleLoginFailed = (errorInfo) => {
-    showNotification({
-      type: "warning",
-      title: "Form Submission Failed",
-      description: "Please check the form fields and try again.",
-    });
-  };
-
-  handleLogin = (values) => {
-    const { username, password } = values;
-
-    if (username === "test@example.com" && password === "password123") {
-      showMessage("success", "Login successful!");
-    } else {
-      showMessage("error", "Invalid username or password!");
-    }
-  };
-
-  handleLoginFailed = (errorInfo) => {
-    showNotification({
-      type: "warning",
-      title: "Form Submission Failed",
-      description: "Please check the form fields and try again.",
-    });
-  };
-
-  handleLogin = (values) => {
-    const { username, password } = values;
-
-    if (username === "test@example.com" && password === "password123") {
-      showMessage("success", "Login successful!");
-    } else {
-      showMessage("error", "Invalid username or password!");
-    }
-  };
-
-  handleLoginFailed = (errorInfo) => {
-    showNotification({
-      type: "warning",
-      title: "Form Submission Failed",
-      description: "Please check the form fields and try again.",
-    });
-  };
-
-  handleLogin = (values) => {
-    const { username, password } = values;
-
-    if (username === "test@example.com" && password === "password123") {
-      showMessage("success", "Login successful!");
-    } else {
-      showMessage("error", "Invalid username or password!");
-    }
-  };
-
-  handleLoginFailed = (errorInfo) => {
-    showNotification({
-      type: "warning",
-      title: "Form Submission Failed",
-      description: "Please check the form fields and try again.",
-    });
-  };
-
+ 
   render() {
     return (
       <>
