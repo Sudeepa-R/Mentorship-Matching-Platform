@@ -1,10 +1,11 @@
-import React, { useRef,useEffect } from "react";
+import React, { useRef,useEffect, useContext } from "react";
 import { Box, Typography, Button } from "@mui/material";
 import { Link, useNavigate } from "react-router-dom";
 import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
 import "./home.scss";
 import {get} from '../../api/API'
+import ThemeContext from "../../context/theme/ThemeContext";
 
 function Home() {
   const navigate = useNavigate();
@@ -13,6 +14,8 @@ function Home() {
   const mentorshipStoriesRef = useRef(null);
   const membershipPlansRef = useRef(null);
   const contactUsRef = useRef(null);
+
+  const { isDark } = useContext(ThemeContext);
 
   // Scroll to specific section
   const scrollToSection = (ref) => {
@@ -46,34 +49,20 @@ function Home() {
       />
 
       {/*----- Home Section ------*/}
-      <Box ref={homeRef} id="home" className="homeContainer">
+      <Box ref={homeRef} id="home" className="homeContainer" style={isDark ? { backgroundColor: '#333', color: '#fff' } : {}}>
         <Typography variant="h2" gutterBottom className="title">
           Welcome to the Mentorship Matching Platform
         </Typography>
         <Typography variant="h5" gutterBottom className="title subTitle">
           <strong>Connect with mentors to unlock your potential.</strong>
         </Typography>
-        {/* <Typography variant="body1" className="description">
-          <strong>
-            Our platform offers a variety of resources to help you grow,
-            including one-on-one mentoring sessions, group workshops, and access
-            to exclusive content.
-          </strong>
-        </Typography> */}
-        {/* <Typography variant="body1" className="description">
-          <strong>
-            Whether you're looking to enhance your skills, explore new career
-            paths, or gain insights from experienced professionals, we are here
-            to support you every step of the way.
-          </strong>
-        </Typography> */}
         <Button variant="contained" className="startButton" size="large">
           <Link to="/register">Get Started</Link>
         </Button>
       </Box>
 
       {/*------------ find-mentor section------------- */}
-      <Box ref={findMentorRef} id="findMentor" className="section-1 ">
+      <Box ref={findMentorRef} id="findMentor" className="section-1 " style={isDark ? { backgroundColor: '#444', color: '#fff' } : {}}>
         <Box className="sectionContentWrapper-1">
           <Box className="content-1">
             <Typography variant="h3" className="sectionTitle-1">
@@ -94,11 +83,12 @@ function Home() {
         </Box>
       </Box>
 
-      {/*------ mentorship-storiess ----------*/}
+      {/*------ mentorship-stories ----------*/}
       <Box
         ref={mentorshipStoriesRef}
         id="mentorshipStories"
         className="section-2"
+        style={isDark ? { backgroundColor: '#444', color: '#fff' } : {}}
       >
         <Typography variant="h3" className="sectionTitle-2">
           Mentorship Stories
@@ -148,8 +138,8 @@ function Home() {
                 style={{
                   margin: "1rem auto",
                   display: "block",
-                  backgroundColor: "#537786",
-                  color: "#fff",
+                  backgroundColor: isDark ? '#537786' : '#537786',
+                  color: isDark ? '#fff' : '#fff',
                   textTransform: "capitalize",
                 }}
                 onClick={() => navigate("/login")}
@@ -165,7 +155,7 @@ function Home() {
      
 
       
-      <Box ref={membershipPlansRef} id="membershipPlans" className="section-3">
+      <Box ref={membershipPlansRef} id="membershipPlans" className="section-3" style={isDark ? { backgroundColor: '#444', color: '#fff' } : {}}>
         <Typography variant="h3" className="sectionTitle-3">
           Membership Plans
         </Typography>
@@ -176,7 +166,7 @@ function Home() {
       { title: 'Pro', content: 'Learn more about how our platform can help you connect with mentors and unlock new opportunities.Learn more about how our platform can help you connect with mentors and unlock new opportunities.Learn more about how our platform can help you connect with mentors and unlock new opportunities.', subHeading: 'Credits $12/months' },
       { title: 'Free', content: 'Learn more about how our platform can help you connect with mentors and unlock new opportunities.Learn more about how our platform can help you connect with mentors and unlock new opportunities.Learn more about how our platform can help you connect with mentors and unlock new opportunities.', subHeading: 'Free' },
     ].map((card2, index) => (
-      <Box key={index} className="card2" sx={{ textAlign: 'left', padding: '16px', margin: '16px', border: '1px solid #ddd', boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)' }}>
+      <Box key={index} className="card2" sx={{ textAlign: 'left', padding: '16px', margin: '16px', border: '1px solid #ddd', boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)', backgroundColor: isDark ? '#555' : '#fff', color: isDark ? '#fff' : '#000' }}>
         <Typography variant="h5" className="cardTitle2" sx={{ fontWeight: 'bold', marginBottom: '8px' }}>
           {card2.title}
         </Typography>
@@ -193,11 +183,11 @@ function Home() {
           sx={{
             margin: '1rem auto',
             display: 'block',
-            backgroundColor: '#fff',
-            color: '#537786',
+            backgroundColor: isDark ? '#fff' : '#fff',
+            color: isDark ? '#537786' : '#537786',
             textTransform: 'capitalize',
             border: '',
-            borderRadius: '0',  // Removes the border radius
+            borderRadius: '0', 
           }}
           
           onClick={() => navigate("/login")}
@@ -215,6 +205,7 @@ function Home() {
       id="contactUs"
       className="section-4"
       to="/contactUs"
+      style={isDark ? { backgroundColor: '#444', color: '#fff' } : {}}
     >
       <Typography variant="h3" className="sectionTitle-4">
     Contact Us
