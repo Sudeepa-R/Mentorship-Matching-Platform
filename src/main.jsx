@@ -1,5 +1,6 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import './index.css'
@@ -11,6 +12,8 @@ createRoot(document.getElementById('root')).render(
   </StrictMode>,
 )
 =======
+=======
+>>>>>>> be8bcddf2e6a08e445d8894e8cfad51e26efb244
 =======
 >>>>>>> be8bcddf2e6a08e445d8894e8cfad51e26efb244
 import { StrictMode } from "react";
@@ -28,6 +31,9 @@ createRoot(document.getElementById("root")).render(
   </StrictMode>
 );
 <<<<<<< HEAD
+<<<<<<< HEAD
+>>>>>>> be8bcddf2e6a08e445d8894e8cfad51e26efb244
+=======
 >>>>>>> be8bcddf2e6a08e445d8894e8cfad51e26efb244
 =======
 >>>>>>> be8bcddf2e6a08e445d8894e8cfad51e26efb244
