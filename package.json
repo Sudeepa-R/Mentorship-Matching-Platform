@@ -10,13 +10,10 @@
     "preview": "vite preview"
   },
   "dependencies": {
-<<<<<<< HEAD
-=======
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.0",
     "@mui/icons-material": "^6.2.1",
     "@mui/material": "^6.2.0",
->>>>>>> be8bcddf2e6a08e445d8894e8cfad51e26efb244
     "antd": "^5.22.4",
     "axios": "^1.7.9",
     "dotenv": "^16.4.7",

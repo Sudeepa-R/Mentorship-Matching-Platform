@@ -243,17 +243,6 @@ export class LoginPage extends React.Component {
             </div>
           </Col>
         </Row>
-<<<<<<< HEAD
-        {this.state.forgotPass &&  <Modal
-        title="Reset Your Account Password"
-        centered
-        open={this.state.forgotPass}
-        // onOk={this.handleOnOk()}
-        onCancel={()=>this.handleClose()}
-      >
-       <ForgotPass/>
-      </Modal>}
-=======
         {this.state.forgotPass && (
           <Modal
             title="Reset Your Account Password"
@@ -267,7 +256,6 @@ export class LoginPage extends React.Component {
             <ForgotPass />
           </Modal>
         )}
->>>>>>> be8bcddf2e6a08e445d8894e8cfad51e26efb244
       </>
     );
   }
