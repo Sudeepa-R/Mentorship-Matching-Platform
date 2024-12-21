@@ -2,7 +2,10 @@
 @use './variable.scss' as *;
 
 
-
+body {
+  overflow-x: hidden;
+  margin: 0; /* Ensure no default margin on the body */
+}
 .homeContainer {
   display: flex;
   flex-direction: column;
@@ -16,6 +19,7 @@
   width: 100%;
   position: relative;
   overflow: hidden;
+  
 
   &::before {
     content: "";
@@ -419,5 +423,15 @@
   text-align: center;
   padding-bottom: 10px;
 }
+
+.full-page {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
 
 
