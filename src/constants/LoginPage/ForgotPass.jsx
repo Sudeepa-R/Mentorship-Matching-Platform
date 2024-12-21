@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 <<<<<<< HEAD
+<<<<<<< HEAD
 import { Button, Form, Input, Flex } from "antd";
 import {
   LockOutlined,
@@ -7,6 +8,8 @@ import {
   LoginOutlined,
 } from "@ant-design/icons";
 =======
+=======
+>>>>>>> be8bcddf2e6a08e445d8894e8cfad51e26efb244
 import { Button, Form, Input, Space, message, notification } from "antd";
 import { UserOutlined, LockOutlined } from "@ant-design/icons";
 import { showMessage } from "../../constants/Toaster/toaster";
@@ -28,6 +31,9 @@ export class ForgotPass extends Component {
       confirmPassword: "",
       regexError: "",
       otpError: "",
+<<<<<<< HEAD
+>>>>>>> be8bcddf2e6a08e445d8894e8cfad51e26efb244
+=======
 >>>>>>> be8bcddf2e6a08e445d8894e8cfad51e26efb244
     };
   }
@@ -106,6 +112,106 @@ export class ForgotPass extends Component {
     const { otp } = this.state;
     const updatedOtp = [...otp];
     const digit = value.slice(-1);
+<<<<<<< HEAD
+=======
+
+    if (/^\d$/.test(digit)) {
+      updatedOtp[index] = digit;
+      this.setState({ otp: updatedOtp, otpError: "" });
+
+      if (digit && index < otp.length - 1) {
+        const nextInput = document.getElementById(`otp-${index + 1}`);
+        if (nextInput) nextInput.focus();
+      }
+    } else {
+      this.setState({ otpError: "Only numbers are allowed!" });
+    }
+  };
+
+  handleBackspace = (index) => {
+    const { otp } = this.state;
+    if (index > 0 && !otp[index]) {
+      const prevInput = document.getElementById(`otp-${index - 1}`);
+      if (prevInput) prevInput.focus();
+    }
+  };
+
+  handleConfirm = () => {
+    const { otp } = this.state;
+    if (otp.some((digit) => digit === "")) {
+      this.showNotification("Error", "Please fill all OTP boxes.", "error");
+    } else {
+      this.showNotification(
+        "Success",
+        "Password reset successfully. You can now log in with your new password."
+      );
+    }
+  };
+
+  showNotification = (title, description, type = "success") => {
+    notification[type]({
+      message: title,
+      description,
+      placement: "topRight",
+    });
+  };
+
+  renderOtpInputs = () => {
+    const { otp, otpError } = this.state;
+    return (
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+        }}
+      >
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          {otp.map((digit, index) => (
+            <Input
+              key={index}
+              id={`otp-${index}`}
+              value={digit}
+              maxLength={1}
+              onChange={(e) => this.handleOtpChange(e.target.value, index)}
+              onKeyDown={(e) => {
+                if (e.key === "Backspace") this.handleBackspace(index);
+              }}
+              style={{
+                width: "50px",
+                height: "50px",
+                textAlign: "center",
+                margin: "0 5px",
+                fontSize: "18px",
+              }}
+            />
+          ))}
+        </div>
+        {otpError && (
+          <p style={{ color: "red", marginTop: "5px", textAlign: "center" }}>
+            {otpError}
+          </p>
+        )}
+      </div>
+    );
+  };
+
+  render() {
+    const {
+      isUserExist,
+      countdown,
+      username,
+      password,
+      confirmPassword,
+      regexError,
+    } = this.state;
+>>>>>>> be8bcddf2e6a08e445d8894e8cfad51e26efb244
 
     if (/^\d$/.test(digit)) {
       updatedOtp[index] = digit;
