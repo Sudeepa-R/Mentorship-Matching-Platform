@@ -10,6 +10,7 @@ import {
 } from "@ant-design/icons";
 import "./Logingpage.scss";
 import ForgotPass from "./ForgotPass";
+import { showMessage, showNotification } from "../Toaster/toaster";
 
 
 export class LoginPage extends React.Component {
@@ -29,6 +30,24 @@ export class LoginPage extends React.Component {
     this.setState({forgotPass:false})
   }
 
+  handleLogin = (values) => {
+    const { username, password } = values;
+
+    if (username === "test@example.com" && password === "password123") {
+      showMessage("success", "Login successful!");
+    } else {
+      showMessage("error", "Invalid username or password!");
+    }
+  };
+
+  handleLoginFailed = (errorInfo) => {
+    showNotification({
+      type: "warning",
+      title: "Form Submission Failed",
+      description: "Please check the form fields and try again.",
+    });
+  };
+
   render() {
     return (
       <>
@@ -47,7 +66,7 @@ export class LoginPage extends React.Component {
           >
             <img
               src={loginImg}
-              alt="loging page image"
+              alt="login page image"
               style={{ width: "100%", height: "100%" }}
             />
           </Col>
@@ -80,6 +99,8 @@ export class LoginPage extends React.Component {
                   style={{
                     minWidth: 350,
                   }}
+                  onFinish={this.handleLogin}
+                  onFinishFailed={this.handleLoginFailed}
                   // onFinish={onFinish}
                 >
                   <p>
@@ -151,6 +172,7 @@ export class LoginPage extends React.Component {
             </div>
           </Col>
         </Row>
+<<<<<<< HEAD
         {this.state.forgotPass &&  <Modal
         title="Reset Your Account Password"
         centered
@@ -160,6 +182,21 @@ export class LoginPage extends React.Component {
       >
        <ForgotPass/>
       </Modal>}
+=======
+        {this.state.forgotPass && (
+          <Modal
+            title="Reset Your Account Password"
+            centered
+            open={this.state.forgotPass}
+            // onOk={this.handleOnOk()}
+            onCancel={() => this.handleClose()}
+            footer={false}
+            className=".forget-model"
+          >
+            <ForgotPass />
+          </Modal>
+        )}
+>>>>>>> be8bcddf2e6a08e445d8894e8cfad51e26efb244
       </>
     );
   }
