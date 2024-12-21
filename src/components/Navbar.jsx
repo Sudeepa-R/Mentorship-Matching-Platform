@@ -22,6 +22,13 @@ const Navbar = ({ onScrollToSection }) => {
   const { isDark, setIsDark } = useContext(ThemeContext);
 
   useEffect(() => {
+    const savedTheme = localStorage.getItem("theme");
+    if (savedTheme) {
+      setIsDark(savedTheme === "dark");
+    }
+  }, [setIsDark]);
+  
+  useEffect(() => {
     const handleScroll = () => {
       if (window.scrollY > window.innerHeight * 0.05) {
         setIsScrolled(true);
@@ -63,6 +70,13 @@ const Navbar = ({ onScrollToSection }) => {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  const toggleTheme = () => {
+    const newTheme = !isDark;
+    setIsDark(newTheme);
+    localStorage.setItem("theme", newTheme ? "dark" : "light");
+  };
+
 
   return (
     <header
@@ -129,7 +143,7 @@ const Navbar = ({ onScrollToSection }) => {
         </div>
 
         <div style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
-          <IconButton onClick={() => setIsDark(!isDark)}>
+          <IconButton onClick={toggleTheme}>
             {isDark ? <WbSunnySharpIcon style={{ color: '#fff' }} /> : <DarkModeSharpIcon style={{ color: '#000' }} />}
           </IconButton>
           <Button
