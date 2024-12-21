@@ -62,6 +62,13 @@ export class ForgotPass extends Component {
         "An OTP has been sent to your registered mobile number/email."
       );
     });
+    this.setState({ isUserExist: true }, () => {
+      this.startCountdown();
+      this.showNotification(
+        "OTP Generated",
+        "An OTP has been sent to your registered mobile number/email."
+      );
+    });
   };
 
   startCountdown = () => {
@@ -69,6 +76,11 @@ export class ForgotPass extends Component {
       this.setState((prevState) => {
         if (prevState.countdown <= 0) {
           clearInterval(this.timer);
+          this.showNotification(
+            "Error",
+            "The OTP has expired. Please generate a new one.",
+            "error"
+          );
           this.showNotification(
             "Error",
             "The OTP has expired. Please generate a new one.",
@@ -92,18 +104,27 @@ export class ForgotPass extends Component {
 
   handleInputChange = (e) => {
     this.setState({ [e.target.name]: e.target.value, regexError: "" });
+    this.setState({ [e.target.name]: e.target.value, regexError: "" });
   };
 
   handleGenerateOtp = () => {
     const { username, password, confirmPassword } = this.state;
     if (!username || !password || !confirmPassword) {
       showMessage("error", "Please fill in all fields before generating OTP!");
+      showMessage("error", "Please fill in all fields before generating OTP!");
     } else if (password !== confirmPassword) {
+      showMessage("error", "Passwords do not match!");
       showMessage("error", "Passwords do not match!");
     } else {
       const passwordPattern =
         /^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+      const passwordPattern =
+        /^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
       if (!passwordPattern.test(password)) {
+        this.setState({
+          regexError:
+            "Password must be at least 8 characters long, contain one uppercase letter, one number, and one special character!",
+        });
         this.setState({
           regexError:
             "Password must be at least 8 characters long, contain one uppercase letter, one number, and one special character!",
@@ -415,6 +436,14 @@ export class ForgotPass extends Component {
       confirmPassword,
       regexError,
     } = this.state;
+    const {
+      isUserExist,
+      countdown,
+      username,
+      password,
+      confirmPassword,
+      regexError,
+    } = this.state;
 
 >>>>>>> be8bcddf2e6a08e445d8894e8cfad51e26efb244
     return (
@@ -545,9 +574,15 @@ export class ForgotPass extends Component {
                 />
               </Form.Item>
               {regexError && <p style={{ color: "red" }}>{regexError}</p>}
+              {regexError && <p style={{ color: "red" }}>{regexError}</p>}
             </Form>
             <Space style={{ display: "flex", justifyContent: "end" }}>
               <Button key="back">Reset</Button>,
+              <Button
+                key="submit"
+                type="primary"
+                onClick={this.handleGenerateOtp}
+              >
               <Button
                 key="submit"
                 type="primary"
@@ -569,6 +604,10 @@ export class ForgotPass extends Component {
                 maxWidth: 350,
               }}
             >
+              <Form.Item label="Enter OTP">
+                <div style={{ display: "flex", justifyContent: "center" }}>
+                  {this.renderOtpInputs()}
+                </div>
               <Form.Item label="Enter OTP">
                 <div style={{ display: "flex", justifyContent: "center" }}>
                   {this.renderOtpInputs()}
@@ -595,6 +634,11 @@ export class ForgotPass extends Component {
                   type="primary"
                   onClick={this.handleConfirm}
                 >
+                <Button
+                  key="submit"
+                  type="primary"
+                  onClick={this.handleConfirm}
+                >
                   Confirm
                 </Button>
               </Space>
@@ -608,3 +652,4 @@ export class ForgotPass extends Component {
 }
 
 export default ForgotPass;
+
