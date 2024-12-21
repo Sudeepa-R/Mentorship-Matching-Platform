@@ -109,6 +109,7 @@ export class LoginPage extends React.Component {
             <img
               src={loginImg}
               alt="login page image"
+              alt="login page image"
               style={{ width: "100%", height: "100%" }}
             />
           </Col>
@@ -143,9 +144,12 @@ export class LoginPage extends React.Component {
                   }}
                   onFinish={this.handleLogin}
                   onFinishFailed={this.handleLoginFailed}
+                  onFinish={this.handleLogin}
+                  onFinishFailed={this.handleLoginFailed}
                   // onFinish={onFinish}
                 >
                   <p>
+                    Enter your email address and password to access your portal!
                     Enter your email address and password to access your portal!
                   </p>
                   <Form.Item
@@ -234,6 +238,7 @@ export class LoginPage extends React.Component {
             onCancel={() => this.handleClose()}
             footer={false}
             className=".forget-model"
+            className=".forget-model"
           >
             <ForgotPass />
           </Modal>
@@ -245,3 +250,4 @@ export class LoginPage extends React.Component {
 }
 
 export default LoginPage;
+

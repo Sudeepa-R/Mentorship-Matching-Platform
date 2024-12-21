@@ -24,6 +24,7 @@ import { BrowserRouter as Router } from "react-router-dom";
 
 // Removed ThemeProvider import due to unresolved import error
 createRoot(document.getElementById("root")).render(
+createRoot(document.getElementById("root")).render(
   <StrictMode>
     <Router>
       <App />
