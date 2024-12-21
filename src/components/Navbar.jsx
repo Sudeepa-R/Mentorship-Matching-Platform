@@ -1,7 +1,10 @@
 import { Link, useNavigate } from "react-router-dom";
-import { Button } from "@mui/material";
-import React, { useState, useEffect } from "react";
+import { Button, IconButton } from "@mui/material";
+import React, { useState, useEffect, useContext } from "react";
 import "./navbar.scss";
+import ThemeContext from "../context/theme/ThemeContext";
+import DarkModeSharpIcon from '@mui/icons-material/DarkModeSharp';
+import WbSunnySharpIcon from '@mui/icons-material/WbSunnySharp';
 
 const navigation = [
   { name: "Home", section: "home" },
@@ -16,9 +19,17 @@ const Navbar = ({ onScrollToSection }) => {
   const [activeSection, setActiveSection] = useState("home");
   const [isScrolled, setIsScrolled] = useState(false);
 
+  const { isDark, setIsDark } = useContext(ThemeContext);
+
+  useEffect(() => {
+    const savedTheme = localStorage.getItem("theme");
+    if (savedTheme) {
+      setIsDark(savedTheme === "dark");
+    }
+  }, [setIsDark]);
+  
   useEffect(() => {
     const handleScroll = () => {
-      // Check if scroll position is beyond 100vh
       if (window.scrollY > window.innerHeight * 0.05) {
         setIsScrolled(true);
       } else {
@@ -55,18 +66,32 @@ const Navbar = ({ onScrollToSection }) => {
     }
   };
 
-  // Listen to scroll events to update active section
   useEffect(() => {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  const toggleTheme = () => {
+    const newTheme = !isDark;
+    setIsDark(newTheme);
+    localStorage.setItem("theme", newTheme ? "dark" : "light");
+  };
+
+
   return (
     <header
-      style={{ position: "fixed", top: 0, left: 0, right: 0, zIndex: 50 }}
+      style={{
+        position: "fixed",
+        top: 0,
+        left: 0,
+        right: 0,
+        zIndex: 50,
+        backgroundColor: isDark ? "#333" : "#fff",
+        color: isDark ? "#fff" : "#000",
+      }}
     >
       <nav
-        className={`navbar ${isScrolled ? "scrolled" : ""}`}
+        className={`navbar`}
         style={{
           display: "flex",
           alignItems: "center",
@@ -75,14 +100,12 @@ const Navbar = ({ onScrollToSection }) => {
         }}
         aria-label="Global"
       >
-        {/* Logo */}
         <div style={{ display: "flex" }}>
-          <Link to="/" style={{ textDecoration: "none" }}>
+          <Link to="/" style={{ textDecoration: "none", color: isDark ? "#fff" : "#537786" }}>
             <span
               style={{
                 fontSize: "1.5rem",
                 fontWeight: "bold",
-                color: "#537786",
               }}
             >
               MentorMatch
@@ -90,16 +113,15 @@ const Navbar = ({ onScrollToSection }) => {
           </Link>
         </div>
 
-        {/* Navigation Links */}
         <div style={{ display: "flex", gap: "3rem" }}>
           {navigation.map((item) =>
             item.section ? (
               <span
                 key={item.name}
                 onClick={() => onScrollToSection(item.section)}
-                className={`nav-link ${
-                  item.section === activeSection ? "active" : ""
-                }`}
+                className={`nav-link ${item.section === activeSection ? "active" : ""
+                  }`}
+                style={{ color: isDark ? "#fff" : "#537786" }}
               >
                 {item.name}
               </span>
@@ -109,7 +131,7 @@ const Navbar = ({ onScrollToSection }) => {
                 to={item.href}
                 style={{
                   fontWeight: "600",
-                  color: "#537786",
+                  color: isDark ? "#fff" : "#537786",
                   fontSize: "1rem",
                   textDecoration: "none",
                 }}
@@ -120,11 +142,13 @@ const Navbar = ({ onScrollToSection }) => {
           )}
         </div>
 
-        {/* Buttons */}
         <div style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
+          <IconButton onClick={toggleTheme}>
+            {isDark ? <WbSunnySharpIcon style={{ color: '#fff' }} /> : <DarkModeSharpIcon style={{ color: '#000' }} />}
+          </IconButton>
           <Button
             variant="text"
-            style={{ color: "#000", textTransform: "capitalize" }}
+            style={{ color: isDark ? "#fff" : "#000", textTransform: "capitalize" }}
             onClick={() => navigate("/login")}
           >
             Log In

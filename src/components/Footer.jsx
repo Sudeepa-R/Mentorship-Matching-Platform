@@ -1,10 +1,14 @@
-import Link from "antd/es/typography/Link";
-import React from "react";
+import React, { useContext } from "react";
 import "./Footer.scss";
+import ThemeContext from "../context/theme/ThemeContext";
 
 const Footer = () => {
+  const { isDark } = useContext(ThemeContext);
   return (
-    <div className="footer" id="contactUs">
+    <div className="footer" id="contactUs" style={{
+      backgroundColor: isDark ? "#333" : "#fff",
+      color: isDark ? "#fff" : "#000",
+    }}>
       <div className="app_name">
         <h1>MentorMatch</h1>
         <p>
@@ -36,7 +40,10 @@ const Footer = () => {
         <p>Address: Your address 123</p>
       </div>
       <hr />
-      <div className="footer_bottom">
+      <div className="footer_bottom" style={{
+      backgroundColor: isDark ? "#333" : "#fff",
+      color: isDark ? "#fff" : "#000",
+    }}>
         <p>
           <span>&copy; 2024</span> Your Company Name. All rights reserved.
         </p>
