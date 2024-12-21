@@ -171,21 +171,31 @@ function Home() {
           ))}
         </Box>
       </Box>
-      {/*----------- ContactUs-------------- */}
 
-      <Box
-        ref={contactUsRef}
-        id="contactUs"
-        className="section-4"
-        to="/contactUs"
-        style={isDark ? { backgroundColor: '#444', color: '#fff' } : {}}
-      >
-        <Typography variant="h3" className="sectionTitle-4">
-          Contact Us
-        </Typography>
-        <Footer />
 
-      </Box>
+
+       {/*----------- ContactUs-------------- */}
+       
+       <Box
+  ref={contactUsRef}
+  id="contactUs"
+  className="section-4 full-page"
+  to="/contactUs"
+>
+  <Box>
+    <Typography variant="h3" className="sectionTitle-4">
+      Contact Us
+    </Typography>
+  </Box>
+  <Box>
+    <Footer />
+  </Box>
+</Box>
+
+
+    
+
+
     </>
   );
 }
