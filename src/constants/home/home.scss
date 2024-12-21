@@ -345,7 +345,7 @@
   text-align: center;
   padding: 2rem;
   background-color: #f9f9f9; /* Optional: Adjust as needed */
-  height: 100vh; /* Makes the section take up the full viewport height */
+  min-height: 100vh; /* Makes the section take up the full viewport height */
   box-sizing: border-box; /* Ensures padding is included in height */
   margin: 0; /* Removes any default margin */
   display: flex; /* Ensures the content is centered vertically */
@@ -401,5 +401,23 @@
   transform: scale(0.98); /* Slightly shrinks button on click */
 }
 
+
+//footerrr(contatct)
+.section-4 {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start; /* Ensures content starts at the top */
+  min-height: 100vh; /* Full viewport height */
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.sectionTitle-4 {
+  color: #537786;
+  font-weight: 700;
+  margin-bottom: 20px;
+  text-align: center;
+  padding-bottom: 10px;
+}
 
 

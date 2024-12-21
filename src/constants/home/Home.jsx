@@ -108,14 +108,7 @@ function Home() {
           and unlock new opportunities.
         </Typography>
 
-        {/*----------- ContactUs-------------- */}
-        <Box
-        ref={contactUsRef}
-        id="contactUs"
-        className="section-3"
-        to='/contactUs'
        
-      ></Box>
         <Box className="cardContainer">
           {[
             {
@@ -215,8 +208,22 @@ function Home() {
     ))}
   </Box>
       </Box>
+       {/*----------- ContactUs-------------- */}
+       
+       <Box
+      ref={contactUsRef}
+      id="contactUs"
+      className="section-4"
+      to="/contactUs"
+    >
+      <Typography variant="h3" className="sectionTitle-4">
+    Contact Us
+  </Typography>
+      <Footer />
+      
+    </Box>
+    
 
-<Footer />
 
     </>
   );
