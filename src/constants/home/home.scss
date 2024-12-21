@@ -1,0 +1,423 @@
+
+@use './variable.scss' as *;
+
+
+
+.homeContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  text-align: center;
+  padding: 40px;
+  border-radius: 8px;
+  // box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 30;
+    left: 0;
+    width: 100%;
+    height: 70%;
+    background: url("../../assets/banner.webp") no-repeat center center fixed,
+      url("../../assets/extrImg.svg") no-repeat center center fixed;
+    background-size: cover, cover;
+    background-position: center, center;
+    background-repeat: no-repeat, no-repeat;
+    background-blend-mode: overlay;
+    opacity: 1;
+    z-index: 1;
+  }
+
+  .title,
+  .description,
+  .startButton {
+    position: relative;
+    z-index: 2;
+  }
+
+  .title {
+    font-weight: bold;
+    color: whitesmoke;
+  }
+  .subTitle {
+    position: absolute;
+    left: 100px;
+    top: 450px;
+    height: 200px;
+    width: 350px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    background-color: $text-color-primary;
+    font-family: roboto;
+  }
+
+  .description {
+    margin-top: 2rem;
+    color: whitesmoke;
+  }
+
+  .startButton {
+    background-color: green;
+    color: white;
+    margin-top: 3rem;
+
+    a {
+      text-decoration: none;
+      color: white;
+    }
+  }
+}
+
+.section {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #f9f9f9;
+  background-image: url("../../assets/banner.webp") no-repeat center center
+    fixed;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-blend-mode: overlay;
+  opacity: 1;
+  z-index: 1;
+
+  .sectionTitle {
+    font-size: $font-size-large;
+    color: $text-color-primary;
+    margin-bottom: 1rem;
+  }
+
+  .sectionContent {
+    font-size: 1.2rem;
+    color: #333;
+    max-width: 600px;
+    text-align: center;
+  }
+}
+
+.nav-link {
+  cursor: pointer;
+  font-weight: 600;
+  color: #000;
+  font-size: 1rem;
+  position: relative;
+  display: inline-block;
+  padding-bottom: 5px;
+  transition: color 0.3s ease; /* Smooth color transition */
+
+  &.active {
+    color: $text-color-primary;
+  }
+
+  &.active::before {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: $text-color-primary;
+    transform: scaleX(0);
+    transition: transform 0.3s ease;
+    transform-origin: bottom right;
+  }
+
+  &:hover::before {
+    transform: scaleX(1);
+    transform-origin: bottom left;
+  }
+
+  &.active:hover::before {
+    transform: scaleX(1);
+    transform-origin: bottom left;
+  }
+}
+.nav-link {
+  cursor: pointer;
+  font-weight: 600;
+  color: #000;
+  font-size: 1rem;
+  position: relative;
+  display: inline-block;
+  padding-bottom: 5px;
+  transition: color 0.3s ease; /* Smooth color transition */
+
+  &.active {
+    color: $text-color-primary;
+  }
+
+  &.active::before {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: $text-color-primary;
+    transform: scaleX(0);
+    transition: transform 0.3s ease-in-out;
+    transform-origin: bottom left;
+  }
+
+  &:hover::before {
+    transform: scaleX(1);
+    transform-origin: bottom left;
+  }
+
+  &.active::before {
+    transform: scaleX(
+      1
+    ); /* This ensures the underline is fully expanded when active */
+    transform-origin: bottom left;
+    animation: slideUnderline 0.3s forwards; /* Apply animation when active */
+  }
+}
+
+/* Animation to slide the underline from left to right */
+@keyframes slideUnderline {
+  0% {
+    transform: scaleX(0);
+    transform-origin: bottom left;
+  }
+  100% {
+    transform: scaleX(1);
+    transform-origin: bottom right;
+  }
+}
+
+//-----Find a Mentor section edited---------//
+
+.section-1 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+  background-color: #f9f9f9; /* Adjust background as needed */
+  height: 100vh; /* Makes the section take up the full viewport height */
+  box-sizing: border-box; /* Ensures padding is included in height */
+  margin: 0; /* Removes any default margin */
+}
+.sectionTitle-1 {
+  font-size: $font-size-large;
+  color: $text-color-primary;
+  margin-bottom: 1rem;
+}
+
+.sectionContentWrapper-1 {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 2rem; /* Space between content and image */
+  max-width: 1200px;
+  width: 100%;
+}
+
+.content-1 {
+  flex: 1; /* Takes equal space as the image */
+}
+
+.imageWrapper {
+  flex: 1; /* Takes equal space as the content */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.mentorImage {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px; /* Optional: Adds rounded corners */
+}
+
+//------Mentornship  stories section
+.section-2 {
+  text-align: center;
+  padding: 2rem;
+  background-color: #f9f9f9; /* Optional: Adjust as needed */
+  height: 100vh; /* Makes the section take up the full viewport height */
+  box-sizing: border-box; /* Ensures padding is included in height */
+  margin: 0; /* Removes any default margin */
+  display: flex; /* Ensures the content is centered vertically */
+  flex-direction: column; /* Aligns the content vertically */
+  justify-content: center; /* Centers content vertically */
+  align-items: center; /* Centers content horizontally */
+  gap: 1.5rem; /* Adds gap between title, content, and cards */
+}
+
+.sectionTitle-2 {
+  margin-bottom: 0.5rem; /* Adds space below the title */
+  font-size:$font-size-large;
+  font-weight: bold;
+  color: $text-color-primary;
+}
+
+.sectionContent-2 {
+  margin-bottom: 1rem; /* Adds space below the content */
+  color: #666; /* Optional: Adjust text color */
+}
+
+.cardContainer {
+  display: flex;
+  justify-content: center;
+  gap: 2rem; /* Adjusts the space between cards */
+  flex-wrap: wrap; /* Makes the cards wrap on smaller screens */
+}
+
+.card {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 1.5rem; /* Adds internal spacing inside the card */
+  max-width: 300px;
+  flex: 1;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  text-align: left;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 10px rgba(83, 119, 134, 0.5);
+}
+
+.cardImage {
+  width: 100%;
+  height: auto;
+  border-radius: 8px; /* Adds rounded corners to the image */
+  margin-bottom: 1rem; /* Adds space below the image */
+}
+
+.cardTitle {
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-bottom: 0.75rem; /* Adds space below the title */
+}
+
+.cardContent {
+  font-size: 0.9rem;
+  color: #555;
+  margin-bottom: 1rem; /* Adds space below the content if needed */
+}
+
+.cardButton:hover {
+  background-color: $text-color-primary; /* Darker shade for hover */
+  transform: scale(1.05); /* Slightly enlarges button on hover */
+}
+
+.cardButton:active {
+  background-color: $text-color-primary; /* Even darker shade for active state */
+  transform: scale(0.98); /* Slightly shrinks button on click */
+}
+
+
+//home page animation
+@keyframes slideInFromRight {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+.subTitle {
+  animation: slideInFromRight 1.5s ease-out; /* Duration and easing */
+  display: inline-block; /* Ensures animation affects the text properly */
+}
+
+
+
+//membership plansss--------------------
+.section-3 {
+  text-align: center;
+  padding: 2rem;
+  background-color: #f9f9f9; /* Optional: Adjust as needed */
+  min-height: 100vh; /* Makes the section take up the full viewport height */
+  box-sizing: border-box; /* Ensures padding is included in height */
+  margin: 0; /* Removes any default margin */
+  display: flex; /* Ensures the content is centered vertically */
+  flex-direction: column; /* Aligns the content vertically */
+  justify-content: center; /* Centers content vertically */
+  align-items: center; /* Centers content horizontally */
+  gap: 1.5rem; /* Adds gap between title, content, and cards */
+}
+
+.sectionTitle-3{
+  margin-bottom: 0.5rem; /* Adds space below the title */
+  font-size:$font-size-large;
+  font-weight: bold;
+  color: $text-color-primary;
+}
+.cardContainer-3 {
+  display: flex;
+  justify-content: center;
+  gap: 2rem; /* Adjusts the space between cards */
+  flex-wrap: wrap; /* Makes the cards wrap on smaller screens */
+}
+
+.card2 {
+  background-color: $text-color-primary;
+  border: 1px solid #ddd;
+  padding: 1.5rem; /* Adds internal spacing inside the card */
+  max-width: 300px;
+  flex: 1;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  text-align: left;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.cardTitle2 {
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-bottom: 0.75rem;
+  color: #fff; /* Adds space below the title */
+}
+
+.cardContent2 {
+  font-size: 0.9rem;
+  color: #f9f9f9;
+  margin-bottom: 1rem; /* Adds space below the content if needed */
+}
+
+.cardButton2:hover {
+  background-color: #fff; /* Darker shade for hover */
+  transform: scale(1.05); /* Slightly enlarges button on hover */
+}
+
+.cardButton2:active {
+  background-color: $text-color-primary; /* Even darker shade for active state */
+  transform: scale(0.98); /* Slightly shrinks button on click */
+}
+
+
+//footerrr(contatct)
+.section-4 {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start; /* Ensures content starts at the top */
+  min-height: 100vh; /* Full viewport height */
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.sectionTitle-4 {
+  color: #537786;
+  font-weight: 700;
+  margin-bottom: 20px;
+  text-align: center;
+  padding-bottom: 10px;
+}
+
+
