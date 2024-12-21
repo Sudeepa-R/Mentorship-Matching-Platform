@@ -5,10 +5,7 @@ const api = axios.create({
   headers: {
     'Content-Type': 'application/json',
   },
-  
 });
-let baseURL= import.meta.env.VITE_MMP_BACKEND_URL
-console.log('url:',baseURL)
 
 // GET request
 export const get = async (endpoint) => {
@@ -55,7 +52,7 @@ export const patch = async (endpoint, payload) => {
 };
 
 // DELETE request
-export const dalete = async (endpoint) => {
+export const deleteRequest = async (endpoint) => {
   try {
     const response = await api.delete(endpoint);
     return response.data;
