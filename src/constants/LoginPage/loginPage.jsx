@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import loginImg from "../../assets/loginImg.webp";
-import { Col, Row, Button, Divider, Form, Input, Flex, Modal } from "antd";
+import { Col, Row, Button, Divider, Form, Input, Flex,Modal } from "antd";
 import {
   LockOutlined,
   UserOutlined,
@@ -13,19 +13,92 @@ import ForgotPass from "./ForgotPass";
 import { showMessage, showNotification } from "../Toaster/toaster";
 
 export class LoginPage extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      forgotPass: false,
-    };
+  constructor(props){
+    super(props)
+    this.state={
+      forgotPass:false,
+    }
+
   }
-  handleOnClick = () => {
+  handleOnClick=()=>{
     event.preventDefault();
-    this.setState({ forgotPass: true });
+    this.setState({forgotPass:true})
+  }   
+  
+  handleClose=()=>{
+    this.setState({forgotPass:false})
+  }
+
+  handleLogin = (values) => {
+    const { username, password } = values;
+
+    if (username === "test@example.com" && password === "password123") {
+      showMessage("success", "Login successful!");
+    } else {
+      showMessage("error", "Invalid username or password!");
+    }
   };
 
-  handleClose = () => {
-    this.setState({ forgotPass: false });
+  handleLoginFailed = (errorInfo) => {
+    showNotification({
+      type: "warning",
+      title: "Form Submission Failed",
+      description: "Please check the form fields and try again.",
+    });
+  };
+
+  handleLogin = (values) => {
+    const { username, password } = values;
+
+    if (username === "test@example.com" && password === "password123") {
+      showMessage("success", "Login successful!");
+    } else {
+      showMessage("error", "Invalid username or password!");
+    }
+  };
+
+  handleLoginFailed = (errorInfo) => {
+    showNotification({
+      type: "warning",
+      title: "Form Submission Failed",
+      description: "Please check the form fields and try again.",
+    });
+  };
+
+  handleLogin = (values) => {
+    const { username, password } = values;
+
+    if (username === "test@example.com" && password === "password123") {
+      showMessage("success", "Login successful!");
+    } else {
+      showMessage("error", "Invalid username or password!");
+    }
+  };
+
+  handleLoginFailed = (errorInfo) => {
+    showNotification({
+      type: "warning",
+      title: "Form Submission Failed",
+      description: "Please check the form fields and try again.",
+    });
+  };
+
+  handleLogin = (values) => {
+    const { username, password } = values;
+
+    if (username === "test@example.com" && password === "password123") {
+      showMessage("success", "Login successful!");
+    } else {
+      showMessage("error", "Invalid username or password!");
+    }
+  };
+
+  handleLoginFailed = (errorInfo) => {
+    showNotification({
+      type: "warning",
+      title: "Form Submission Failed",
+      description: "Please check the form fields and try again.",
+    });
   };
 
   handleLogin = (values) => {
@@ -109,8 +182,8 @@ export class LoginPage extends React.Component {
                     name="username"
                     rules={[
                       {
-                        type: "email",
-                        message: "The input is not valid E-mail!",
+                        type: 'email',
+                        message: 'The input is not valid E-mail!',
                       },
                       {
                         required: true,
@@ -137,11 +210,7 @@ export class LoginPage extends React.Component {
                   </Form.Item>
                   <Form.Item style={{ margin: "10px" }}>
                     <Flex justify="end" align="center">
-                      <a
-                        href=""
-                        className="forgotPassword"
-                        onClick={this.handleOnClick}
-                      >
+                      <a href="" className="forgotPassword" onClick={this.handleOnClick}>
                         Forgot password ?
                       </a>
                     </Flex>
@@ -153,13 +222,7 @@ export class LoginPage extends React.Component {
                       htmlType="submit"
                       style={{ backgroundColor: "#537786" }}
                     >
-                      <strong>
-                        {" "}
-                        <span>
-                          <LoginOutlined />
-                        </span>{" "}
-                        Login
-                      </strong>
+                      <strong> <span><LoginOutlined /></span> Login</strong>
                     </Button>
                     <div className="mt-2">
                       Don't have an account?{" "}
@@ -180,6 +243,17 @@ export class LoginPage extends React.Component {
             </div>
           </Col>
         </Row>
+<<<<<<< HEAD
+        {this.state.forgotPass &&  <Modal
+        title="Reset Your Account Password"
+        centered
+        open={this.state.forgotPass}
+        // onOk={this.handleOnOk()}
+        onCancel={()=>this.handleClose()}
+      >
+       <ForgotPass/>
+      </Modal>}
+=======
         {this.state.forgotPass && (
           <Modal
             title="Reset Your Account Password"
@@ -193,6 +267,7 @@ export class LoginPage extends React.Component {
             <ForgotPass />
           </Modal>
         )}
+>>>>>>> be8bcddf2e6a08e445d8894e8cfad51e26efb244
       </>
     );
   }

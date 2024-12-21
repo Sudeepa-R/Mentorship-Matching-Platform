@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Button, Form, Input, Space, message, notification } from "antd";
 import { UserOutlined, LockOutlined } from "@ant-design/icons";
 import { showMessage } from "../../constants/Toaster/toaster";
+>>>>>>> be8bcddf2e6a08e445d8894e8cfad51e26efb244
 import "./Logingpage.scss";
 
 export class ForgotPass extends Component {
@@ -9,6 +10,8 @@ export class ForgotPass extends Component {
     super(props);
     this.state = {
       modal2Open: this.props.modal2Open,
+<<<<<<< HEAD
+=======
       isUserExist: false,
       countdown: 120,
       otp: Array(6).fill(""),
@@ -20,11 +23,13 @@ export class ForgotPass extends Component {
     };
     this.timer = null;
   }
-
   componentDidMount() {
     this.setState({ modal2Open: this.props.modal2Open });
   }
 
+<<<<<<< HEAD
+  render() {
+=======
   componentWillUnmount() {
     clearInterval(this.timer);
   }
@@ -191,30 +196,74 @@ export class ForgotPass extends Component {
       regexError,
     } = this.state;
 
+>>>>>>> be8bcddf2e6a08e445d8894e8cfad51e26efb244
     return (
       <>
-        {isUserExist === false ? (
-          <div>
-            <Form
-              layout="vertical"
-              name="confim password"
-              initialValues={{
-                remember: true,
-              }}
-              style={{
-                maxWidth: 350,
-              }}
+        <div>
+        <p>Enter your email address and phone number to reset your password!</p>
+          <Form
+            layout="vertical"
+            name="login"
+            initialValues={{
+              remember: true,
+            }}
+            style={{
+              maxWidth: 350,
+            }}
+            // onFinish={onFinish}
+          >
+            <Form.Item
+              label="Username"
+              name="username"
+              rules={[
+                {
+                  type: "email",
+                  message: "The input is not valid E-mail!",
+                },
+                {
+                  required: true,
+                  message: "Please input your Username!",
+                },
+              ]}
             >
-              <Form.Item
-                label="Username or Phone Number"
-                name="username or phone number"
-                rules={[
-                  {
-                    required: true,
-                    message: "Please input your Username!",
-                  },
-                ]}
+              <Input prefix={<UserOutlined />} placeholder="Username" />
+            </Form.Item>
+            <Form.Item
+              label="Phone number"
+              name="Phone number"
+              rules={[
+                {
+                  required: true,
+                  message: "Please input your Password!",
+                },
+              ]}
+            >
+              <Input.Password
+                prefix={<LockOutlined />}
+                placeholder="Phone number"
+              />
+            </Form.Item>
+            
+            {/* <Form.Item>
+              <Button
+                block
+                type="primary"
+                htmlType="submit"
+                style={{ backgroundColor: "#537786" }}
               >
+<<<<<<< HEAD
+                <strong>
+                  {" "}
+                  <span>
+                    <LoginOutlined />
+                  </span>{" "}
+                  Login
+                </strong>
+              </Button>
+            </Form.Item> */}
+          </Form>
+        </div>
+=======
                 <Input
                   name="username"
                   value={username}
@@ -332,6 +381,7 @@ export class ForgotPass extends Component {
             </Form>
           </div>
         )}
+>>>>>>> be8bcddf2e6a08e445d8894e8cfad51e26efb244
       </>
     );
   }
