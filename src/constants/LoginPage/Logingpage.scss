@@ -1,20 +1,21 @@
-.forgotPassword{
-    text-decoration: none;
-    color: #757474;
+.forgotPassword {
+  text-decoration: none;
+  color: #757474;
 }
-.socialApps{
-    font-size: 2rem;
-    margin-right: 1rem;
-    cursor: pointer;
-    // color: rgb(136, 90, 6);
+.socialApps {
+  font-size: 2rem;
+  margin-right: 1rem;
+  cursor: pointer;
+  // color: rgb(136, 90, 6);
 }
-.google:hover{
-    color:#F3B605;
+.google:hover {
+  color: #f3b605;
 }
-.linkedIn:hover{
-    color:#0170AD;
+.linkedIn:hover {
+  color: #0170ad;
 }
 
-.ant-modal-content{
-    max-width: 83%;
+.ant-modal-content,
+.forget-model {
+  max-width: 80%;
 }
