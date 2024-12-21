@@ -10,14 +10,6 @@ import {
 } from "@ant-design/icons";
 import "./Logingpage.scss";
 import ForgotPass from "./ForgotPass";
-import { showMessage, showNotification } from "../Toaster/toaster";
-<<<<<<< HEAD
-<<<<<<< HEAD
-
-=======
->>>>>>> be8bcddf2e6a08e445d8894e8cfad51e26efb244
-=======
->>>>>>> be8bcddf2e6a08e445d8894e8cfad51e26efb244
 
 export class LoginPage extends React.Component {
   constructor(props){
@@ -35,6 +27,24 @@ export class LoginPage extends React.Component {
   handleClose=()=>{
     this.setState({forgotPass:false})
   }
+
+  handleLogin = (values) => {
+    const { username, password } = values;
+
+    if (username === "test@example.com" && password === "password123") {
+      showMessage("success", "Login successful!");
+    } else {
+      showMessage("error", "Invalid username or password!");
+    }
+  };
+
+  handleLoginFailed = (errorInfo) => {
+    showNotification({
+      type: "warning",
+      title: "Form Submission Failed",
+      description: "Please check the form fields and try again.",
+    });
+  };
 
   handleLogin = (values) => {
     const { username, password } = values;
@@ -108,8 +118,7 @@ export class LoginPage extends React.Component {
           >
             <img
               src={loginImg}
-              alt="login page image"
-              alt="login page image"
+              alt="loging page image"
               style={{ width: "100%", height: "100%" }}
             />
           </Col>
@@ -142,15 +151,10 @@ export class LoginPage extends React.Component {
                   style={{
                     minWidth: 350,
                   }}
-                  onFinish={this.handleLogin}
-                  onFinishFailed={this.handleLoginFailed}
-                  onFinish={this.handleLogin}
-                  onFinishFailed={this.handleLoginFailed}
                   // onFinish={onFinish}
                 >
                   <p>
-                    Enter your email address and password to access your portal!
-                    Enter your email address and password to access your portal!
+                    Enter your email address and password to access you portal!
                   </p>
                   <Form.Item
                     label="Username"
@@ -237,8 +241,6 @@ export class LoginPage extends React.Component {
             // onOk={this.handleOnOk()}
             onCancel={() => this.handleClose()}
             footer={false}
-            className=".forget-model"
-            className=".forget-model"
           >
             <ForgotPass />
           </Modal>
@@ -250,4 +252,3 @@ export class LoginPage extends React.Component {
 }
 
 export default LoginPage;
-
