@@ -2,7 +2,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { Button, IconButton } from "@mui/material";
 import React, { useState, useEffect, useContext } from "react";
 import "./navbar.scss";
-import ThemeContext from "../context/theme/ThemeContext";
+import ThemeContext from "../../context/theme/ThemeContext";
 import DarkModeSharpIcon from '@mui/icons-material/DarkModeSharp';
 import WbSunnySharpIcon from '@mui/icons-material/WbSunnySharp';
 
