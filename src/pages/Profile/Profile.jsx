@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import {
   Box,
@@ -9,14 +9,36 @@ import {
   Chip,
   Divider,
 } from '@mui/material';
+import AuthContext from '../../context/auth/AuthContext';
+import CustomLoaderWithText from '../../constants/loader/CustomLoader';
 
-const Profile = ({ users }) => {
+const Profile = () => {
   const { userId } = useParams();
-  const user = users[userId];
+  const { user, getUser , setUser } = useContext(AuthContext);
+  const [loading, setLoading] = useState(true);
 
-  if (!user || !user.name) {
+  useEffect(() => {
+    const fetchUser = async () => {
+      setLoading(true);
+      const userdata = await getUser(userId);
+      if(!user){
+        setUser(userdata)
+      }
+      setLoading(false);
+    };
+
+    fetchUser();
+  }, [userId, getUser]);
+
+  if (loading) {
+    return <CustomLoaderWithText size={"large"} spinnerColor={"gray"} />;
+  }
+
+  if (!user) {
     return <Typography variant="h6" color="error">User data is not available.</Typography>;
   }
+
+  const fullName = `${user.firstName} ${user.lastName}`;
 
   return (
     <Box sx={{ width: '100%', p: 2, background: 'linear-gradient(to right, #f0f4f8, #e0e7ef)', borderRadius: 2 }}>
@@ -28,24 +50,24 @@ const Profile = ({ users }) => {
               height: 100,
               border: '4px solid #fff',
               boxShadow: 3,
-              bgcolor: user.profilePic ? 'transparent' : 'orange',
+              bgcolor: user?.profilePic ? 'transparent' : 'orange',
               color: user.profilePic ? 'inherit' : 'white',
             }}
             alt="Profile Picture"
             src={user.profilePic || undefined}
           >
-            {!user.profilePic && user.name.charAt(0)}
+            {!user?.profilePic && user.firstName.charAt(0)}
           </Avatar>
           <Box sx={{ ml: 2 }}>
             <Typography variant="h5" gutterBottom>
-              {user.name}
+              {fullName}
             </Typography>
             <Typography variant="body1" color="textSecondary" gutterBottom>
-              {user.jobTitle}
+              {user?.jobTitle || 'Job Title Not Available'}
             </Typography>
             <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
               <Typography variant="body1" color="textSecondary">
-                {user.location}
+                {user?.location || 'Location Not Available'}
               </Typography>
             </Box>
           </Box>
@@ -58,9 +80,7 @@ const Profile = ({ users }) => {
             About Me
           </Typography>
           <Typography variant="body1" color="textSecondary">
-            Passionate software developer with 5+ years of experience in building web applications.
-            Focused on creating efficient, scalable, and user-friendly solutions using modern
-            technologies. Strong advocate for clean code and best practices.
+            {user?.aboutMe || 'About Me Not Available'}
           </Typography>
         </Box>
 
@@ -105,10 +125,26 @@ const Profile = ({ users }) => {
             Skills
           </Typography>
           <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1 }}>
-            {user.skills.map((skill) => (
+            {user?.skills?.map((skill) => (
               <Chip
                 key={skill}
                 label={skill}
+                color="primary"
+                variant="outlined"
+                sx={{ borderRadius: 1 }}
+              />
+            ))}
+          </Box>
+        </Box>
+        <Box>
+          <Typography variant="h5" gutterBottom>
+            Interests
+          </Typography>
+          <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1 }}>
+            {user?.interests?.map((interest) => (
+              <Chip
+                key={interest}
+                label={interest}
                 color="primary"
                 variant="outlined"
                 sx={{ borderRadius: 1 }}
