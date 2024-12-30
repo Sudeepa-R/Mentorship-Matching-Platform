@@ -1,8 +1,8 @@
 import React, { useRef, useEffect, useContext } from "react";
 import { Box, Typography, Button } from "@mui/material";
 import { Link, useNavigate } from "react-router-dom";
-import Navbar from "../../components/Navbar";
-import Footer from "../../components/Footer";
+import Navbar from "../../components/Navbar/Navbar";
+import Footer from "../../components/Footer/Footer";
 import "./home.scss";
 import { get } from '../../api/API'
 import ThemeContext from "../../context/theme/ThemeContext";
