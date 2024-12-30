@@ -13,7 +13,7 @@ const RouterProvider = () => {
       <Route path="/login" element={<LoginPage />} />
       <Route
         path="/profile/:userId"
-        element={<Profile users={sampleUsers} />}
+        element={<Profile/>}
       />
       <Route path="*" element={<NotFound />} />
     </Routes>
