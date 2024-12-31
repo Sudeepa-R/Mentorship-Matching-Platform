@@ -13,22 +13,24 @@ import AuthContext from '../../context/auth/AuthContext';
 import CustomLoaderWithText from '../../constants/loader/CustomLoader';
 
 const Profile = () => {
-  const { userId } = useParams();
-  const { user, getUser , setUser } = useContext(AuthContext);
+  const { userName } = useParams();
+  const { user, getUser, setUser } = useContext(AuthContext);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchUser = async () => {
       setLoading(true);
-      const userdata = await getUser(userId);
-      if(!user){
-        setUser(userdata)
+      if (userName) {
+        const userdata = await getUser(userName);
+        if (!user) {
+          setUser(userdata);
+        }
       }
       setLoading(false);
     };
 
     fetchUser();
-  }, [userId, getUser]);
+  }, [userName, getUser]);
 
   if (loading) {
     return <CustomLoaderWithText size={"large"} spinnerColor={"gray"} />;

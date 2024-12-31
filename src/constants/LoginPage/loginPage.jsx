@@ -13,10 +13,13 @@ import ForgotPass from "./ForgotPass";
 import { showMessage, showNotification } from "../Toaster/toaster";
 import AuthContext from "../../context/auth/AuthContext";
 import { useNavigate } from "react-router-dom";
+import { CircularProgress, Dialog, DialogContent } from "@mui/material";
+import { CircularProgressComponent } from "../loader/CustomLoader";
 
 const LoginPage = () => {
   const [forgotPass, setForgotPass] = useState(false);
-  const { user, Login , setUser } = useContext(AuthContext)
+  const [loading, setLoading] = useState(false);
+  const { Login, setUser } = useContext(AuthContext)
   const navigate = useNavigate()
 
   const handleOnClick = (event) => {
@@ -24,25 +27,28 @@ const LoginPage = () => {
     setForgotPass(true);
   };
 
-  // alice.smith@example2.com
-  // spexzee@123
-
   const handleClose = () => {
     setForgotPass(false);
   };
 
   const handleLogin = async (values) => {
     setUser({})
+    setLoading(true)
     const res = await Login(values);
-    if (res.user) {
+    setLoading(false)
+    if (res && res?.user) { 
       setUser(res.user)
       showMessage("success", res.message);
-      navigate(`/profile/${user._id}`);
+      if(res.user?.userName){
+        navigate(`/profile/${res.user?.userName}`);
+      } else {
+      showMessage("error", "userName not found");
+      }
     } else {
       showNotification({
         type: "error",
         title: "Login Failed",
-        description: "User data is not available",
+        description: "Something went wrong!",
       });
     }
   };
@@ -53,6 +59,7 @@ const LoginPage = () => {
       title: "Form Submission Failed",
       description: "Please check the form fields and try again.",
     });
+    console.error(errorInfo)
   };
 
   return (
@@ -112,20 +119,20 @@ const LoginPage = () => {
                   Enter your email address and password to access your portal!
                 </p>
                 <Form.Item
-                  label="Email"
-                  name="email"
+                  label="Email or Username"
+                  name="emailOrUsername"
                   rules={[
                     {
-                      type: "email",
+                      type: "text",
                       message: "The input is not valid E-mail!",
                     },
                     {
                       required: true,
-                      message: "Please input your Email!",
+                      message: "Please input your Email or Username!",
                     },
                   ]}
                 >
-                  <Input prefix={<UserOutlined />} placeholder="Email" />
+                  <Input prefix={<UserOutlined />} placeholder="Email or Username" />
                 </Form.Item>
                 <Form.Item
                   label="Password"
@@ -198,6 +205,9 @@ const LoginPage = () => {
         >
           <ForgotPass />
         </Modal>
+      )}
+      {loading && (
+        <CircularProgressComponent loading={loading}/>
       )}
     </>
   );

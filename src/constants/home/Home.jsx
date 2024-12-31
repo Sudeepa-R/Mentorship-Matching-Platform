@@ -4,7 +4,6 @@ import { Link, useNavigate } from "react-router-dom";
 import Navbar from "../../components/Navbar/Navbar";
 import Footer from "../../components/Footer/Footer";
 import "./home.scss";
-import { get } from '../../api/API'
 import ThemeContext from "../../context/theme/ThemeContext";
 import { plans, stories } from "../../data";
 
@@ -22,25 +21,12 @@ function Home() {
   const scrollToSection = (ref) => {
     ref.current.scrollIntoView({ behavior: "smooth" });
   };
-  useEffect(() => {
-    // This runs once before the component mounts
-    backendTest()
-    console.log('Component is about to mount');
-
-    // Optionally clean up if needed
-
-  }, []);
   const sectionRefs = {
     home: homeRef,
     findMentor: findMentorRef,
     mentorshipStories: mentorshipStoriesRef,
     membershipPlans: membershipPlansRef,
     contactUs: contactUsRef,
-  };
-
-  const backendTest = async () => {
-    const test = await get('/users/1');
-    console.log(test);
   };
 
   return (
