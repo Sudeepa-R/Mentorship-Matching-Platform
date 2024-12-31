@@ -12,7 +12,7 @@ const RouterProvider = () => {
       <Route index element={<Home />} />
       <Route path="/login" element={<LoginPage />} />
       <Route
-        path="/profile/:userId"
+        path="/profile/:userName"
         element={<Profile/>}
       />
       <Route path="*" element={<NotFound />} />

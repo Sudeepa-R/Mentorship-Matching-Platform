@@ -1,5 +1,5 @@
 import { styled } from '@mui/material/styles';
-import { CircularProgress, Typography } from '@mui/material';
+import { CircularProgress, Dialog, DialogContent, Typography } from '@mui/material';
 
 export const CustomLoader = styled(CircularProgress)(({ size, spinnerColor }) => {
   const sizes = {
@@ -19,11 +19,21 @@ const LoadingText = styled(Typography)({
   color: 'text.primary',
 });
 
-export default function CustomLoaderWithText({ size, spinnerColor }) {
+export default function CustomLoaderWithText({ size, spinnerColor, ...otherProps }) {
   return (
-    <div>
+    <div style={{height:"100vh" , width:"100vw" , display:"flex" , justifyContent:"center" , alignItems:"center", flexDirection:"column", position: 'relative'}} {...otherProps}>
       <CustomLoader size={size} spinnerColor={spinnerColor} />
       <LoadingText>Loading...</LoadingText>
     </div>
   );
+}
+
+export const CircularProgressComponent = ({loading}) => {
+  return(
+    <Dialog open={loading}>
+          <DialogContent>
+            <CircularProgress />
+          </DialogContent>
+        </Dialog>
+  )
 }
