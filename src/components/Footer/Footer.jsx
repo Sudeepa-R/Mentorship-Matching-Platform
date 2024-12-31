@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import "./Footer.scss";
-import ThemeContext from "../context/theme/ThemeContext";
+import ThemeContext from "../../context/theme/ThemeContext";
 
 const Footer = () => {
   const { isDark } = useContext(ThemeContext);

@@ -1,10 +1,9 @@
 import React, { useRef, useEffect, useContext } from "react";
 import { Box, Typography, Button } from "@mui/material";
 import { Link, useNavigate } from "react-router-dom";
-import Navbar from "../../components/Navbar";
-import Footer from "../../components/Footer";
+import Navbar from "../../components/Navbar/Navbar";
+import Footer from "../../components/Footer/Footer";
 import "./home.scss";
-import { get } from '../../api/API'
 import ThemeContext from "../../context/theme/ThemeContext";
 import { plans, stories } from "../../data";
 
@@ -22,25 +21,12 @@ function Home() {
   const scrollToSection = (ref) => {
     ref.current.scrollIntoView({ behavior: "smooth" });
   };
-  useEffect(() => {
-    // This runs once before the component mounts
-    backendTest()
-    console.log('Component is about to mount');
-
-    // Optionally clean up if needed
-
-  }, []);
   const sectionRefs = {
     home: homeRef,
     findMentor: findMentorRef,
     mentorshipStories: mentorshipStoriesRef,
     membershipPlans: membershipPlansRef,
     contactUs: contactUsRef,
-  };
-
-  const backendTest = async () => {
-    const test = await get('/users/1');
-    console.log(test);
   };
 
   return (
@@ -171,21 +157,31 @@ function Home() {
           ))}
         </Box>
       </Box>
-      {/*----------- ContactUs-------------- */}
 
-      <Box
-        ref={contactUsRef}
-        id="contactUs"
-        className="section-4"
-        to="/contactUs"
-        style={isDark ? { backgroundColor: '#444', color: '#fff' } : {}}
-      >
-        <Typography variant="h3" className="sectionTitle-4">
-          Contact Us
-        </Typography>
-        <Footer />
 
-      </Box>
+
+       {/*----------- ContactUs-------------- */}
+       
+       <Box
+  ref={contactUsRef}
+  id="contactUs"
+  className="section-4 full-page"
+  to="/contactUs"
+>
+  <Box>
+    <Typography variant="h3" className="sectionTitle-4">
+      Contact Us
+    </Typography>
+  </Box>
+  <Box>
+    <Footer />
+  </Box>
+</Box>
+
+
+    
+
+
     </>
   );
 }
