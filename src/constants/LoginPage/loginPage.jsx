@@ -13,7 +13,6 @@ import ForgotPass from "./ForgotPass";
 import { showMessage, showNotification } from "../Toaster/toaster";
 import AuthContext from "../../context/auth/AuthContext";
 import { useNavigate } from "react-router-dom";
-import { CircularProgress, Dialog, DialogContent } from "@mui/material";
 import { CircularProgressComponent } from "../loader/CustomLoader";
 
 const LoginPage = () => {
