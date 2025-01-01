@@ -4,7 +4,6 @@ import Home from "./home/Home";
 import LoginPage from "./LoginPage/loginPage";
 import NotFound from "./not-found/not-found";
 import Profile from "../pages/Profile/Profile";
-import { sampleUsers } from "../data";
 
 const RouterProvider = () => {
   return (
