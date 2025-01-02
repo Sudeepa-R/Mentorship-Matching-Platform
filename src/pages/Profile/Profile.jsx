@@ -9,20 +9,18 @@ import {
   Chip,
   Divider,
   Button,
-  IconButton,
 } from '@mui/material';
 import AuthContext from '../../context/auth/AuthContext';
 import CustomLoaderWithText from '../../constants/loader/CustomLoader';
 import ThemeContext from '../../context/theme/ThemeContext';
-import DarkModeSharpIcon from '@mui/icons-material/DarkModeSharp';
-import WbSunnySharpIcon from '@mui/icons-material/WbSunnySharp';
+import ThemeComponent from '../../components/Theme/Theme';
 
 const Profile = () => {
   const { userName } = useParams();
   const { user, getUser, setUser } = useContext(AuthContext);
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
-  const { isDark, setIsDark } = useContext(ThemeContext);
+  const { isDark } = useContext(ThemeContext);
 
   useEffect(() => {
     const fetchUser = async () => {
@@ -38,19 +36,6 @@ const Profile = () => {
 
     fetchUser();
   }, [userName, getUser]);
-
-  useEffect(() => {
-    const savedTheme = localStorage.getItem("theme");
-    if (savedTheme) {
-      setIsDark(savedTheme === "dark");
-    }
-  }, [setIsDark]);
-
-  const toggleTheme = () => {
-    const newTheme = !isDark;
-    setIsDark(newTheme);
-    localStorage.setItem("theme", newTheme ? "dark" : "light");
-  };
 
   if (loading) {
     return <CustomLoaderWithText size={"large"}/>;
@@ -71,9 +56,7 @@ const Profile = () => {
     <Box sx={{ width: '100vw', height: '100vh', p: 1, background: isDark ? 'linear-gradient(to right, #2B2B2B, #3B3B3B)' : 'linear-gradient(to right, #f0f4f8, #e0e7ef)' }}>
       <Paper elevation={6} sx={{ p: 4, borderRadius: 2, backgroundColor: isDark ? '#1A1A1A' : '#ffffff', boxShadow: '0 4px 20px rgba(0,0,0,0.1)' }}>
         <Box sx={{ display: 'flex', justifyContent: 'flex-end', m: 2, position: 'absolute', top: 0, right: 0, zIndex: 1 }}>
-          <IconButton onClick={toggleTheme} sx={{ color: isDark ? '#fff' : '#000' }}>
-            {isDark ? <WbSunnySharpIcon /> : <DarkModeSharpIcon />}
-          </IconButton>
+          <ThemeComponent />
         </Box>
         <Box sx={{ display: 'flex', alignItems: 'center', mb: 4 }}>
           <Avatar

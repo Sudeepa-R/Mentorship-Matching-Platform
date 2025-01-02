@@ -1,10 +1,9 @@
 import { Link, useNavigate } from "react-router-dom";
-import { Button, IconButton } from "@mui/material";
+import { Button } from "@mui/material";
 import React, { useState, useEffect, useContext } from "react";
 import "./navbar.scss";
 import ThemeContext from "../../context/theme/ThemeContext";
-import DarkModeSharpIcon from '@mui/icons-material/DarkModeSharp';
-import WbSunnySharpIcon from '@mui/icons-material/WbSunnySharp';
+import ThemeComponent from "../Theme/Theme";
 
 const navigation = [
   { name: "Home", section: "home" },
@@ -19,14 +18,7 @@ const Navbar = ({ onScrollToSection }) => {
   const [activeSection, setActiveSection] = useState("home");
   const [isScrolled, setIsScrolled] = useState(false);
 
-  const { isDark, setIsDark } = useContext(ThemeContext);
-
-  useEffect(() => {
-    const savedTheme = localStorage.getItem("theme");
-    if (savedTheme) {
-      setIsDark(savedTheme === "dark");
-    }
-  }, [setIsDark]);
+  const { isDark } = useContext(ThemeContext);
   
   useEffect(() => {
     const handleScroll = () => {
@@ -70,13 +62,6 @@ const Navbar = ({ onScrollToSection }) => {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
-
-  const toggleTheme = () => {
-    const newTheme = !isDark;
-    setIsDark(newTheme);
-    localStorage.setItem("theme", newTheme ? "dark" : "light");
-  };
-
 
   return (
     <header
@@ -143,9 +128,7 @@ const Navbar = ({ onScrollToSection }) => {
         </div>
 
         <div style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
-          <IconButton onClick={toggleTheme}>
-            {isDark ? <WbSunnySharpIcon style={{ color: '#fff' }} /> : <DarkModeSharpIcon style={{ color: '#000' }} />}
-          </IconButton>
+          <ThemeComponent />
           <Button
             variant="text"
             style={{ color: isDark ? "#fff" : "#000", textTransform: "capitalize" }}
