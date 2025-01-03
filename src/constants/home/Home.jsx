@@ -6,7 +6,6 @@ import Footer from "../../components/Footer/Footer";
 import "./home.scss";
 import ThemeContext from "../../context/theme/ThemeContext";
 import { plans, stories } from "../../data";
-import Celebration from "../../components/Celebration";
 
 function Home() {
   const navigate = useNavigate();
@@ -32,7 +31,6 @@ function Home() {
 
   return (
     <>
-    <Celebration/>
       <Navbar
         onScrollToSection={(section) => scrollToSection(sectionRefs[section])}
       />
