@@ -1,41 +1,38 @@
-import axios from 'axios';
+import axios from "axios";
 
 const api = axios.create({
-  baseURL: import.meta.env.VITE_MMP_BACKEND_URL, 
+  baseURL: import.meta.env.VITE_MMP_BACKEND_URL,
   headers: {
-    'Content-Type': 'application/json',
+    "Content-Type": "application/json",
   },
 });
-
+import commonFunction from "../constants/commonFuncions";
 // GET request
-export const get = async (endpoint) => {
+export const get = async (data) => {
   try {
-    const response = await api.get(endpoint);
-    return response.data;
+    const response = await api.get(`${commonFunction.baseURL}${data}`);
+    return response;
   } catch (error) {
-    console.error(`GET ${endpoint} failed:`, error);
     throw error;
   }
 };
 
 // POST request
-export const post = async (endpoint, payload) => {
+export const post = async (path, data) => {
   try {
-    const response = await api.post(endpoint, payload);
+    const response = await api.post(`${commonFunction.baseURL}${path}`, data);
     return response.data;
   } catch (error) {
-    console.error(`POST ${endpoint} failed:`, error);
     throw error;
   }
 };
 
 // PUT request
-export const put = async (endpoint, payload) => {
+export const put = async (path, data) => {
   try {
-    const response = await api.put(endpoint, payload);
+    const response = await api.put(`${commonFunction.baseURL}${path}`, data);
     return response.data;
   } catch (error) {
-    console.error(`PUT ${endpoint} failed:`, error);
     throw error;
   }
 };
@@ -61,3 +58,7 @@ export const deleteRequest = async (endpoint) => {
     throw error;
   }
 };
+
+const API = { get, patch, post, put, deleteRequest };
+
+export default API;

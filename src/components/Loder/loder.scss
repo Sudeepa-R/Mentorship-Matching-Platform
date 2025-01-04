@@ -1,0 +1,9 @@
+.loder{
+    position: absolute;
+    z-index: 9999;
+    top: 50%;
+    left: 50%;
+    :where(.css-dev-only-do-not-override-142vneq).ant-spin .ant-spin-dot-holder {
+        color: #134d66 !important;
+    }
+}
