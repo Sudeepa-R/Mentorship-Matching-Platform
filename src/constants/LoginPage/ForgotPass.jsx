@@ -1,24 +1,35 @@
 import React, { Component } from "react";
 import { Button, Form, Input, Space, message, notification } from "antd";
 import { UserOutlined, LockOutlined } from "@ant-design/icons";
-import { showMessage } from "../../constants/Toaster/toaster";
 import "./Logingpage.scss";
+import forgotPassAPI from "../../api/forgotPassword/forgotPasswordAPI";
+import commonFunction from "../commonFuncions";
+import { showNotification, showMessage } from "../../constants/Toaster/toaster";
 
+const { getUserData, generateOTP, validateUserOTP, updatePassword } =
+  forgotPassAPI;
 export class ForgotPass extends Component {
   constructor(props) {
     super(props);
     this.state = {
       modal2Open: this.props.modal2Open,
       isUserExist: false,
-      countdown: 120,
-      otp: Array(6).fill(""),
+      countdown: 180,
+      validateOTP: "",
       username: "",
       password: "",
       confirmPassword: "",
       regexError: "",
+      message: "Please input your username!",
       otpError: "",
+      userEmail: "",
+      otpGenerated: false,
+      isFormSubmitted: false,
+      isPassUpdated: false,
+      otp: ["", "", "", "", "", ""],
     };
     this.timer = null;
+    this.formRef = React.createRef();
   }
 
   componentDidMount() {
@@ -29,13 +40,32 @@ export class ForgotPass extends Component {
     clearInterval(this.timer);
   }
 
-  handleClose = () => {
-    this.setState({ isUserExist: true }, () => {
-      this.startCountdown();
-      this.showNotification(
-        "OTP Generated",
-        "An OTP has been sent to your registered mobile number/email."
-      );
+  verifyUser = (data) => {
+    getUserData(data).then((res) => {
+      if (res.status === commonFunction.success) {
+        if (res.data.data) {
+          this.setState({
+            isUserExist: true,
+            userEmail: res.data.data.email,
+          });
+        } else {
+          this.setState({ message: res.data.message });
+        }
+      }
+    });
+  };
+
+  sendOTP = (data) => {
+    generateOTP(data).then((res) => {
+      if (res.status === commonFunction.success) {
+        showNotification({
+          type: "success",
+          title: "OTP sent",
+          description: "OTP is sent to registered Email!",
+        });
+        this.setState({ otpGenerated: true, isFormSubmitted: false });
+        this.startCountdown(this.state.countdown);
+      }
     });
   };
 
@@ -65,66 +95,56 @@ export class ForgotPass extends Component {
     )}`;
   };
 
-  handleInputChange = (e) => {
-    this.setState({ [e.target.name]: e.target.value, regexError: "" });
-  };
-
   handleGenerateOtp = () => {
-    const { username, password, confirmPassword } = this.state;
-    if (!username || !password || !confirmPassword) {
-      showMessage("error", "Please fill in all fields before generating OTP!");
-    } else if (password !== confirmPassword) {
-      showMessage("error", "Passwords do not match!");
+    this.setState({ isFormSubmitted: true });
+    if (this.state.isUserExist) {
+      this.sendOTP(this.state.userEmail);
     } else {
-      const passwordPattern =
-        /^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
-      if (!passwordPattern.test(password)) {
-        this.setState({
-          regexError:
-            "Password must be at least 8 characters long, contain one uppercase letter, one number, and one special character!",
-        });
-      } else {
-        this.handleClose();
-      }
-    }
-  };
-
-  handleOtpChange = (value, index) => {
-    const { otp } = this.state;
-    const updatedOtp = [...otp];
-    const digit = value.slice(-1);
-
-    if (/^\d$/.test(digit)) {
-      updatedOtp[index] = digit;
-      this.setState({ otp: updatedOtp, otpError: "" });
-
-      if (digit && index < otp.length - 1) {
-        const nextInput = document.getElementById(`otp-${index + 1}`);
-        if (nextInput) nextInput.focus();
-      }
-    } else {
-      this.setState({ otpError: "Only numbers are allowed!" });
-    }
-  };
-
-  handleBackspace = (index) => {
-    const { otp } = this.state;
-    if (index > 0 && !otp[index]) {
-      const prevInput = document.getElementById(`otp-${index - 1}`);
-      if (prevInput) prevInput.focus();
+      this.setState({ isFormSubmitted: false });
+      showNotification({
+        type: "error",
+        title: "User not found!",
+        description:
+          "Please enter a valid registered email address or registered phone number.",
+      });
     }
   };
 
   handleConfirm = () => {
-    const { otp } = this.state;
-    if (otp.some((digit) => digit === "")) {
-      this.showNotification("Error", "Please fill all OTP boxes.", "error");
-    } else {
-      this.showNotification(
-        "Success",
-        "Password reset successfully. You can now log in with your new password."
-      );
-    }
+    this.setState({ isPassUpdated: true });
+    const { otp, userEmail, password } = this.state;
+    const validateOTP=otp.join("");
+    const data = { email: userEmail, otp: validateOTP };
+    validateUserOTP(data)
+      .then((res) => {
+        if (res.status === commonFunction.success) {
+          const data = { email: userEmail, password: password };
+          this.changePassword(data);
+        }
+      })
+      .catch((e) => {
+        this.setState({ isPassUpdated: false });
+        showMessage("error", "Please enter valid OTP!.");
+      });
+  };
+
+  changePassword = (data) => {
+    updatePassword(data)
+      .then((res) => {
+        if (res.status === commonFunction.success) {
+          showMessage("success", res.message);
+        }
+        this.setState({ isPassUpdated: false });
+        this.props.HandleClose();
+      })
+      .catch((e) => {
+        this.setState({ isPassUpdated: false });
+        showMessage("error", e.message);
+      });
+  };
+
+  onReset = () => {
+    this.formRef.current.resetFields();
   };
 
   showNotification = (title, description, type = "success") => {
@@ -135,117 +155,107 @@ export class ForgotPass extends Component {
     });
   };
 
-  renderOtpInputs = () => {
-    const { otp, otpError } = this.state;
-    return (
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-        }}
-      >
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-          }}
-        >
-          {otp.map((digit, index) => (
-            <Input
-              key={index}
-              id={`otp-${index}`}
-              value={digit}
-              maxLength={1}
-              onChange={(e) => this.handleOtpChange(e.target.value, index)}
-              onKeyDown={(e) => {
-                if (e.key === "Backspace") this.handleBackspace(index);
-              }}
-              style={{
-                width: "50px",
-                height: "50px",
-                textAlign: "center",
-                margin: "0 5px",
-                fontSize: "18px",
-              }}
-            />
-          ))}
-        </div>
-        {otpError && (
-          <p style={{ color: "red", marginTop: "5px", textAlign: "center" }}>
-            {otpError}
-          </p>
-        )}
-      </div>
-    );
+  handleChange = (value, index) => {
+    const { otp } = this.state;
+    const newOtp = [...otp];
+    newOtp[index] = value;
+
+    // Update state with new OTP values
+    this.setState({ otp: newOtp }, () => {
+      // Notify parent component if required
+      if (this.props.onChange) {
+        this.props.onChange(newOtp.join(""));
+      }
+    });
+
+    // Focus on the next input if value is entered
+    if (value && index < otp.length - 1) {
+      const nextInput = document.getElementById(`otp-input-${index + 1}`);
+      if (nextInput) nextInput.focus();
+    }
+  };
+
+  handleKeyDown = (event, index) => {
+    const { otp } = this.state;
+
+    if (event.key === "Backspace" && !otp[index] && index > 0) {
+      const prevInput = document.getElementById(`otp-input-${index - 1}`);
+      if (prevInput) prevInput.focus();
+    }
   };
 
   render() {
-    const {
-      isUserExist,
-      countdown,
-      username,
-      password,
-      confirmPassword,
-      regexError,
-    } = this.state;
-
+    const { otpGenerated } = this.state;
+    const { otp } = this.state;
     return (
       <>
-        {isUserExist === false ? (
+        {otpGenerated === false ? (
           <div>
             <Form
+              ref={this.formRef}
               layout="vertical"
-              name="confim password"
+              name="basic"
+              className=""
+              labelCol={{
+                span: 16,
+              }}
+              wrapperCol={{
+                span: 25,
+              }}
+              style={{
+                maxWidth: 600,
+              }}
               initialValues={{
                 remember: true,
               }}
-              style={{
-                maxWidth: 350,
-              }}
+              onFinish={this.handleGenerateOtp}
+              autoComplete="off"
             >
               <Form.Item
-                label="Username or Phone Number"
-                name="username or phone number"
+                label="Email/Phone Number"
+                name="username"
+                onChange={(e) => {
+                  this.verifyUser(e.target.value);
+                }}
                 rules={[
                   {
                     required: true,
-                    message: "Please input your Username!",
+                    message: this.state?.message,
                   },
                 ]}
               >
-                <Input
-                  name="username"
-                  value={username}
-                  onChange={this.handleInputChange}
-                  prefix={<UserOutlined />}
-                  placeholder="Username or phone number"
-                />
+                <Input allowClear />
               </Form.Item>
+
               <Form.Item
                 name="password"
-                label="Password"
+                label="password"
+                onChange={(e) => {
+                  this.setState({ password: e.target.value });
+                }}
                 rules={[
+                  { required: true, message: "Please input your password!" },
                   {
-                    required: true,
-                    message: "Please input your password!",
+                    min: 8,
+                    message: "Password must be at least 8 characters long!",
+                  },
+                  {
+                    pattern: /(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&#])/,
+                    message:
+                      "Password must include uppercase, lowercase, number, and special character!",
                   },
                 ]}
                 hasFeedback
               >
-                <Input.Password
-                  name="password"
-                  value={password}
-                  onChange={this.handleInputChange}
-                  prefix={<LockOutlined />}
-                  placeholder="Enter password"
-                />
+                <Input.Password allowClear />
               </Form.Item>
 
               <Form.Item
-                name="confirm"
+                name="confirmPassword"
                 label="Confirm Password"
+                onChange={(e) => {
+                  this.setState({ confirmPassword: e.target.value });
+                }}
                 dependencies={["password"]}
                 hasFeedback
                 rules={[
@@ -267,26 +277,28 @@ export class ForgotPass extends Component {
                   }),
                 ]}
               >
-                <Input.Password
-                  name="confirmPassword"
-                  value={confirmPassword}
-                  onChange={this.handleInputChange}
-                  prefix={<LockOutlined />}
-                  placeholder="Enter Confirm password"
-                />
+                <Input.Password allowClear />
               </Form.Item>
-              {regexError && <p style={{ color: "red" }}>{regexError}</p>}
+
+              <Form.Item label={null}>
+                <Space>
+                  <Button
+                    className="mx-2"
+                    htmlType="button"
+                    onClick={this.onReset}
+                  >
+                    Reset
+                  </Button>
+                </Space>
+                <Button
+                  loading={this.state?.isFormSubmitted}
+                  type="primary"
+                  htmlType="submit"
+                >
+                  Generate OTP
+                </Button>
+              </Form.Item>
             </Form>
-            <Space style={{ display: "flex", justifyContent: "end" }}>
-              <Button key="back">Reset</Button>,
-              <Button
-                key="submit"
-                type="primary"
-                onClick={this.handleGenerateOtp}
-              >
-                Generate OTP
-              </Button>
-            </Space>
           </div>
         ) : (
           <div>
@@ -300,21 +312,45 @@ export class ForgotPass extends Component {
                 maxWidth: 350,
               }}
             >
-              <Form.Item label="Enter OTP">
-                <div style={{ display: "flex", justifyContent: "center" }}>
-                  {this.renderOtpInputs()}
+              <Form.Item
+                label="Enter OTP"
+                name="otp"
+                rules={[
+                  {
+                    required: true,
+                    message: "Please enter a value!",
+                  },
+                  {
+                    pattern: /^\d+$/,
+                    message: "Only numbers are allowed!",
+                  },
+                ]}
+                
+              >
+                <div style={{ display: "flex", gap: "8px" }}>
+                  {otp.map((digit, index) => (
+                    <Input
+                      key={index}
+                      id={`otp-input-${index}`}
+                      value={digit}
+                      maxLength={1}
+                      onChange={(e) => this.handleChange(e.target.value, index)}
+                      onKeyDown={(e) => this.handleKeyDown(e, index)}
+                      style={{ width: "50px", height:'45px',fontSize:'25px', textAlign: "center" }}
+                    />
+                  ))}
                 </div>
               </Form.Item>
               <span style={{ display: "flex", justifyContent: "end" }}>
                 <p style={{ fontSize: "14px", color: "red" }}>
-                  Time Remaining: {this.formatTime(countdown)}
+                  Time Remaining: {this.formatTime(this.state?.countdown)}
                 </p>
               </span>
 
               <p>
-                We’ve sent a One-Time Password (OTP) to your registered mobile
-                number/email. Please enter the 6-digit code below to verify your
-                identity.
+                We’ve sent a <strong>One-Time Password (OTP)</strong> to your
+                registered mobile number/email. Please enter the 6-digit code
+                below to verify your identity.
               </p>
 
               <Space
@@ -323,8 +359,10 @@ export class ForgotPass extends Component {
               >
                 <Button
                   key="submit"
+                  loading={this.state?.isPassUpdated}
                   type="primary"
                   onClick={this.handleConfirm}
+                  iconPosition="end"
                 >
                   Confirm
                 </Button>

@@ -18,8 +18,9 @@ import { CircularProgressComponent } from "../loader/CustomLoader";
 const LoginPage = () => {
   const [forgotPass, setForgotPass] = useState(false);
   const [loading, setLoading] = useState(false);
-  const { Login, setUser } = useContext(AuthContext)
-  const navigate = useNavigate()
+  const [isLoding, setisLoding] = useState(false);
+  const { Login, setUser } = useContext(AuthContext);
+  const navigate = useNavigate();
 
   const handleOnClick = (event) => {
     event.preventDefault();
@@ -31,17 +32,18 @@ const LoginPage = () => {
   };
 
   const handleLogin = async (values) => {
-    setUser({})
-    setLoading(true)
+    setisLoding(true);
+    setUser({});
+    setLoading(true);
     const res = await Login(values);
-    setLoading(false)
-    if (res && res?.user) { 
-      setUser(res.user)
+    setLoading(false);
+    if (res && res?.user) {
+      setUser(res.user);
       showMessage("success", res.message);
-      if(res.user?.userName){
+      if (res.user?.userName) {
         navigate(`/profile/${res.user?.userName}`);
       } else {
-      showMessage("error", "userName not found");
+        showMessage("error", "userName not found");
       }
     } else {
       showNotification({
@@ -50,6 +52,7 @@ const LoginPage = () => {
         description: "Something went wrong!",
       });
     }
+    setisLoding(false);
   };
 
   const handleLoginFailed = (errorInfo) => {
@@ -58,7 +61,7 @@ const LoginPage = () => {
       title: "Form Submission Failed",
       description: "Please check the form fields and try again.",
     });
-    console.error(errorInfo)
+    console.error(errorInfo);
   };
 
   return (
@@ -131,7 +134,10 @@ const LoginPage = () => {
                     },
                   ]}
                 >
-                  <Input prefix={<UserOutlined />} placeholder="Email or Username" />
+                  <Input
+                    prefix={<UserOutlined />}
+                    placeholder="Email or Username"
+                  />
                 </Form.Item>
                 <Form.Item
                   label="Password"
@@ -165,6 +171,7 @@ const LoginPage = () => {
                     type="primary"
                     htmlType="submit"
                     style={{ backgroundColor: "#537786" }}
+                    loading={isLoding}
                   >
                     <strong>
                       {" "}
@@ -200,14 +207,12 @@ const LoginPage = () => {
           open={forgotPass}
           onCancel={handleClose}
           footer={false}
-          className=".forget-model"
+          className="forgotPass .forget-model"
         >
-          <ForgotPass />
+          <ForgotPass HandleClose={handleClose} />
         </Modal>
       )}
-      {loading && (
-        <CircularProgressComponent loading={loading}/>
-      )}
+      {/* {loading && <CircularProgressComponent loading={loading} />} */}
     </>
   );
 };
