@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
 import loginImg from "../../assets/loginImg.webp";
 import { Col, Row, Button, Divider, Form, Input, Flex, Modal } from "antd";
 import {
@@ -10,16 +10,14 @@ import {
 } from "@ant-design/icons";
 import "./Logingpage.scss";
 import ForgotPass from "./ForgotPass";
-import { showMessage, showNotification } from "../Toaster/toaster";
+import { showNotification } from "../Toaster/toaster";
 import AuthContext from "../../context/auth/AuthContext";
 import { useNavigate } from "react-router-dom";
-import { CircularProgressComponent } from "../loader/CustomLoader";
 
 const LoginPage = () => {
   const [forgotPass, setForgotPass] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [isLoding, setisLoding] = useState(false);
-  const { Login, setUser } = useContext(AuthContext);
+  const { setUser , Login } = useContext(AuthContext);
   const navigate = useNavigate();
 
   const handleOnClick = (event) => {
@@ -31,28 +29,30 @@ const LoginPage = () => {
     setForgotPass(false);
   };
 
-  const handleLogin = async (values) => {
-    setisLoding(true);
-    setUser({});
+  const handleLogin = async (data) => {
     setLoading(true);
-    const res = await Login(values);
-    setLoading(false);
-    if (res && res?.user) {
-      setUser(res.user);
-      showMessage("success", res.message);
-      if (res.user?.userName) {
-        navigate(`/profile/${res.user?.userName}`);
+    try {
+      const res = await Login(data);
+      if (res.user) {
+        setUser(res.user);
+        showNotification({
+          type: "success",
+          title: "Success",
+          description: res.message,
+        });
+        navigate('/home');
       } else {
-        showMessage("error", "userName not found");
+        throw new Error(res.message);
       }
-    } else {
+    } catch (e) {
       showNotification({
         type: "error",
         title: "Login Failed",
-        description: "Something went wrong!",
+        description: e?.response?.data?.message || "An error occurred during login.",
       });
+    } finally {
+      setLoading(false);
     }
-    setisLoding(false);
   };
 
   const handleLoginFailed = (errorInfo) => {
@@ -121,11 +121,11 @@ const LoginPage = () => {
                   Enter your email address and password to access your portal!
                 </p>
                 <Form.Item
-                  label="Email or Username"
-                  name="emailOrUsername"
+                  label="Email"
+                  name="email"
                   rules={[
                     {
-                      type: "text",
+                      type: "email",
                       message: "The input is not valid E-mail!",
                     },
                     {
@@ -136,7 +136,7 @@ const LoginPage = () => {
                 >
                   <Input
                     prefix={<UserOutlined />}
-                    placeholder="Email or Username"
+                    placeholder="Email"
                   />
                 </Form.Item>
                 <Form.Item
@@ -171,7 +171,7 @@ const LoginPage = () => {
                     type="primary"
                     htmlType="submit"
                     style={{ backgroundColor: "#537786" }}
-                    loading={isLoding}
+                    loading={loading}
                   >
                     <strong>
                       {" "}
@@ -216,7 +216,6 @@ const LoginPage = () => {
           <ForgotPass HandleClose={handleClose} />
         </Modal>
       )}
-      {/* {loading && <CircularProgressComponent loading={loading} />} */}
     </>
   );
 };
