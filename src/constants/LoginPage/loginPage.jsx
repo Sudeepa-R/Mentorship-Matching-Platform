@@ -183,9 +183,13 @@ const LoginPage = () => {
                   </Button>
                   <div className="mt-2">
                     Don't have an account?{" "}
-                    <a href="" className="forgotPassword">
+                    <Button
+                      color="default"
+                      variant="link"
+                      onClick={() => navigate("/register")}
+                    >
                       Register now!
-                    </a>
+                    </Button>
                   </div>
                 </Form.Item>
               </Form>
