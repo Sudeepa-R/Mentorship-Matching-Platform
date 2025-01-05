@@ -59,17 +59,6 @@ export const deleteRequest = async (endpoint) => {
   }
 };
 
-
-// google login
-export const googleAuth = async (code) => {
-  try {
-    const response = await api.get(`/api/google?code=${code}`);
-    return response.data
-  } catch (error) {
-    console.error(`Google Login failed:`, error);
-    throw error;
-  }
-}
-const API = { get, patch, post, put, deleteRequest , googleAuth };
+const API = { get, patch, post, put, deleteRequest };
 
 export default API;
