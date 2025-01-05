@@ -43,6 +43,7 @@ const RegisterPage = () => {
             title: "Success",
             description: res?.message,
           });
+          navigate('/home')
         }
       })
       .catch((e) => {
