@@ -33,7 +33,6 @@ const LoginPage = () => {
     setLoading(true);
     try {
       const res = await Login(data);
-      console.log(res)
       if (res.user) {
         setUser(res.user);
         showNotification({

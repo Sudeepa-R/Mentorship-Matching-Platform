@@ -39,7 +39,7 @@ const RegisterPage = () => {
   const userRegister = (data) => {
     registerUser(data)
       .then((res) => {
-        if (res) {
+        if (res.status === commonFunction.success) {
           setUser(res.user)
           setLoading(false);
           showNotification({
