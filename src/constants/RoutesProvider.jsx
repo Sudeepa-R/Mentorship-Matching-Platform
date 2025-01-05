@@ -5,6 +5,7 @@ import LoginPage from "./LoginPage/loginPage";
 import NotFound from "./not-found/not-found";
 import Profile from "../pages/Profile/Profile";
 import RegisterPage from "../components/RegisterPage/RegisterPage";
+import Sidebar from "../dashboard/sidebar/SideNavbar";
 
 const RouterProvider = () => {
   return (
@@ -17,6 +18,7 @@ const RouterProvider = () => {
         element={<Profile/>}
       />
       <Route path="*" element={<NotFound />} />
+      <Route path="/home" element={<Sidebar/>} />
     </Routes>
   );
 };
