@@ -4,7 +4,6 @@ import { Col, Row, Button, Divider, Form, Input, Flex, Modal } from "antd";
 import {
   LockOutlined,
   UserOutlined,
-  GoogleCircleFilled,
   LinkedinFilled,
   LoginOutlined,
 } from "@ant-design/icons";
@@ -13,6 +12,8 @@ import ForgotPass from "./ForgotPass";
 import { showNotification } from "../Toaster/toaster";
 import AuthContext from "../../context/auth/AuthContext";
 import { useNavigate } from "react-router-dom";
+import GoogleLogin from "./GoogleLogin";
+import { CircularProgressComponent } from './../loader/CustomLoader';
 
 const LoginPage = () => {
   const [forgotPass, setForgotPass] = useState(false);
@@ -198,7 +199,7 @@ const LoginPage = () => {
               </div>
             </div>
             <div>
-              <GoogleCircleFilled className="socialApps google" />
+              <GoogleLogin setLoading={setLoading} />
               <LinkedinFilled className="socialApps linkedIn" />
             </div>
           </div>
@@ -216,6 +217,7 @@ const LoginPage = () => {
           <ForgotPass HandleClose={handleClose} />
         </Modal>
       )}
+      {loading && <CircularProgressComponent loading={loading} />}
     </>
   );
 };
