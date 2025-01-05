@@ -5,6 +5,7 @@ import LoginPage from "./LoginPage/loginPage";
 import NotFound from "./not-found/not-found";
 import Profile from "../pages/Profile/Profile";
 import { GoogleOAuthProvider } from "@react-oauth/google";
+import Sidebar from "../dashboard/sidebar/SideNavbar";
 
 
 const GoogleAuthLogin = () =>{
@@ -24,6 +25,7 @@ const RouterProvider = () => {
         element={<Profile/>}
       />
       <Route path="*" element={<NotFound />} />
+      <Route path="/home" element={<Sidebar/>} />
     </Routes>
   );
 };

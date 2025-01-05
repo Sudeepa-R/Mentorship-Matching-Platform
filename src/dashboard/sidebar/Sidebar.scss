@@ -1,0 +1,57 @@
+
+@use '../../constants/home/variable.scss' as *;
+
+.profile-container {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+  }
+  
+  .avatar {
+    margin-right: 16px;
+    width: 40px;
+    height: 40px;
+    font-size: 20px;
+    /* Avatar initial font size */
+  }
+  
+  .profile-info {
+    display: flex;
+    flex-direction: column;
+    margin-right: 16px;
+  }
+  
+  .profile-name {
+    font-weight: bold;
+    font-size: 16px;
+    color: $text-color-primary;
+  }
+  
+  
+  
+  .logout-button {
+    background-color: #fff;
+    color: $text-color-primary;
+    &:hover {
+      background-color: $text-color-primary;
+      color: #fff;
+    }
+  }
+.drawer-box {
+  width: 250px;
+  height: 100vh;
+  background-color: #fff; 
+  color: $text-color-primary; 
+  transition: transform 0.7s ease-in-out; 
+}
+
+
+
+
+.list-item-icon {
+  color: $text-color-primary; 
+}
+
+.list-item-text {
+  color: $text-color-primary; 
+}
