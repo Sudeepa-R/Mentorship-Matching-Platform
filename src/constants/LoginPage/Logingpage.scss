@@ -2,6 +2,9 @@
   text-decoration: none;
   color: #757474;
 }
+.forgotPass .ant-modal-content {
+  padding-bottom: 1px !important;
+}
 .socialApps {
   font-size: 2rem;
   margin-right: 1rem;
@@ -18,4 +21,17 @@
 .ant-modal-content,
 .forget-model {
   max-width: 80%;
+}
+
+:where(.css-dev-only-do-not-override-142vneq)[class^="ant-otp"],
+:where(.css-dev-only-do-not-override-142vneq)[class*=" ant-otp"] {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji",
+    "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  font-size: 24px !important;
+  box-sizing: border-box;
+}
+
+:where(.css-dev-only-do-not-override-142vneq).ant-col-offset-16 {
+  margin-inline-start: 42.666667% !important;
 }
