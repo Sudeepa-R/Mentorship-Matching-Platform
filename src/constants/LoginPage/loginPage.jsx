@@ -4,7 +4,6 @@ import { Col, Row, Button, Divider, Form, Input, Flex, Modal } from "antd";
 import {
   LockOutlined,
   UserOutlined,
-  GoogleCircleFilled,
   LinkedinFilled,
   LoginOutlined,
 } from "@ant-design/icons";
@@ -14,6 +13,7 @@ import { showMessage, showNotification } from "../Toaster/toaster";
 import AuthContext from "../../context/auth/AuthContext";
 import { useNavigate } from "react-router-dom";
 import { CircularProgressComponent } from "../loader/CustomLoader";
+import GoogleAuthentication from "../Auth/google/GoogleAuthentication";
 
 const LoginPage = () => {
   const [forgotPass, setForgotPass] = useState(false);
@@ -34,9 +34,9 @@ const LoginPage = () => {
   const handleLogin = async (values) => {
     setisLoding(true);
     setUser({});
-    setLoading(true);
+    // setLoading(true);
     const res = await Login(values);
-    setLoading(false);
+    // setLoading(false);
     if (res && res?.user) {
       setUser(res.user);
       showMessage("success", res.message);
@@ -194,7 +194,7 @@ const LoginPage = () => {
               </div>
             </div>
             <div>
-              <GoogleCircleFilled className="socialApps google" />
+              <GoogleAuthentication setLoading={setLoading} />
               <LinkedinFilled className="socialApps linkedIn" />
             </div>
           </div>
@@ -212,7 +212,7 @@ const LoginPage = () => {
           <ForgotPass HandleClose={handleClose} />
         </Modal>
       )}
-      {/* {loading && <CircularProgressComponent loading={loading} />} */}
+      {loading && <CircularProgressComponent loading={loading} />}
     </>
   );
 };
