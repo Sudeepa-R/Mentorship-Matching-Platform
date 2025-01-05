@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Carousel } from "antd";
 import image1 from "../../assets/image1.gif";
 import image3 from "../../assets/image3.gif";
@@ -17,6 +17,7 @@ import {
 import { useNavigate } from "react-router-dom";
 import registerApi from "../../api/Register/Register";
 import { showNotification } from "../../constants/Toaster/toaster";
+import AuthContext from "../../context/auth/AuthContext";
 
 const RegisterPage = () => {
   const navigate = useNavigate();
@@ -25,6 +26,8 @@ const RegisterPage = () => {
   const [useremail, setUseremail] = useState("");
   const [password, setPassword] = useState("");
   const { registerUser } = registerApi;
+
+  const { setUser } = useContext(AuthContext);
 
   const handleRegisterForm = () => {
     setLoading(true);
@@ -36,7 +39,8 @@ const RegisterPage = () => {
   const userRegister = (data) => {
     registerUser(data)
       .then((res) => {
-        if (res.status === commonFunction.success) {
+        if (res) {
+          setUser(res.user)
           setLoading(false);
           showNotification({
             type: "success",
