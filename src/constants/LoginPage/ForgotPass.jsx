@@ -8,6 +8,7 @@ import { showNotification, showMessage } from "../../constants/Toaster/toaster";
 
 const { getUserData, generateOTP, validateUserOTP, updatePassword } =
   forgotPassAPI;
+const { isValidPhoneNumber, isValidEmail } = commonFunction;
 export class ForgotPass extends Component {
   constructor(props) {
     super(props);
@@ -113,7 +114,7 @@ export class ForgotPass extends Component {
   handleConfirm = () => {
     this.setState({ isPassUpdated: true });
     const { otp, userEmail, password } = this.state;
-    const validateOTP=otp.join("");
+    const validateOTP = otp.join("");
     const data = { email: userEmail, otp: validateOTP };
     validateUserOTP(data)
       .then((res) => {
@@ -215,7 +216,13 @@ export class ForgotPass extends Component {
                 label="Email/Phone Number"
                 name="username"
                 onChange={(e) => {
-                  this.verifyUser(e.target.value);
+                  this.setState({ username: e.target.value });
+                  const { username } = this.state;
+                  if (isValidEmail(username)) {
+                    this.verifyUser(e.target.value);
+                  } else if (isValidPhoneNumber(username)) {
+                    this.verifyUser(e.target.value);
+                  }
                 }}
                 rules={[
                   {
@@ -325,7 +332,6 @@ export class ForgotPass extends Component {
                     message: "Only numbers are allowed!",
                   },
                 ]}
-                
               >
                 <div style={{ display: "flex", gap: "8px" }}>
                   {otp.map((digit, index) => (
@@ -336,7 +342,12 @@ export class ForgotPass extends Component {
                       maxLength={1}
                       onChange={(e) => this.handleChange(e.target.value, index)}
                       onKeyDown={(e) => this.handleKeyDown(e, index)}
-                      style={{ width: "50px", height:'45px',fontSize:'25px', textAlign: "center" }}
+                      style={{
+                        width: "50px",
+                        height: "45px",
+                        fontSize: "25px",
+                        textAlign: "center",
+                      }}
                     />
                   ))}
                 </div>

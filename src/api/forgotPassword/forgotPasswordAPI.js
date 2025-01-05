@@ -1,5 +1,4 @@
 import API from "../API";
-import commonFunction from "../../constants/commonFuncions";
 
 const { get, post, put } = API;
 
