@@ -4,7 +4,8 @@
 .profile-container {
     display: flex;
     align-items: center;
-    justify-content: flex-end;
+    justify-content: space-between;
+  
   }
   
   .avatar {
@@ -14,44 +15,14 @@
     font-size: 20px;
     /* Avatar initial font size */
   }
-  
-  .profile-info {
+
+  .avatarContainer{
     display: flex;
-    flex-direction: column;
-    margin-right: 16px;
+    align-items: center;
+    margin-right: 20px;
   }
-  
-  .profile-name {
-    font-weight: bold;
-    font-size: 16px;
-    color: $text-color-primary;
-  }
-  
-  
-  
-  .logout-button {
-    background-color: #fff;
-    color: $text-color-primary;
-    &:hover {
-      background-color: $text-color-primary;
-      color: #fff;
-    }
-  }
-.drawer-box {
-  width: 250px;
-  height: 100vh;
-  background-color: #fff; 
-  color: $text-color-primary; 
-  transition: transform 0.7s ease-in-out; 
+  .ant-menu-dark .ant-menu-item-selected, .ant-menu-dark>.ant-menu .ant-menu-item-selected {
+    background-color:$text-color-primary !important;
 }
-
-
-
-
-.list-item-icon {
-  color: $text-color-primary; 
-}
-
-.list-item-text {
-  color: $text-color-primary; 
-}
+  
+ 
