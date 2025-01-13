@@ -6,7 +6,7 @@ import NotFound from "./not-found/not-found";
 import Profile from "../pages/Profile/Profile";
 import RegisterPage from "../components/RegisterPage/RegisterPage";
 import { GoogleOAuthProvider } from "@react-oauth/google";
-import AppLayout from "../dashboard/AppLayout/Applayout";
+import AppLayout from '../dashboard/AppLayout/Layout'
 
 
 
