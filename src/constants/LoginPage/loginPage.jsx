@@ -41,7 +41,9 @@ const LoginPage = () => {
           title: "Success",
           description: res.message,
         });
-        navigate('/home');
+        //you can navigate  to home again once the home page or equivalent page is created
+        // navigate('/home');
+        navigate('/AppMenuManagement');
       } else {
         throw new Error(res.message);
       }

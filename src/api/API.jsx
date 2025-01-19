@@ -38,20 +38,20 @@ export const put = async (path, data) => {
 };
 
 // PATCH request
-export const patch = async (endpoint, payload) => {
+export const Patch = async (endPoint, data) => {
   try {
-    const response = await api.patch(endpoint, payload);
+    const response = await api.patch(`${commonFunction.baseURL}${endPoint}`, data);
     return response.data;
   } catch (error) {
-    console.error(`PATCH ${endpoint} failed:`, error);
+    console.error(`PATCH ${endPoint} failed:`, error);
     throw error;
   }
 };
 
 // DELETE request
-export const deleteRequest = async (endpoint) => {
+export const Delete = async (path, data = {}) => {
   try {
-    const response = await api.delete(endpoint);
+    const response = await api.delete(`${commonFunction.baseURL}${path}`, data);
     return response.data;
   } catch (error) {
     console.error(`DELETE ${endpoint} failed:`, error);
@@ -59,17 +59,16 @@ export const deleteRequest = async (endpoint) => {
   }
 };
 
-
 // google login
 export const googleAuth = async (code) => {
   try {
     const response = await api.get(`/api/google?code=${code}`);
-    return response.data
+    return response.data;
   } catch (error) {
     console.error(`Google Login failed:`, error);
     throw error;
   }
-}
-const API = { get, patch, post, put, deleteRequest , googleAuth };
+};
+const API = { get, Patch, post, put, Delete, googleAuth };
 
 export default API;

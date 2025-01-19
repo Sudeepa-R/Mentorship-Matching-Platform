@@ -3,7 +3,7 @@ import { Layout, theme } from "antd";
 import { Box, Avatar, Typography } from "@mui/material";
 const { Header } = Layout;
 
-const Headers = () => {
+const Headers = (props) => {
   const {
     token: { colorBgContainer, borderRadiusLG },
   } = theme.useToken();
@@ -18,7 +18,7 @@ const Headers = () => {
       >
         <Box className="profile-container">
             <div style={{width:'100%',display:'flex',alignItems:'center',justifyContent:'space-between',marginTop:'10px'}}>
-          <h5 style={{ marginLeft: "20px" }}>HomePage</h5>
+          <h5 style={{ marginLeft: "20px",fontFamily:'Poppins',color:'#001529' }}>{props.Heading}</h5>
           <span className="avatarContainer">
             <Avatar
               className="avatar"

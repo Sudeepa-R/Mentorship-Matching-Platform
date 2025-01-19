@@ -1,8 +1,10 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import AppLayout from "../../dashboard/AppLayout/Layout";
 
 const NotFound = () => {
   return (
+    // <AppLayout Heading="Page Not Found">
     <div
       style={{
         display: "flex",
@@ -34,6 +36,7 @@ const NotFound = () => {
         Go to Home
       </Link>
     </div>
+    // </AppLayout>
   );
 };
 
