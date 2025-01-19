@@ -40,14 +40,16 @@ const RegisterPage = () => {
     registerUser(data)
       .then((res) => {
         if (res.status === commonFunction.success) {
-          setUser(res.user)
+          setUser(res.user);
           setLoading(false);
           showNotification({
             type: "success",
             title: "Success",
             description: res?.message,
           });
-          navigate('/home')
+          // navigate('/home')
+          // navigate(`/profile/:${res?.userName}`)
+          navigate(`/AppMenuManagement`);
         }
       })
       .catch((e) => {

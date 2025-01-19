@@ -1,0 +1,19 @@
+// .menuFormModal.ant-modal {
+//     width: -webkit-fill-available !important;
+// }
+@use "../../constants/home/variable.scss" as *;
+
+.appMenuTable.ant-table-wrapper .ant-table-thead {
+  font-size: 16px !important;
+  font-family: "Roboto";
+}
+.appMenuTable.ant-table-wrapper
+  .ant-table-tbody
+  .ant-table-row
+  > .ant-table-cell-row-hover {
+  background-color: #5377865d !important ;
+}
+.ant-table-wrapper table {
+  table-layout:auto !important;
+}
+
