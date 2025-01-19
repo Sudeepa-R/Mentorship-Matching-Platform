@@ -1,28 +1,40 @@
-
-@use '../../constants/home/variable.scss' as *;
+@use "../../constants/home/variable.scss" as *;
 
 .profile-container {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  
-  }
-  
-  .avatar {
-    margin-right: 16px;
-    width: 40px;
-    height: 40px;
-    font-size: 20px;
-    /* Avatar initial font size */
-  }
-
-  .avatarContainer{
-    display: flex;
-    align-items: center;
-    margin-right: 20px;
-  }
-  .ant-menu-dark .ant-menu-item-selected, .ant-menu-dark>.ant-menu .ant-menu-item-selected {
-    background-color:$text-color-primary !important;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
-  
- 
+
+.siderMenuItems{
+  width: 600px !important;
+}
+
+.avatar {
+  margin-right: 16px;
+  width: 40px;
+  height: 40px;
+  font-size: 20px;
+  /* Avatar initial font size */
+}
+
+.avatarContainer {
+  display: flex;
+  align-items: center;
+  margin-right: 20px;
+}
+.ant-menu-dark .ant-menu-item-selected,
+.ant-menu-dark > .ant-menu .ant-menu-item-selected {
+  background-color: $text-color-primary !important;
+}
+.menuItems .ant-menu-item:hover {
+  background-color: $text-color-primary !important;
+}
+// .menuItems .ant-menu-item{
+//   margin-bottom: 10px !important;
+// }
+.menuFormNumber.ant-input-number {
+  width: 100% !important;
+}
+.menuItems {
+}

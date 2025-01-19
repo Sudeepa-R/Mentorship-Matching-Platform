@@ -8,7 +8,6 @@ import Headers from "../Header/Header";
 const { Header, Sider, Content } = Layout;
 
 const AppLayout = (props) => {
-  console.log("MenuItems", props);
   const [collapsed, setCollapsed] = useState(true);
   const {
     token: { colorBgContainer, borderRadiusLG },
@@ -16,14 +15,15 @@ const AppLayout = (props) => {
   return (
     <Layout>
       <Sider
-       style={{minHeight:'85vh'}}
+      width={250}
+      className="siderMenuItems"
+        style={{ minHeight: "85vh" }}
         onMouseEnter={() => setCollapsed(!collapsed)}
         onMouseLeave={() => setCollapsed(!collapsed)}
         trigger={null}
         collapsible
         collapsed={collapsed}
       >
-        <div className="demo-logo-vertical" />
         <div
           className="mt-3"
           style={{
@@ -31,7 +31,7 @@ const AppLayout = (props) => {
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
-            marginBottom: "5px",
+            marginBottom: "15px",
           }}
         >
           {collapsed ? (
@@ -45,8 +45,8 @@ const AppLayout = (props) => {
         </div>
         <MenuContents />
       </Sider>
-      <Layout>
-       <Headers/>
+      <Layout >
+        <Headers Heading={props.Heading} />
         <Content
           style={{
             margin: "24px 16px",
@@ -56,7 +56,7 @@ const AppLayout = (props) => {
             borderRadius: borderRadiusLG,
           }}
         >
-          Content
+         {props.children}
         </Content>
       </Layout>
     </Layout>
