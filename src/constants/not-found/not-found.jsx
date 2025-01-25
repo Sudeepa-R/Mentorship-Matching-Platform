@@ -23,7 +23,7 @@ const NotFound = () => {
         Sorry, the page you are looking for does not exist.
       </p>
       <Link
-        to="/"
+        to="/AppMenuManagement"
         style={{
           padding: "10px 20px",
           fontSize: "1em",

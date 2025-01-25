@@ -6,7 +6,7 @@ import {
 } from "@ant-design/icons";
 import * as Icons from "@ant-design/icons";
 import { Layout, Menu, theme } from "antd";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import commonFunction from "../../constants/commonFuncions";
 import { showNotification } from "../../constants/Toaster/toaster";
 import MenuItemApis from "../../api/menuItems/MenuItemsApis";
@@ -14,15 +14,15 @@ import MenuItemApis from "../../api/menuItems/MenuItemsApis";
 const { Sider } = Layout;
 const { getMenuItems } = MenuItemApis;
 
-const MenuContents = () => {
+const MenuContents = (props) => {
   const navigate = useNavigate();
   const [MenuItems, SetMenuItems] = useState([]);
-  const [defaultSelectedKey,SetdefaultSelectedKey]=useState("appMenus")
+  const [defaultSelectedKey, SetdefaultSelectedKey] = useState("appMenus");
+  const [activePageKey, SetactivePage]=useState('');
 
   useEffect(() => {
     fetchTableData();
     return () => {
-      // console.log("Component unmounted");
     };
   }, []);
 
@@ -31,14 +31,14 @@ const MenuContents = () => {
     if (IconComponent) {
       return <IconComponent />;
     }
-    return null; 
+    return null;
   };
 
   const fetchTableData = () => {
     getMenuItems()
       .then((res) => {
         if (res.status === commonFunction.success) {
-          SetMenuItems(res.data.data);
+          SetMenuItems(res.data?.data);
         }
       })
       .catch((e) => {
@@ -50,33 +50,41 @@ const MenuContents = () => {
       });
   };
 
-  const handleClick = (e) => {
-    const selectedItem = MenuItems.find((item) => item.key === e.key);
-    if (selectedItem) {
-      navigate(selectedItem.path);
-    }
-  };
-
   return (
     <>
       <Menu
         className="menuItems"
         theme="dark"
         mode="inline"
-        defaultSelectedKeys={defaultSelectedKey}
-        onClick={handleClick}
+        selectedKeys={[activePageKey || props.activePage]}
       >
         {MenuItems.map((item) =>
           item.subMenu ? (
             <Menu.SubMenu key={item.key} title={item.label} icon={item.icon}>
               {item.subMenu.map((subItem) => (
-                <Menu.Item onClick={(data)=>{SetdefaultSelectedKey(data.key)}} key={subItem.key} icon={renderDynamicIcon(subItem.icon)}>
+                <Menu.Item
+                  // onChange={(data) => {
+                  //   SetdefaultSelectedKey(data.key);
+                  // }}
+                  key={subItem.key}
+                  icon={renderDynamicIcon(subItem.icon)}
+                >
                   {subItem.label}
                 </Menu.Item>
               ))}
             </Menu.SubMenu>
           ) : (
-            <Menu.Item key={item.key} onClick={(data)=>{SetdefaultSelectedKey(data.key)}} icon={renderDynamicIcon(item.icon)}>
+            <Menu.Item
+              key={item.key}
+              onClick={(data) => {
+                const selectedItem = MenuItems.find(
+                  (item) => item.key === data.key
+                );
+                SetactivePage(data.key);
+                navigate(selectedItem.path);
+              }}
+              icon={renderDynamicIcon(item.icon)}
+            >
               {item.label}
             </Menu.Item>
           )
