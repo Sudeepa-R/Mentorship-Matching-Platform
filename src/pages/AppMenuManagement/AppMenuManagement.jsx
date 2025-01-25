@@ -10,10 +10,13 @@ import MenuForm from "../../dashboard/sidebar/MenuForm";
 import { showNotification } from "../../constants/Toaster/toaster";
 import MenuItemApis from "../../api/menuItems/MenuItemsApis";
 import commonFunction from "../../constants/commonFuncions";
+import Loder from "../../components/Loder/Loder"
+import { setActivePage, setHeaderTitle } from "../../components/react-redux/action";
+import { connect } from "react-redux";
 
 const { getMenuItems, deleteAppMenuItem } = MenuItemApis;
 
-const AppMenuManagement = () => {
+const AppMenuManagement = (props) => {
   const [openModal, SetOpenModal] = useState(false);
   const [columnData, SetColumnData] = useState([]);
   const [tableData, SettableData] = useState([]);
@@ -22,6 +25,7 @@ const AppMenuManagement = () => {
   const [addSubMenus, SetaddSubMenus] = useState(false);
   const [confirmLoading, setConfirmLoading] = useState(false);
   const [editAppMenuItems, SeteditAppMenuItems] = useState(false);
+  const [showLoader, SetshowLoader] = useState(true);
   const [menuId, SetMenuid] = useState(999);
   const [paginationConfig, setPaginationConfig] = useState({
     current: 1,
@@ -31,9 +35,13 @@ const AppMenuManagement = () => {
   });
 
   useEffect(() => {
+    SetshowLoader(true)
+    props.setHeaderTitle("App Menu Management")
+    props.setActivePage("appMenus")
     fetchTableData();
     return () => {
-      // console.log("Component unmounted");
+      props.setHeaderTitle("App Menu Management")
+      SetshowLoader(false)
       fetchTableData();
     };
   }, []);
@@ -66,6 +74,7 @@ const AppMenuManagement = () => {
           description: e?.message,
         });
       });
+      SetshowLoader(false)
   };
 
   const DeleteAppMenu = () => {
@@ -175,6 +184,7 @@ const AppMenuManagement = () => {
 
   return (
     <>
+      <Loder showLoader={showLoader}/>
       <div
         style={{
           display: "flex",
@@ -243,7 +253,7 @@ const AppMenuManagement = () => {
                 <Button className="me-2" key="cancel" onClick={handleCancel}>
                   Cancel
                 </Button>
-                <Button type="primary" key="delete" onClick={DeleteAppMenu}>
+                <Button type="primary" key="delete" loading={confirmLoading} onClick={DeleteAppMenu}>
                   Confirm Delete
                 </Button>
               </div>
@@ -277,4 +287,14 @@ const AppMenuManagement = () => {
   );
 };
 
-export default AppMenuManagement;
+
+const mapStateToProps = (state) => ({
+  headerTitle: state.headerTitle,
+});
+
+const mapDispatchToProps = dispatch=>( {
+  setHeaderTitle: (data)=>dispatch(setHeaderTitle(data)),
+  setActivePage: (data)=> dispatch(setActivePage(data))
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(AppMenuManagement);

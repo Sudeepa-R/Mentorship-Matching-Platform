@@ -17,7 +17,7 @@ import ThemeContext from '../../context/theme/ThemeContext';
 import DarkModeSharpIcon from '@mui/icons-material/DarkModeSharp';
 import WbSunnySharpIcon from '@mui/icons-material/WbSunnySharp';
 
-const Profile = () => {
+const ProfilePage = () => {
   const { userName } = useParams();
   const { user, getUser, setUser } = useContext(AuthContext);
   const [loading, setLoading] = useState(true);
@@ -68,13 +68,13 @@ const Profile = () => {
   const fullName = `${user?.firstName} ${user?.lastName}`;
 
   return (
-    <Box sx={{ width: '100vw', height: '100vh', p: 1, background: isDark ? 'linear-gradient(to right, #2B2B2B, #3B3B3B)' : 'linear-gradient(to right, #f0f4f8, #e0e7ef)' }}>
-      <Paper elevation={6} sx={{ p: 4, borderRadius: 2, backgroundColor: isDark ? '#1A1A1A' : '#ffffff', boxShadow: '0 4px 20px rgba(0,0,0,0.1)' }}>
-        <Box sx={{ display: 'flex', justifyContent: 'flex-end', m: 2, position: 'absolute', top: 0, right: 0, zIndex: 1 }}>
+      <Box sx={{background: isDark ? 'linear-gradient(to right, #2B2B2B, #3B3B3B)' : 'linear-gradient(to right, #f0f4f8, #e0e7ef)' }}>
+        <Paper elevation={6} sx={{ p: 4, borderRadius: 2, backgroundColor: isDark ? '#1A1A1A' : '#ffffff' }}>
+        {/* <Box sx={{ display: 'flex', justifyContent: 'flex-end', m: 2, position: 'absolute', top: 0, right: 0, zIndex: 1 }}>
           <IconButton onClick={toggleTheme} sx={{ color: isDark ? '#fff' : '#000' }}>
             {isDark ? <WbSunnySharpIcon /> : <DarkModeSharpIcon />}
           </IconButton>
-        </Box>
+        </Box> */}
         <Box sx={{ display: 'flex', alignItems: 'center', mb: 4 }}>
           <Avatar
             sx={{
@@ -202,4 +202,4 @@ const Profile = () => {
   );
 };
 
-export default Profile;
+export default ProfilePage;

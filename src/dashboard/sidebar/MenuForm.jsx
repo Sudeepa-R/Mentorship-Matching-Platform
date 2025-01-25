@@ -202,10 +202,10 @@ const MenuForm = (props) => {
             />
           </Form.Item>
           <Form.Item style={{ display: "flex", justifyContent: "flex-end" }}>
-            <Button loading={formBtnLoading} className="me-2" onClick={onReset}>
+            <Button  className="me-2" onClick={onReset}>
               Reset
             </Button>
-            <Button type="primary" htmlType="submit">
+            <Button loading={formBtnLoading} type="primary" htmlType="submit">
               {props.EditMenu ? "Update Menu" : "Add Menu"}
             </Button>
           </Form.Item>
