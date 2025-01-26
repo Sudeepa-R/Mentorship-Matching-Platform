@@ -11,9 +11,10 @@ function App() {
     <Provider store={store}>
       <ThemeProvider>
         <AuthProvider>
-          <AppLayout>
+          {/* <AppLayout>
             <RouterProvider />
-          </AppLayout>
+          </AppLayout> */}
+            <RouterProvider />
         </AuthProvider>
       </ThemeProvider>
     </Provider>
