@@ -13,12 +13,12 @@ import { showNotification } from "../Toaster/toaster";
 import AuthContext from "../../context/auth/AuthContext";
 import { useNavigate } from "react-router-dom";
 import GoogleLogin from "./GoogleLogin";
-import { CircularProgressComponent } from './../loader/CustomLoader';
+import { CircularProgressComponent } from "./../loader/CustomLoader";
 
 const LoginPage = () => {
   const [forgotPass, setForgotPass] = useState(false);
   const [loading, setLoading] = useState(false);
-  const { setUser , Login } = useContext(AuthContext);
+  const { setUser, Login } = useContext(AuthContext);
   const navigate = useNavigate();
 
   const handleOnClick = (event) => {
@@ -34,8 +34,8 @@ const LoginPage = () => {
     setLoading(true);
     try {
       const res = await Login(data);
-      const userInfo=JSON.stringify(res?.user)
-      localStorage.setItem("data",res)
+      const userInfo = JSON.stringify(res?.user);
+      localStorage.setItem("data", userInfo);
       if (res.user) {
         setUser(res.user);
         showNotification({
@@ -53,7 +53,8 @@ const LoginPage = () => {
       showNotification({
         type: "error",
         title: "Login Failed",
-        description: e?.response?.data?.message || "An error occurred during login.",
+        description:
+          e?.response?.data?.message || "An error occurred during login.",
       });
     } finally {
       setLoading(false);
@@ -138,10 +139,7 @@ const LoginPage = () => {
                     },
                   ]}
                 >
-                  <Input
-                    prefix={<UserOutlined />}
-                    placeholder="Email"
-                  />
+                  <Input prefix={<UserOutlined />} placeholder="Email" />
                 </Form.Item>
                 <Form.Item
                   label="Password"

@@ -196,7 +196,7 @@ export class ForgotPass extends Component {
               ref={this.formRef}
               layout="vertical"
               name="basic"
-              className=""
+              className="ForgotPasswordStyles"
               labelCol={{
                 span: 16,
               }}
@@ -287,23 +287,28 @@ export class ForgotPass extends Component {
                 <Input.Password allowClear />
               </Form.Item>
 
-              <Form.Item label={null}>
-                <Space>
+              <Form.Item
+                style={{ marginLeft:'1px' }}
+                label={null}
+              >
+                <div style={{display:'flex',justifyContent:"flex-end"}}>
+                  <Space>
+                    <Button
+                      className="mx-2"
+                      htmlType="button"
+                      onClick={this.onReset}
+                    >
+                      Reset
+                    </Button>
+                  </Space>
                   <Button
-                    className="mx-2"
-                    htmlType="button"
-                    onClick={this.onReset}
+                    loading={this.state?.isFormSubmitted}
+                    type="primary"
+                    htmlType="submit"
                   >
-                    Reset
+                    Generate OTP
                   </Button>
-                </Space>
-                <Button
-                  loading={this.state?.isFormSubmitted}
-                  type="primary"
-                  htmlType="submit"
-                >
-                  Generate OTP
-                </Button>
+                </div>
               </Form.Item>
             </Form>
           </div>
@@ -366,7 +371,7 @@ export class ForgotPass extends Component {
 
               <Space
                 className="mt-5"
-                style={{ display: "flex", justifyContent: "end" }}
+                style={{ display: "flex", justifyContent: "flex-end" }}
               >
                 <Button
                   key="submit"

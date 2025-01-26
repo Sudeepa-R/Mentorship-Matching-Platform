@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import { Layout, theme } from "antd";
 import { Box, Avatar, Typography } from "@mui/material";
 import { DownOutlined, SmileOutlined } from "@ant-design/icons";
-import { Dropdown, Space } from "antd";
+import { Dropdown, Space, Modal } from "antd";
+import ForgotPass from "../../constants/LoginPage/ForgotPass";
 
 const { Header } = Layout;
 
@@ -10,46 +11,28 @@ const Headers = (props) => {
   const {
     token: { colorBgContainer, borderRadiusLG },
   } = theme.useToken();
+  const [forgotPass, SetforgotPass] = useState(false);
 
   const items = [
     {
       key: "1",
-      label: (
-        <a
-          target="_blank"
-          rel="noopener noreferrer"
-          href="https://www.antgroup.com"
-        >
-          1st menu item
-        </a>
-      ),
+      label: <span>My Profile</span>,
     },
     {
       key: "2",
       label: (
-        <a
-          target="_blank"
-          rel="noopener noreferrer"
-          href="https://www.aliyun.com"
+        <span
+          onClick={() => {
+            SetforgotPass(true);
+          }}
         >
-          2nd menu item (disabled)
-        </a>
+          Change Password
+        </span>
       ),
-      icon: <SmileOutlined />,
-      disabled: true,
     },
     {
       key: "3",
-      label: (
-        <a
-          target="_blank"
-          rel="noopener noreferrer"
-          href="https://www.luohanacademy.com"
-        >
-          3rd menu item (disabled)
-        </a>
-      ),
-      disabled: true,
+      label: <span>Last Login : {new Date(Date.now()).toLocaleString()}</span>,
     },
     {
       key: "4",
@@ -58,56 +41,80 @@ const Headers = (props) => {
     },
   ];
 
+  const handleClose = () => {
+    SetforgotPass(false);
+  };
+
   return (
-    <div>
-      <Header
-        style={{
-          padding: 0,
-          background: colorBgContainer,
-        }}
-      >
-        <Box className="profile-container">
-          <div
-            style={{
-              width: "100%",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "space-between",
-              marginTop: "10px",
-            }}
-          >
-            <h5
+    <>
+      <div>
+        <Header
+          style={{
+            padding: 0,
+            background: colorBgContainer,
+          }}
+        >
+          <Box className="profile-container">
+            <div
               style={{
-                marginLeft: "20px",
-                fontFamily: "Poppins",
-                color: "#001529",
+                width: "100%",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "space-between",
+                marginTop: "10px",
               }}
             >
-              {props.Heading}
-            </h5>
-            <span className="avatarContainer">
-              <Dropdown
-                menu={{
-                  items,
+              <h5
+                style={{
+                  marginLeft: "20px",
+                  fontFamily: "Poppins",
+                  color: "#001529",
                 }}
               >
-                <Space>
-                  <Avatar
-                    className="avatar"
-                    sx={{ marginRight:'0px' ,backgroundColor: "#537786", color: "#fff" }}
-                  >
-                    A
-                  </Avatar>
-                  <Box className="profile-info">
-                    <Typography className="profile-name">John Doe</Typography>
-                  </Box>
-                </Space>
-              </Dropdown>
-            </span>
-          </div>
-        </Box>
-      </Header>
-    </div>
+                {props.Heading}
+              </h5>
+              <span className="avatarContainer">
+                <Dropdown
+                  menu={{
+                    items,
+                  }}
+                  placement="bottomLeft"
+                  arrow
+                >
+                  <Space>
+                    <Avatar
+                      className="avatar"
+                      sx={{
+                        marginRight: "0px",
+                        backgroundColor: "#537786",
+                        color: "#fff",
+                      }}
+                    >
+                      A
+                    </Avatar>
+                    <Box className="profile-info">
+                      <Typography className="profile-name">John Doe</Typography>
+                    </Box>
+                  </Space>
+                </Dropdown>
+              </span>
+            </div>
+          </Box>
+        </Header>
+      </div>
+      {forgotPass && (
+        <Modal
+          title="Reset Your Account Password"
+          centered
+          open={forgotPass}
+          onCancel={handleClose}
+          footer={false}
+          className="forgotPass .forget-model"
+        >
+          <ForgotPass HandleClose={handleClose} />
+        </Modal>
+      )}
+    </>
   );
 };
 
