@@ -6,7 +6,6 @@ import MenuContents from "../sidebar/MenuContents";
 import Headers from "../Header/Header";
 import { connect } from "react-redux";
 import { setHeaderTitle } from "../../components/react-redux/action";
-import pageUrls from "./pageUrls";
 
 const { Header, Sider, Content } = Layout;
 

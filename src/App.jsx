@@ -11,9 +11,6 @@ function App() {
     <Provider store={store}>
       <ThemeProvider>
         <AuthProvider>
-          {/* <AppLayout>
-            <RouterProvider />
-          </AppLayout> */}
             <RouterProvider />
         </AuthProvider>
       </ThemeProvider>

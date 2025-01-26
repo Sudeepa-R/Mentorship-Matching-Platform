@@ -32,7 +32,6 @@ const RouterProvider = () => {
       {/* Routes without layout */}
       <Route path="/login" element={<GoogleAuthLogin />} />
       <Route path="/register" element={<RegisterPage />} />
-      <Route path="/profile/:userName" element={<ProfilePage />} />
       <Route index element={<Home />} />
 
       {/* Routes with layout */}
@@ -40,6 +39,7 @@ const RouterProvider = () => {
         <Route path="/AppMenuManagement" element={<AppMenuItems />} />
         <Route path="/UserLists" element={<UserListData />} />
         <Route path="*" element={<NotFound />} />
+        <Route path="/profile/:userName" element={<ProfilePage />} />
       </Route>
     </Routes>
   );
