@@ -6,9 +6,9 @@ import AppMenuManagement from './AppMenuManagement';
 const AppMenuItems = () => {
   return (
     <>
-    <AppLayout Heading="App Menu Management">
+    {/* <AppLayout activePage='appMenus' Heading="App Menu Management"> */}
       <AppMenuManagement/>
-    </AppLayout>
+    {/* </AppLayout> */}
    
     </>
   )
