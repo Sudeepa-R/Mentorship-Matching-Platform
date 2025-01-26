@@ -30,8 +30,8 @@ const RouterProvider = () => {
         path="/profile/:userName"
         element={<ProfilePage/>}
       />
+      
       <Route path="*" element={<NotFound />} />
-      <Route path="/home" element={<AppLayout/>} />
       <Route path="/AppMenuManagement" element={<AppMenuItems/>} />
       <Route path="/UserLists" element={<UserListData/>} />
     </Routes>
