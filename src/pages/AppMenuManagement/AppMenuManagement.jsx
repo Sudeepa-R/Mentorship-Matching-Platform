@@ -41,7 +41,7 @@ const AppMenuManagement = (props) => {
     fetchTableData();
     return () => {
       props.setHeaderTitle("App Menu Management")
-      SetshowLoader(false)
+      SetshowLoader(true)
       fetchTableData();
     };
   }, []);
@@ -204,6 +204,7 @@ const AppMenuManagement = (props) => {
       </div>
       <div>
         <Table
+          loading={showLoader}
           className="appMenuTable"
           columns={columnData}
           dataSource={tableData}

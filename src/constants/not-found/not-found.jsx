@@ -1,8 +1,17 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import AppLayout from "../../dashboard/AppLayout/Layout";
+import { connect } from "react-redux";
+import { setHeaderTitle } from "../../components/react-redux/action";
 
 const NotFound = () => {
+  useEffect(() => {
+    setHeaderTitle("Page Not Found");
+    return () => {
+      setHeaderTitle("Page Not Found");
+    };
+  }, []);
+
   return (
     // <AppLayout Heading="Page Not Found">
     <div
@@ -11,7 +20,7 @@ const NotFound = () => {
         flexDirection: "column",
         alignItems: "center",
         justifyContent: "center",
-        height: "100vh",
+        minHeight: "70vh",
         textAlign: "center",
         padding: "20px",
       }}
@@ -40,4 +49,12 @@ const NotFound = () => {
   );
 };
 
-export default NotFound;
+const mapStateToProps = (state) => ({
+  headerTitle: state.headerTitle,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  setHeaderTitle: (data) => dispatch(setHeaderTitle(data)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(NotFound);
