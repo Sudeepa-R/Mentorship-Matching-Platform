@@ -123,7 +123,7 @@ const AppMenuManagement = (props) => {
             title: "Actions",
             dataIndex: "action",
             key: "action",
-            width: 10,
+            width: "10%",
             render: (_, record) => (
               <div style={{ display: "flex", justifyContent: "space-between" }}>
                 <Tooltip placement="leftTop" title={`Delete menu`}>
@@ -168,6 +168,7 @@ const AppMenuManagement = (props) => {
             title: item.charAt(0).toUpperCase() + item.slice(1),
             dataIndex: item,
             key: item,
+            width:"10%"
           });
         }
       }
